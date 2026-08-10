@@ -6414,85 +6414,10 @@ function drawTapFrame(ctx, rect) {
  */
 /** How many cycles of a periodic signal the scope shows. Two: one is not
  *  obviously a repeat, and more makes the shape small. */
-/* ONE cycle. Two was the wrong default and was reported as such twice — "still
- * several waves instead of one", then "double waves on simple syn wave". One
- * period is what a waveform IS, and it also fits at every pitch the keyboard
- * reaches: two cycles of a 32.7 Hz note need 4404 samples against a 4096 tap,
- * so two could not be honoured at the bottom and the window quietly halved
- * there, which read as the wavelength changing with pitch. */
-const SCOPE_CYCLES = 1;
-
-/**
- * The period of a signal, in samples, or 0 if it does not repeat.
- *
- * CUMULATIVE MEAN NORMALISED DIFFERENCE — the heart of YIN, and the reason
- * plain autocorrelation is not enough here. Correlation is just as strong at
- * TWICE a period as at the period, so a maximum-picking search reports 2x or 3x
- * about as often as the truth, and the scope then draws four humps where it
- * promised two. Dividing each lag by the running mean of everything shorter
- * pushes those multiples back down, so the FIRST lag under the threshold is the
- * real one. That is the whole trick, and it is why the loop takes the first
- * crossing rather than the best score.
- *
- * Parabolic interpolation on the winner because a period is rarely a whole
- * number of samples — 440 Hz at 48 kHz is 109.09 — and rounding it is what
- * makes a trace crawl: two cycles of error accumulate a whole sample every few
- * frames.
- */
-function detectPeriod(x, minLag, maxLag) {
-  /* SEARCH A DECIMATED COPY, then refine at full rate.
-   *
-   * Searched directly this is 2000 lags over 2000 samples — a million
-   * multiply-adds per probe per redraw, thirty times a second, on the same
-   * main thread that draws every other curve in the app. That is enough to
-   * overrun the frame budget and skip the probe entirely, which is what it did.
-   * Eight-to-one decimation cuts the coarse pass by 64x; the winner is then
-   * refined over a few lags at full rate, so the answer is the same and the
-   * work is about a tenth. Scratch buffers are module-level because this runs
-   * at 30 Hz and allocating four arrays a frame is pure garbage. */
-  const D = 8;
-  const m = Math.floor(x.length / D);
-  const loD = Math.max(2, Math.floor(minLag / D));
-  const hiD = Math.min(Math.floor(maxLag / D), (m >> 1) - 2);
-  if (hiD <= loD) return 0;
-  if (!_pd.y || _pd.y.length < m) { _pd.y = new Float32Array(m); _pd.d = new Float64Array(m); }
-  const y = _pd.y, d = _pd.d;
-  for (let i = 0; i < m; i++) {          /* box average — a cheap anti-alias */
-    let a = 0; for (let k = 0, b = i * D; k < D; k++) a += x[b + k];
-    y[i] = a / D;
-  }
-  const n = m >> 1;
-  let run = 0, best = 0, prev = 0;
-  for (let lag = loD; lag <= hiD + 1; lag++) {
-    let sum = 0;
-    for (let i = 0; i < n; i++) { const t = y[i] - y[i + lag]; sum += t * t; }
-    run += sum;
-    d[lag] = sum * (lag - loD + 1) / (run || 1e-12);
-    /* first lag under threshold whose successor does not improve on it — the
-     * cumulative mean is what keeps this off the octave multiples that plain
-     * autocorrelation scores just as highly as the true period */
-    if (!best && lag > loD && prev < 0.15 && prev <= d[lag]) best = lag - 1;
-    prev = d[lag];
-  }
-  if (!best) return 0;
-  /* refine at FULL rate: decimation blurs the minimum by a few samples, and a
-   * few samples of period error is a whole sample of drift by the second cycle */
-  const nn = Math.min(x.length - maxLag - 1, x.length >> 1);
-  const full = (lag) => { let s = 0;
-    for (let i = 0; i < nn; i++) { const t = x[i] - x[i + lag]; s += t * t; } return s; };
-  const c0 = best * D;
-  let bl = c0, bd = Infinity;
-  for (let lag = Math.max(minLag + 1, c0 - D); lag <= Math.min(maxLag - 1, c0 + D); lag++) {
-    const v = full(lag);
-    if (v < bd) { bd = v; bl = lag; }
-  }
-  /* sub-sample by a parabola through the three lowest, all on the SAME scale —
-   * mixing a normalised score with a raw one puts the vertex anywhere */
-  const a = full(bl - 1), b = bd, c = full(bl + 1);
-  const den = a - 2 * b + c;
-  return den > 1e-12 ? bl + 0.5 * (a - c) / den : bl;
-}
-const _pd = { y: null, d: null };
+/* The scope's time base: 10 ms, the same at every pitch. Middle C is 2.6
+ * cycles of it, an octave up is 5.2, an octave down is 1.3 — which is the point,
+ * the wavelength on screen IS the pitch. */
+const SCOPE_SECONDS = 0.010;
 
 /**
  * Where the signal crosses zero going up, to sub-sample precision.
@@ -6544,38 +6469,28 @@ function drawScope(ctx, rect, samples, opts = {}) {
    * SEARCHED IN THE FIRST HALF ONLY, so there is always a second half left to
    * draw. A buffer with no crossing — silence, or DC — falls back to sample 0
    * rather than drawing nothing. */
-  /* WHAT THE SCOPE SHOWS: exactly SCOPE_CYCLES of the signal, starting at a
-   * rising zero crossing, both measured to sub-sample precision.
+  /* A FIXED SLICE OF TIME, phase-locked. This is what a hardware scope does
+   * and what was asked for: draw the real wave. The window is the same 10 ms at
+   * every pitch, so an octave up genuinely halves the wavelength on screen and
+   * you can SEE which note is playing.
    *
-   * Every part of that is needed and each was learned by getting it wrong:
-   * without a trigger the trace slides; without a pitch-tracked window one sine
-   * reads as two different waveforms an octave apart; without SUB-SAMPLE
-   * precision on both the period and the trigger it crawls, because a period is
-   * almost never a whole number of samples; and without reading BETWEEN samples
-   * a high note has fewer samples than the box has columns and breaks into
-   * dots.
+   * The alternative — tracking the pitch and always drawing one whole cycle —
+   * was tried and is what made a bass note and a top note look identical. It
+   * gives a steadier, more readable SHAPE, but it throws away the one thing the
+   * picture should obviously tell you.
    *
-   * A signal with no period keeps the fixed half-buffer window — noise and
-   * decaying tails have nothing to lock to, and inventing a period would make
-   * the picture jump. */
-  const half = samples.length >> 1;
-  const period = detectPeriod(samples, 16, half - 1);
-  let span = half, start = 0;
-  if (period > 0) {
-    /* Two cycles if two cycles fit, otherwise ONE — never a leftover fraction.
-     * A 40 Hz note is 2400 samples for two cycles, so at the bottom of
-     * the range even a 4096 tap runs out. Showing one whole cycle keeps the promise
-     * that the picture is a waveform; showing 1.4 does not. */
-    const room = samples.length - Math.ceil(period) - 2;
-    let want = period * SCOPE_CYCLES;
-    if (want > room) want = period;
-    if (want >= 8 && want <= room) span = want;
-  }
-  /* Trigger within the first cycle: any later crossing is the same phase and
-   * only costs window. */
-  const z = risingZero(samples, 1, Math.min(samples.length - span - 1,
-                                            (period > 0 ? Math.ceil(period) : half) + 2));
-  if (z >= 0) start = z;
+   * The TRIGGER stays, and is the whole reason this is legible: starting the
+   * window at a rising zero crossing, to sub-sample precision, is what stops
+   * the trace sliding sideways frame to frame. A scope without a trigger is a
+   * scope you cannot read. Below about 100 Hz the window holds less than a full
+   * cycle — that is honest, it is what 10 ms of a bass note looks like. */
+  const sr = +opts.sr > 0 ? +opts.sr : 48000;
+  const span = Math.max(64, Math.min(samples.length - 2, Math.round(sr * SCOPE_SECONDS)));
+  /* Search a generous stretch for the crossing — a 27 Hz note only crosses
+   * every 1750 samples, and failing to find one would put the trace back to
+   * sliding. */
+  const z = risingZero(samples, 1, Math.max(2, samples.length - span - 1));
+  const start = z >= 0 ? z : 0;
 
   const mid = area.y + area.h * 0.5;
   const vhalf = area.h * 0.5;
