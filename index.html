@@ -694,7 +694,16 @@ class Audio {
   async start(sr) {
     if (this.running) return true;
     this.ctx = new AudioContext(sr ? { sampleRate: sr } : {});
-    await this.ctx.resume();
+    /* NOT AWAITED, and that is the whole point of there being no splash screen.
+     *
+     * A context created before the user has touched the page starts SUSPENDED,
+     * and resume() cannot succeed until a gesture arrives. Awaiting it here
+     * meant start() never returned on a fresh load — so the caller never got to
+     * mount the board or remove the boot screen, and the "start" button that
+     * was supposed to be gone sat there forever. Everything below this line
+     * (wasm, worklet, graph) works perfectly well on a suspended context; only
+     * the sound waits. app.js resumes it on the first click, key or touch. */
+    this.ctx.resume().catch(() => {});
     this.sr = this.ctx.sampleRate;
 
     /* THE ENGINE DEFAULTS TO THE CEILING: the largest of 1x/2x/4x the device
