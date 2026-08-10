@@ -6414,7 +6414,13 @@ function drawTapFrame(ctx, rect) {
  */
 /** How many cycles of a periodic signal the scope shows. Two: one is not
  *  obviously a repeat, and more makes the shape small. */
-const SCOPE_CYCLES = 2;
+/* ONE cycle. Two was the wrong default and was reported as such twice — "still
+ * several waves instead of one", then "double waves on simple syn wave". One
+ * period is what a waveform IS, and it also fits at every pitch the keyboard
+ * reaches: two cycles of a 32.7 Hz note need 4404 samples against a 4096 tap,
+ * so two could not be honoured at the bottom and the window quietly halved
+ * there, which read as the wavelength changing with pitch. */
+const SCOPE_CYCLES = 1;
 
 /**
  * The period of a signal, in samples, or 0 if it does not repeat.
@@ -6571,19 +6577,6 @@ function drawScope(ctx, rect, samples, opts = {}) {
                                             (period > 0 ? Math.ceil(period) : half) + 2));
   if (z >= 0) start = z;
 
-  /* SAY HOW MANY CYCLES when it is not the usual two. Two triggered cycles of a
-   * 32.7 Hz note need 4404 samples and the tap holds 4096, so the bottom octave
-   * genuinely cannot show two — and silently showing one made the on-screen
-   * wavelength double there, which reads as the scope changing its mind rather
-   * than as a limit. One word turns a confusing jump into information. */
-  if (period > 0 && span < period * SCOPE_CYCLES * 0.9 && area.h > 34) {
-    ctx.font = FONT;
-    ctx.fillStyle = '#606878';
-    ctx.textAlign = 'right';
-    ctx.textBaseline = 'top';
-    ctx.fillText('1 cycle', area.x + area.w - 2, area.y + 1);
-  }
-
   const mid = area.y + area.h * 0.5;
   const vhalf = area.h * 0.5;
   ctx.lineWidth = 1;
@@ -6607,17 +6600,8 @@ function drawScope(ctx, rect, samples, opts = {}) {
    * instead — which is what a plain polyline through 1024 points in 190 px
    * does — draws a moiré pattern that moves with the pitch and looks like an
    * aliasing bug in the synth rather than in the chart. */
-  /* COLUMN EDGES BY PROPORTION, not by an integer stride.
-   *
-   * `per = floor(span / cols)` throws away the remainder, and the remainder is
-   * most of the window when the span is small: two cycles of a high note is 183
-   * samples over 116 columns, so per = 1 and only 116 of them were drawn —
-   * 1.3 cycles, not the 2 that were measured out. The same sine then looked
-   * like a different waveform an octave up, which is the thing this window was
-   * added to fix. */
   const cols = Math.max(8, Math.floor(area.w));
   const dx = area.w / cols;
-  const edge = (c) => start + Math.floor(c * span / cols);
   /* FEWER SAMPLES THAN COLUMNS: read BETWEEN them.
    *
    * Two cycles of a top-octave note is under 100 samples across ~120 columns,
@@ -6633,7 +6617,23 @@ function drawScope(ctx, rect, samples, opts = {}) {
    * Min/max is kept for the dense case, where a column really does span many
    * samples and taking the extremes is what stops a 4096-point signal aliasing
    * into a moire. */
-  const sparse = span < cols * 2;
+  /* READ AT FRACTIONAL POSITIONS — the trigger is sub-sample, so the window
+   * starts BETWEEN two samples, and `samples[12.34]` on a Float32Array is
+   * `undefined`. Indexing it directly skipped every column and the probe drew
+   * nothing at all for any signal that does not happen to cross zero exactly on
+   * a sample — which a test sine at phase 0 does and a real instrument never
+   * does. That is the whole bug, and it hid because the suite compared two
+   * empty traces and called them identical.
+   *
+   * One path, not two. The column's extremes are the interpolated values at its
+   * two EDGES plus every whole sample strictly inside it. When a column spans
+   * many samples that is min/max, which is what stops a 4096-point signal
+   * aliasing into a moire; when it spans less than one — two cycles of a
+   * top-octave note is fewer samples than the box has columns — the inner loop
+   * simply does not run and the two edges carry it, which is what keeps a high
+   * note a curve instead of the staircase of dots it used to break into. The
+   * edges also mean neighbouring columns MEET, and that a saw's reset stays a
+   * vertical edge instead of being interpolated into a ramp. */
   const at = (pos) => {
     const i = Math.floor(pos), f = pos - i;
     const a = samples[i], b = samples[i + 1];
@@ -6646,19 +6646,16 @@ function drawScope(ctx, rect, samples, opts = {}) {
   ctx.beginPath();
   for (let cIdx = 0; cIdx < cols; cIdx++) {
     let lo = Infinity, hi = -Infinity;
-    if (sparse) {
-      const a = at(start + cIdx * span / cols);
-      const b = at(start + (cIdx + 1) * span / cols);
-      if (Number.isFinite(a) && Number.isFinite(b)) { lo = Math.min(a, b); hi = Math.max(a, b); }
-    } else {
-      const from = edge(cIdx);
-      const to = Math.max(from + 1, edge(cIdx + 1));
-      for (let i = from; i < to; i++) {
-        const v = samples[i];
-        if (!Number.isFinite(v)) continue;
-        if (v < lo) lo = v;
-        if (v > hi) hi = v;
-      }
+    const from = start + cIdx * span / cols;
+    const to = start + (cIdx + 1) * span / cols;
+    const ea = at(from), eb = at(to);
+    if (Number.isFinite(ea)) { lo = ea; hi = ea; }
+    if (Number.isFinite(eb)) { if (eb < lo) lo = eb; if (eb > hi) hi = eb; }
+    for (let i = Math.ceil(from); i < to; i++) {
+      const v = samples[i];
+      if (!Number.isFinite(v)) continue;
+      if (v < lo) lo = v;
+      if (v > hi) hi = v;
     }
     if (lo > hi) continue;
     lo = Math.min(1, Math.max(-1, lo));
