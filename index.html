@@ -1018,7 +1018,13 @@ class Audio {
   }
 
   /** Tell the worklet which nodes' live data to send back each push. */
-  setReadPlan(nodes, tapLen = 1024, hz = 30) {
+  /* tapLen is the FULL PCKS_TAP_LEN the core keeps, not a fraction of it.
+   * Reading 1024 was enough for a picture but not for a LOW one: two cycles of
+   * a bass note is 732 samples and, with room to find the trigger, would not
+   * fit — so low notes fell back to a fixed window and appeared to change
+   * length with pitch. It also quadruples the spectrum's frequency resolution,
+   * which is where its low end was weakest. */
+  setReadPlan(nodes, tapLen = 4096, hz = 30) {
     this._vizPlan = [];
     this._effPlan = [];
     this._tapPlan = [];
@@ -6410,6 +6416,86 @@ function drawTapFrame(ctx, rect) {
  *  obviously a repeat, and more makes the shape small. */
 const SCOPE_CYCLES = 2;
 
+/**
+ * The period of a signal, in samples, or 0 if it does not repeat.
+ *
+ * CUMULATIVE MEAN NORMALISED DIFFERENCE — the heart of YIN, and the reason
+ * plain autocorrelation is not enough here. Correlation is just as strong at
+ * TWICE a period as at the period, so a maximum-picking search reports 2x or 3x
+ * about as often as the truth, and the scope then draws four humps where it
+ * promised two. Dividing each lag by the running mean of everything shorter
+ * pushes those multiples back down, so the FIRST lag under the threshold is the
+ * real one. That is the whole trick, and it is why the loop takes the first
+ * crossing rather than the best score.
+ *
+ * Parabolic interpolation on the winner because a period is rarely a whole
+ * number of samples — 440 Hz at 48 kHz is 109.09 — and rounding it is what
+ * makes a trace crawl: two cycles of error accumulate a whole sample every few
+ * frames.
+ */
+function detectPeriod(x, minLag, maxLag) {
+  const n = Math.min(x.length >> 1, maxLag * 2);
+  if (n < minLag * 2) return 0;
+  /* COARSE PASS ON DECIMATED DATA. Searched at full resolution this is 2000
+   * lags over 2000 samples — four million multiply-adds per redraw per probe,
+   * thirty times a second, on the same thread that was already the reason the
+   * audio crackled. Decimating by D cuts it by D squared and costs nothing:
+   * the winner is then refined at full rate over a few lags either side, so the
+   * answer is identical while the work is ~1/16th. */
+  const D = 4;
+  const d = new Float64Array(maxLag + 1);
+  const diff = (lag, step) => {
+    let sum = 0;
+    for (let i = 0; i < n; i += step) { const t = x[i] - x[i + lag]; sum += t * t; }
+    return sum * step;
+  };
+  for (let lag = minLag; lag <= maxLag; lag++) d[lag] = diff(lag, lag < minLag * 4 ? 1 : D);
+  /* the cumulative mean normalisation */
+  const cm = new Float64Array(maxLag + 1);
+  let run = 0;
+  for (let lag = minLag; lag <= maxLag; lag++) {
+    run += d[lag];
+    cm[lag] = d[lag] * (lag - minLag + 1) / (run || 1e-12);
+  }
+  let best = 0;
+  for (let lag = minLag + 1; lag < maxLag; lag++) {
+    if (cm[lag] < 0.15 && cm[lag] <= cm[lag + 1]) { best = lag; break; }
+  }
+  if (!best) return 0;
+  /* REFINE AT FULL RATE around the coarse winner: decimation blurs the exact
+   * minimum by a couple of samples, and a couple of samples of period error is
+   * a whole sample of drift by the second cycle. */
+  {
+    let bd = diff(best, 1), bl = best;
+    for (let lag = Math.max(minLag, best - D); lag <= Math.min(maxLag - 1, best + D); lag++) {
+      const v = diff(lag, 1);
+      if (v < bd) { bd = v; bl = lag; }
+    }
+    if (bl !== best) { best = bl; for (let k = best - 1; k <= best + 1; k++) cm[k] = diff(k, 1); }
+  }
+  /* refine to sub-sample with a parabola through the three lowest points */
+  const a = cm[best - 1], b = cm[best], c = cm[best + 1];
+  const denom = a - 2 * b + c;
+  return denom > 1e-12 ? best + 0.5 * (a - c) / denom : best;
+}
+
+/**
+ * Where the signal crosses zero going up, to sub-sample precision.
+ *
+ * The integer crossing is only ever within one sample of the truth, and one
+ * sample is 4 degrees of phase at C5 — enough to see the trace twitch frame to
+ * frame. Interpolating between the two samples that straddle zero pins it.
+ */
+function risingZero(x, from, to) {
+  for (let i = Math.max(1, from); i < to; i++) {
+    if (x[i - 1] <= 0 && x[i] > 0) {
+      const d = x[i] - x[i - 1];
+      return d > 1e-12 ? (i - 1) + (-x[i - 1]) / d : i;
+    }
+  }
+  return -1;
+}
+
 function drawScope(ctx, rect, samples, opts = {}) {
   const R = rectOf(rect);
   if (R.w < 6 || R.h < 6) return false;
@@ -6443,38 +6529,50 @@ function drawScope(ctx, rect, samples, opts = {}) {
    * SEARCHED IN THE FIRST HALF ONLY, so there is always a second half left to
    * draw. A buffer with no crossing — silence, or DC — falls back to sample 0
    * rather than drawing nothing. */
-  /* THE WINDOW FOLLOWS THE PITCH, so every note draws the same two humps.
+  /* WHAT THE SCOPE SHOWS: exactly SCOPE_CYCLES of the signal, starting at a
+   * rising zero crossing, both measured to sub-sample precision.
    *
-   * A fixed time window is what a bench oscilloscope gives you, and it is
-   * honest, but it is the wrong default here: half a tap buffer is about 10.7
-   * ms, which is 1.4 cycles of C3 and 5.6 of C5 — so the same sine looks like a
-   * different waveform an octave apart, and you end up counting humps instead
-   * of reading the shape. Reported as "sometimes I see two waves".
+   * Every part of that is needed and each was learned by getting it wrong:
+   * without a trigger the trace slides; without a pitch-tracked window one sine
+   * reads as two different waveforms an octave apart; without SUB-SAMPLE
+   * precision on both the period and the trigger it crawls, because a period is
+   * almost never a whole number of samples; and without reading BETWEEN samples
+   * a high note has fewer samples than the box has columns and breaks into
+   * dots.
    *
-   * So: trigger, measure the period from the crossings that follow, and draw
-   * exactly SCOPE_CYCLES of it. A sine then looks like a sine at every pitch
-   * and two probes at different points in a chain can be compared by eye.
-   *
-   * A SIGNAL WITH NO PERIOD keeps the fixed window — noise, a decaying tail and
-   * silence have no cycle to lock to, and inventing one would make the picture
-   * jump about. That is the fallback, not a failure. */
-  const crossings = [];
+   * A signal with no period keeps the fixed half-buffer window — noise and
+   * decaying tails have nothing to lock to, and inventing a period would make
+   * the picture jump. */
   const half = samples.length >> 1;
-  for (let i = 1; i < samples.length && crossings.length < SCOPE_CYCLES + 1; i++) {
-    if (samples[i - 1] <= 0 && samples[i] > 0) {
-      if (crossings.length || i < half) crossings.push(i);
-    }
+  const period = detectPeriod(samples, 16, half - 1);
+  let span = half, start = 0;
+  if (period > 0) {
+    /* Two cycles if two cycles fit, otherwise ONE — never a leftover fraction.
+     * A 40 Hz note is 2400 samples for two cycles, so at the bottom of
+     * the range even a 4096 tap runs out. Showing one whole cycle keeps the promise
+     * that the picture is a waveform; showing 1.4 does not. */
+    const room = samples.length - Math.ceil(period) - 2;
+    let want = period * SCOPE_CYCLES;
+    if (want > room) want = period;
+    if (want >= 8 && want <= room) span = want;
   }
-  const start = crossings.length ? crossings[0] : 0;
-  let span = half;
-  if (crossings.length >= 2) {
-    const period = (crossings[crossings.length - 1] - crossings[0])
-                 / (crossings.length - 1);
-    const want = Math.round(period * SCOPE_CYCLES);
-    /* Only when it fits and is worth resolving: a period under a few samples is
-     * above the drawing's own resolution, and one longer than the buffer would
-     * draw past the end. */
-    if (want >= 16 && start + want <= samples.length) span = want;
+  /* Trigger within the first cycle: any later crossing is the same phase and
+   * only costs window. */
+  const z = risingZero(samples, 1, Math.min(samples.length - span - 1,
+                                            (period > 0 ? Math.ceil(period) : half) + 2));
+  if (z >= 0) start = z;
+
+  /* SAY HOW MANY CYCLES when it is not the usual two. Two triggered cycles of a
+   * 32.7 Hz note need 4404 samples and the tap holds 4096, so the bottom octave
+   * genuinely cannot show two — and silently showing one made the on-screen
+   * wavelength double there, which reads as the scope changing its mind rather
+   * than as a limit. One word turns a confusing jump into information. */
+  if (period > 0 && span < period * SCOPE_CYCLES * 0.9 && area.h > 34) {
+    ctx.font = FONT;
+    ctx.fillStyle = '#606878';
+    ctx.textAlign = 'right';
+    ctx.textBaseline = 'top';
+    ctx.fillText('1 cycle', area.x + area.w - 2, area.y + 1);
   }
 
   const mid = area.y + area.h * 0.5;
@@ -6511,19 +6609,47 @@ function drawScope(ctx, rect, samples, opts = {}) {
   const cols = Math.max(8, Math.floor(area.w));
   const dx = area.w / cols;
   const edge = (c) => start + Math.floor(c * span / cols);
+  /* FEWER SAMPLES THAN COLUMNS: read BETWEEN them.
+   *
+   * Two cycles of a top-octave note is under 100 samples across ~120 columns,
+   * so walking whole samples repeats each one for several columns and the trace
+   * breaks into a staircase of dots — reported in exactly those words. Reading
+   * at fractional positions keeps it a curve at any pitch.
+   *
+   * Both column EDGES rather than the centre: a column here spans about one
+   * sample, so a single centre reading leaves gaps between columns and quietly
+   * interpolates ACROSS a discontinuity — a saw's reset became a gentle ramp
+   * instead of the vertical edge that is the whole character of the shape.
+   *
+   * Min/max is kept for the dense case, where a column really does span many
+   * samples and taking the extremes is what stops a 4096-point signal aliasing
+   * into a moire. */
+  const sparse = span < cols * 2;
+  const at = (pos) => {
+    const i = Math.floor(pos), f = pos - i;
+    const a = samples[i], b = samples[i + 1];
+    if (!Number.isFinite(a)) return NaN;
+    return Number.isFinite(b) ? a + (b - a) * f : a;
+  };
 
   ctx.strokeStyle = fade(tint, 210);
   ctx.lineWidth = opts.lineWidth || 1;
   ctx.beginPath();
   for (let cIdx = 0; cIdx < cols; cIdx++) {
     let lo = Infinity, hi = -Infinity;
-    const from = edge(cIdx);
-    const to = Math.max(from + 1, edge(cIdx + 1));
-    for (let i = from; i < to; i++) {
-      const v = samples[i];
-      if (!Number.isFinite(v)) continue;
-      if (v < lo) lo = v;
-      if (v > hi) hi = v;
+    if (sparse) {
+      const a = at(start + cIdx * span / cols);
+      const b = at(start + (cIdx + 1) * span / cols);
+      if (Number.isFinite(a) && Number.isFinite(b)) { lo = Math.min(a, b); hi = Math.max(a, b); }
+    } else {
+      const from = edge(cIdx);
+      const to = Math.max(from + 1, edge(cIdx + 1));
+      for (let i = from; i < to; i++) {
+        const v = samples[i];
+        if (!Number.isFinite(v)) continue;
+        if (v < lo) lo = v;
+        if (v > hi) hi = v;
+      }
     }
     if (lo > hi) continue;
     lo = Math.min(1, Math.max(-1, lo));
@@ -17762,7 +17888,7 @@ class App {
 
   refreshReadPlan() {
     audio.uiNodes = this.nodes;
-    audio.setReadPlan(this.nodes, 1024, 30);
+    audio.setReadPlan(this.nodes, 4096, 30);
   }
 
   /* -- construction ------------------------------------------------------ */
