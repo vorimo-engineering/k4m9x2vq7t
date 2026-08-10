@@ -16471,16 +16471,44 @@ async function main() {
   goBtn.textContent = 'start';
 }
 
-main().catch(fail);
+main().then(boot_).catch(fail);
 
-goBtn.onclick = async () => {
-  goBtn.disabled = true;
-  goBtn.textContent = 'starting…';
+/* THE BOARD COMES UP BY ITSELF; AUDIO WAITS FOR A GESTURE.
+ *
+ * There used to be a `start` button because browsers will not let a page make
+ * a sound before you touch it. True, and it was answered with the wrong thing:
+ * the whole application sat behind a click, so the first thing anyone saw was
+ * a splash screen asking permission to show them a synth.
+ *
+ * The rule is narrower than that. An AudioContext may be CREATED without a
+ * gesture — it simply starts suspended — and everything expensive can happen
+ * there: the wasm compiles, the worklet loads, the graph builds, the UI mounts.
+ * Only `resume()` needs the gesture. So the board appears immediately and the
+ * first click, key or touch anywhere starts the sound. If the browser has
+ * already allowed audio for this site, even that is invisible.
+ */
+async function boot_() {
   try {
     const mode = await audio.start();
     const app = new App(mode);
     app.mount();
     boot.remove();
+    /* THE GESTURE, once, from anywhere. Registered whatever the context's
+     * state is: a page that was allowed to start immediately resolves this on
+     * the first interaction and removes it, which costs one listener. */
+    if (audio.ctx && audio.ctx.state !== 'running') {
+      const wake = () => {
+        audio.ctx.resume().catch(() => {});
+        if (audio.ctx.state === 'running') {
+          for (const ev of ['pointerdown', 'keydown', 'touchstart']) {
+            window.removeEventListener(ev, wake, true);
+          }
+        }
+      };
+      for (const ev of ['pointerdown', 'keydown', 'touchstart']) {
+        window.addEventListener(ev, wake, true);
+      }
+    }
     /* SAY SO WHEN THE WORKLET DID NOT LOAD.
      *
      * The fallback runs the graph on a ScriptProcessorNode on the MAIN THREAD,
@@ -16496,12 +16524,11 @@ goBtn.onclick = async () => {
       console.warn('audio worklet unavailable:', audio.fallbackReason);
     }
   } catch (e) {
-    goBtn.textContent = 'failed';
-    goBtn.disabled = false;
+    if (goBtn) { goBtn.textContent = 'failed'; goBtn.disabled = false; }
     if (errEl) errEl.textContent = String(e && e.stack || e);
     console.error(e);
   }
-};
+}
 
 /* ------------------------------------------------------------------------ */
 
