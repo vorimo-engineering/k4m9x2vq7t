@@ -28,12 +28,17 @@
 
 <div id="app"></div>
 
-<div id="boot">
+<!-- HIDDEN UNTIL SOMETHING GOES WRONG.
+     This used to be a splash screen with a `start audio` button, because a
+     browser will not make a sound before you touch the page. The board now
+     mounts on its own and the first click resumes the audio, so the screen has
+     nothing left to ask for — but it is still where a startup FAILURE has to be
+     reported, since at that point there is no app to report it in.
+     So it ships hidden and `fail()` reveals it. Removing it outright would
+     trade a flash of unwanted UI for a blank page on any error, which is the
+     worse of the two. -->
+<div id="boot" hidden>
   <h1>PCHKRAFT SYNTH</h1>
-  <p>A modular synthesiser. The DSP is C compiled to WebAssembly; nothing here
-     is simulated in JavaScript.</p>
-  <button id="go">start audio</button>
-  <p>Browsers only start audio from a click — that is what this button is for.</p>
   <div id="err"></div>
 </div>
 
@@ -16456,6 +16461,10 @@ function fail(e) {
    * an unhandled promise rejection, which prints a second, less useful error
    * while the message the user actually needs is already on screen. */
   console.error(e);
+  /* The boot screen is hidden in the shell and this is the only thing that
+   * shows it: a startup failure is the one moment there is no app to put a
+   * message in. */
+  if (boot) boot.hidden = false;
   if (errEl) errEl.textContent = String(e && e.stack || e);
   if (goBtn) { goBtn.disabled = true; goBtn.textContent = 'failed'; }
 }
@@ -16471,13 +16480,17 @@ async function main() {
 
   /* What the core says about itself, before anything else can go wrong. A
    * wrong count here means a stale wasm and saves a long hunt. */
+  /* APPENDED TO A HIDDEN SCREEN, on purpose. Nobody sees this unless a startup
+   * failure reveals the boot panel — at which point "47 block types" sitting
+   * above the stack trace is the first thing worth knowing, because a wrong
+   * count means a stale wasm and saves a long hunt. It costs one element on a
+   * page that is not displayed. */
   const p = document.createElement('p');
   const code = document.createElement('code');
   code.textContent = `${reg.types.length} block types · ${reg.groups.size} groups · `
                    + `core block ${reg.block} · ${reg.sr_min}–${reg.sr_max} Hz`;
   p.appendChild(code);
-  boot.insertBefore(p, goBtn);
-  goBtn.textContent = 'start';
+  if (boot) boot.appendChild(p);
 }
 
 main().then(boot_).catch(fail);
