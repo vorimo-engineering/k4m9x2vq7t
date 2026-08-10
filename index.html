@@ -6406,6 +6406,10 @@ function drawTapFrame(ctx, rect) {
  * @param samples  Float32Array from Graph.tap(), oldest first
  * @param opts     {tint, frame, top, empty, lineWidth}
  */
+/** How many cycles of a periodic signal the scope shows. Two: one is not
+ *  obviously a repeat, and more makes the shape small. */
+const SCOPE_CYCLES = 2;
+
 function drawScope(ctx, rect, samples, opts = {}) {
   const R = rectOf(rect);
   if (R.w < 6 || R.h < 6) return false;
@@ -6439,19 +6443,42 @@ function drawScope(ctx, rect, samples, opts = {}) {
    * SEARCHED IN THE FIRST HALF ONLY, so there is always a second half left to
    * draw. A buffer with no crossing — silence, or DC — falls back to sample 0
    * rather than drawing nothing. */
-  const span = samples.length >> 1;      /* FIXED, so every refresh averages the
-                                          * same number of samples per column —
-                                          * a window that changed length with
-                                          * the trigger point drew a slightly
-                                          * different trace each time even when
-                                          * the phase was right. */
-  let start = 0;
-  for (let i = 1; i < span; i++) {
-    if (samples[i - 1] <= 0 && samples[i] > 0) { start = i; break; }
+  /* THE WINDOW FOLLOWS THE PITCH, so every note draws the same two humps.
+   *
+   * A fixed time window is what a bench oscilloscope gives you, and it is
+   * honest, but it is the wrong default here: half a tap buffer is about 10.7
+   * ms, which is 1.4 cycles of C3 and 5.6 of C5 — so the same sine looks like a
+   * different waveform an octave apart, and you end up counting humps instead
+   * of reading the shape. Reported as "sometimes I see two waves".
+   *
+   * So: trigger, measure the period from the crossings that follow, and draw
+   * exactly SCOPE_CYCLES of it. A sine then looks like a sine at every pitch
+   * and two probes at different points in a chain can be compared by eye.
+   *
+   * A SIGNAL WITH NO PERIOD keeps the fixed window — noise, a decaying tail and
+   * silence have no cycle to lock to, and inventing one would make the picture
+   * jump about. That is the fallback, not a failure. */
+  const crossings = [];
+  const half = samples.length >> 1;
+  for (let i = 1; i < samples.length && crossings.length < SCOPE_CYCLES + 1; i++) {
+    if (samples[i - 1] <= 0 && samples[i] > 0) {
+      if (crossings.length || i < half) crossings.push(i);
+    }
+  }
+  const start = crossings.length ? crossings[0] : 0;
+  let span = half;
+  if (crossings.length >= 2) {
+    const period = (crossings[crossings.length - 1] - crossings[0])
+                 / (crossings.length - 1);
+    const want = Math.round(period * SCOPE_CYCLES);
+    /* Only when it fits and is worth resolving: a period under a few samples is
+     * above the drawing's own resolution, and one longer than the buffer would
+     * draw past the end. */
+    if (want >= 16 && start + want <= samples.length) span = want;
   }
 
   const mid = area.y + area.h * 0.5;
-  const half = area.h * 0.5;
+  const vhalf = area.h * 0.5;
   ctx.lineWidth = 1;
   ctx.strokeStyle = MIDLINE;
   ctx.beginPath();
@@ -6462,7 +6489,7 @@ function drawScope(ctx, rect, samples, opts = {}) {
   ctx.strokeStyle = CLIPLINE;
   ctx.setLineDash([1, 2]);
   ctx.beginPath();
-  for (const y of [mid - half, mid + half]) {
+  for (const y of [mid - vhalf, mid + vhalf]) {
     ctx.moveTo(area.x, Math.round(y) + 0.5);
     ctx.lineTo(area.x + area.w, Math.round(y) + 0.5);
   }
@@ -6473,17 +6500,25 @@ function drawScope(ctx, rect, samples, opts = {}) {
    * instead — which is what a plain polyline through 1024 points in 190 px
    * does — draws a moiré pattern that moves with the pitch and looks like an
    * aliasing bug in the synth rather than in the chart. */
-  let cols = Math.max(8, Math.floor(area.w));
-  let per = Math.floor(span / cols);
-  if (per < 1) { cols = span; per = 1; }
+  /* COLUMN EDGES BY PROPORTION, not by an integer stride.
+   *
+   * `per = floor(span / cols)` throws away the remainder, and the remainder is
+   * most of the window when the span is small: two cycles of a high note is 183
+   * samples over 116 columns, so per = 1 and only 116 of them were drawn —
+   * 1.3 cycles, not the 2 that were measured out. The same sine then looked
+   * like a different waveform an octave up, which is the thing this window was
+   * added to fix. */
+  const cols = Math.max(8, Math.floor(area.w));
   const dx = area.w / cols;
+  const edge = (c) => start + Math.floor(c * span / cols);
 
   ctx.strokeStyle = fade(tint, 210);
   ctx.lineWidth = opts.lineWidth || 1;
   ctx.beginPath();
   for (let cIdx = 0; cIdx < cols; cIdx++) {
     let lo = Infinity, hi = -Infinity;
-    const from = start + cIdx * per, to = from + per;
+    const from = edge(cIdx);
+    const to = Math.max(from + 1, edge(cIdx + 1));
     for (let i = from; i < to; i++) {
       const v = samples[i];
       if (!Number.isFinite(v)) continue;
@@ -6494,7 +6529,7 @@ function drawScope(ctx, rect, samples, opts = {}) {
     lo = Math.min(1, Math.max(-1, lo));
     hi = Math.min(1, Math.max(-1, hi));
     const px = area.x + (cIdx + 0.5) * dx;
-    let yTop = mid - hi * half, yBot = mid - lo * half;
+    let yTop = mid - hi * vhalf, yBot = mid - lo * vhalf;
     /* A zero-length line strokes NOTHING on a canvas (Qt drew a dot). DC, or
      * anything slow enough that a column holds no swing, would render as an
      * empty box — which reads as a dead probe. */
