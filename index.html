@@ -17615,6 +17615,22 @@ class App {
      * own summary. */
     if (!opts.quiet) this.history.push(`preset ${p.name}`);
 
+    /* Put the surface back to the patch's saved state first, so what this
+     * preset does NOT name cannot arrive from whatever was picked before it. */
+    let restored = 0;
+    if (this._surface) {
+      const named = new Set(p.sets.map((s) => s.node + '\u0000' + s.index));
+      for (const [k, base] of this._surface) {
+        if (named.has(k)) continue;
+        const cut = k.indexOf('\u0000');
+        const node = k.slice(0, cut), index = Number(k.slice(cut + 1));
+        if (!this.nodes.has(node)) continue;
+        if (audio.paramNorm(node, index) === base) continue;
+        audio.setParam(node, index, base);
+        restored++;
+      }
+    }
+
     let n = 0, gone = 0;
     for (const s of p.sets) {
       /* The bind was resolved when the patch loaded; the block may have been
@@ -17640,6 +17656,7 @@ class App {
     }
     if (!opts.quiet) {
       this.notify(`preset applied — ${p.name}, ${n} knob${n === 1 ? '' : 's'}`
+                + (restored ? `, ${restored} put back` : '')
                 + (gone ? `, ${gone} skipped (that block is gone)` : ''));
     }
     return true;
@@ -18419,6 +18436,50 @@ class App {
     this.presets = res.presets || [];
     this.groups = res.groups || [];
     this._face = res.face || { panel: null, presets: null, groups: null };
+
+    /* THE PRESET SURFACE, snapshotted before any preset is applied.
+     *
+     * Presets are SPARSE OVERLAYS — a preset lists only what it moves — which is
+     * right for a file and wrong for a picker: a knob preset A moves and preset
+     * B never mentions kept A's value, so picking B gave you B plus a leftover
+     * of A. Measured across the shelf, 13 banks have face knobs no preset states
+     * at all (pk-jupiter8-x 14 of 62, pk-poly 12 of 27, pk-prophet5-x 11 of 41),
+     * and on pk-jupiter8-x turning the VOLUME to zero then picking any preset
+     * recalled SILENCE, because nothing put it back.
+     *
+     * capturePreset() already states the rule in as many words — "the face is
+     * the promise a preset makes and a missing one would inherit whatever the
+     * previous preset left there" — so anything captured here is complete. This
+     * defends the patches already on disk, which were not.
+     *
+     * The surface is every knob ANY preset in the bank names, plus every knob
+     * the face binds. Restoring it to the patch's saved state before applying an
+     * overlay makes a preset mean the same thing whatever you picked before it.
+     * Knobs outside the surface are left alone — they are the user's edits to a
+     * patch, not a preset's business. */
+    this._surface = new Map();
+    {
+      const add = (node, index) => {
+        const k = node + '\u0000' + index;
+        if (!this._surface.has(k) && this.nodes.has(node)) {
+          this._surface.set(k, audio.paramNorm(node, index));
+        }
+      };
+      /* A face bind is [node, KEY] — the key resolves through the registry, the
+       * same way a mod link's destination does. Most of the face lives on the
+       * GROUPS, not on the top-level panel: pk-jupiter8-x has 2 binds there and
+       * 60 across its nine groups. */
+      const bind = (b) => {
+        if (!b || !Array.isArray(b.bind)) return;
+        const [node, key] = b.bind;
+        const t = this.reg.byType.get(this.nodes.get(node)?.type);
+        const i = t?.paramByKey.get(key);
+        if (i != null) add(node, i);
+      };
+      for (const pr of this.presets) for (const st of pr.sets) add(st.node, st.index);
+      for (const b of this.panel) bind(b);
+      for (const gr of this.groups) for (const b of gr.panel || []) bind(b);
+    }
 
     this._modLinks = [];
     for (const m of patch.mod ?? []) {
