@@ -4288,6 +4288,13 @@ class Palette {
     const n = this._counts.get(t.type) ?? 0;
     const why = this._fullReason(t);
     return typeTip(t, {
+      /* A MODULE'S OWN PROSE. The card is a pseudo-type built here and it has
+       * no `desc` — that field belongs to the C registry — so without this
+       * every one of the fourteen modules showed a tooltip with no body at
+       * all, identical apart from its port and knob rows. `about` is the
+       * sentence the module file writes about itself, and it is the only
+       * description a composite has. */
+      about: t.about ?? undefined,
       rows: n ? [['placed', `${n} in this patch`]] : [],
       note: why || undefined,
       hint: why ? undefined
