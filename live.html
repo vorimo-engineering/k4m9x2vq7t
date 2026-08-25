@@ -10276,7 +10276,26 @@ class Board {
     this._targets = null;
     if (!a || a.kind !== 'wire') return;
     const map = new Map();
-    const modOk = a.isOut && (a.pkind === PORT_CV || a.pkind === PORT_GATE);
+    /* WHAT THE CORE ACCEPTS AS A MOD LINK, and nothing narrower or wider.
+     *
+     * This used to be `a.isOut && (pkind === CV || pkind === GATE)` — one
+     * boolean for the whole board — and it was wrong in BOTH directions,
+     * measured over all 21583 (source port, moddable knob) pairs:
+     *
+     *   12349  the core ACCEPTS and the board never lit. pcks_graph_modulate
+     *          does not look at the source's kind at all, so an oscillator can
+     *          drive a knob — and the DROP always worked. Only the halo was
+     *          missing, so the feature existed and was invisible.
+     *    1368  the board LIT and the core refuses: a per-voice source into a
+     *          global destination is PCKS_ERR_MOD_SCOPE, and a single boolean
+     *          could not know about the destination.
+     *
+     * So it is decided per DESTINATION now, against the two things the core
+     * actually tests: the parameter is moddable, and a voice source may not
+     * reach a global one. `srcVoice` is read once — the source cannot change
+     * mid-drag. */
+    const srcT = this.ctl.reg.byType.get(this.ctl.nodes.get(a.id)?.type);
+    const srcVoice = !!srcT?.isVoice;
     for (const [id, n] of this.ctl.nodes) {
       if (id === a.id) continue;
       const t = this.ctl.reg.byType.get(n.type);
@@ -10296,7 +10315,9 @@ class Board {
         if (a.isOut ? mayFeed(a.pkind, tab[i].kind) : mayFeed(tab[i].kind, a.pkind)) ports.push(i);
       }
       const knobs = [];
-      if (modOk) t.params.forEach((p, i) => { if (p.moddable) knobs.push(i); });
+      if (a.isOut && !(srcVoice && !t.isVoice)) {
+        t.params.forEach((p, i) => { if (p.moddable) knobs.push(i); });
+      }
       if (ports.length || knobs.length) map.set(id, { ports, knobs });
     }
     this._targets = map;
