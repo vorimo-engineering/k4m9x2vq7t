@@ -7444,6 +7444,8 @@ const L = 'l', R = 'r';
  *  sense. A block not named here is never trimmed, so this cannot affect
  *  anything that was working before it existed. */
 const FAN_OUTS = { 'util.route': 2, 'mod.route': 2 };
+/** The param key a fan block selects with. */
+const FAN_SEL = 'pos';
 
 /** How many output pins a fan block shows: its `outs` if it has one, clamped to
  *  what the type actually declares, and the full set for everything else. */
@@ -7452,6 +7454,25 @@ function fanOuts(t, outs) {
   if (!lo) return t ? t.out.length : 0;
   const n = Math.round(+outs);
   return Number.isFinite(n) ? Math.max(lo, Math.min(t.out.length, n)) : t.out.length;
+}
+
+/** The SELECTOR on a fan block, trimmed to the outputs that exist.
+ *
+ * The registry declares twenty positions because the ports are twenty; `outs`
+ * says how many are drawn, and a selector that still offered all twenty could
+ * be pointed at an output with no pin — which is what shipped, and what the
+ * tooltip and the inspector both claimed it could not do.
+ *
+ * A trimmed COPY rather than a mutation: the registry record is shared by every
+ * instance of the type, and two routers set to four and twelve must not fight
+ * over it. Returns the spec untouched for anything that is not a fan selector,
+ * so this can be applied unconditionally at the call sites. */
+function fanSpec(t, spec, outs) {
+  if (!spec || !FAN_OUTS[t?.type] || spec.key !== FAN_SEL) return spec;
+  const n = fanOuts(t, outs);
+  if (n >= (spec.steps | 0)) return spec;
+  return { ...spec, steps: n, max: spec.min + (n - 1),
+           enums: String(spec.enums || '').split('|').slice(0, n).join('|') };
 }
 
 function fanLimit(t, isOut, outs, ports) {
@@ -7562,12 +7583,14 @@ function pinOfLane(t, isOut, stereo, lane, outs) {
 }
 
 __x["fanOuts"] = fanOuts;
+__x["fanSpec"] = fanSpec;
 __x["hasPair"] = hasPair;
 __x["canBeMono"] = canBeMono;
 __x["viewPorts"] = viewPorts;
 __x["lanePairs"] = lanePairs;
 __x["pinOfLane"] = pinOfLane;
 __x["FAN_OUTS"] = FAN_OUTS;
+__x["FAN_SEL"] = FAN_SEL;
 
 }, {}],
 "web/js/ui/board.js": [async function(__x, __req){
@@ -7756,7 +7779,7 @@ const { drawKnob, knobCenter, knobDrag, defaultNorm, hitKnob, snapNorm,
 const { CURVE_POINTS, TAP_MODES, curvePoints, drawCurve, drawTap } = __req("./curves.js");
 const { PORT_AUDIO, PORT_CV, PORT_GATE, KNOB, SELECT, TOGGLE, selectIndex, formatValue, modLabel } = __req("../engine.js");
 const { showTipSoon, hideTip, typeTip, portTip, paramTip } = __req("./tooltip.js");
-const { viewPorts, lanePairs, pinOfLane, canBeMono, fanOuts } = __req("./channels.js");
+const { viewPorts, lanePairs, pinOfLane, canBeMono, fanOuts, fanSpec } = __req("./channels.js");
 const { deriveGroupViz } = __req("../patch.js");
 
 /* Node geometry, carried over verbatim from nodeitem.py.  These are not free
@@ -8689,6 +8712,13 @@ class Board {
    * value must arrive exactly as written, and the arc is the arc.
    */
   _gestureSpec(nodeId, spec) {
+    /* A FAN BLOCK'S SELECTOR is trimmed to the outputs that are drawn. Without
+     * this the knob still offered all twenty positions on a block showing four,
+     * so it could be pointed at an output with no pin — which the tooltip and
+     * the inspector both said it could not be. */
+    const n0 = this.ctl.nodes?.get?.(nodeId);
+    const t0 = n0 && this.ctl.reg.byType.get(n0.type);
+    if (t0) { const f = fanSpec(t0, spec, n0.outs); if (f !== spec) return f; }
     if (!spec || spec.key !== 'value') return spec;
     if (this.ctl.nodes?.get?.(nodeId)?.type !== 'mod.macro') return spec;
     const dests = [];
@@ -11353,7 +11383,9 @@ class Board {
     /* The MEMBER's own tint, not one colour for the card: a group of an
      * oscillator and a filter should say which knob is which. */
     drawKnob(ctx, cell, {
-      spec: e.spec,
+      /* Trimmed for the same reason as every other knob: a router on a group's
+       * card must offer the outputs the router actually draws. */
+      spec: this._gestureSpec(e.node, e.spec),
       value: this.ctl.paramNorm(e.node, e.index),
       effective: L && L.eff && e.index < L.eff.length ? L.eff[e.index] : null,
       tint: nodeColor(e.type.group),
@@ -11500,7 +11532,7 @@ class Board {
 
     const L = this._live.get(id);
     const byParam = this._modsBy.get(id);
-    const spec = t.params[0];
+    const spec = fanSpec(t, t.params[0], this.ctl.nodes.get(id)?.outs);
     const base = this.ctl.paramNorm(id, 0);
     drawKnob(ctx, K.cx, K.cy, K.r, spec, base, {
       tint: off ? COLORS.dim : tint,
@@ -11638,7 +11670,7 @@ class Board {
   }
 
   _paintKnob(ctx, id, t, lay, i, tint, eff, targets) {
-    const spec = t.params[i];
+    const spec = fanSpec(t, t.params[i], this.ctl.nodes.get(id)?.outs);
     const base = this.ctl.paramNorm(id, i);
     const byParam = this._modsBy.get(id);
     drawKnob(ctx, lay.cells[i], {
@@ -11966,7 +11998,7 @@ __x["BARE_LABEL_W"] = BARE_LABEL_W;
 const { KNOB, SELECT, TOGGLE, LIN, POLY, MONO, LEGATO, PORT_AUDIO, PORT_CV, PORT_GATE, formatValue, enumLabels, inverseCurve, selectIndex, modLabel } = __req("../engine.js");
 const { attachTip, hideTip, typeTip, paramTip, scopeLead } = __req("./tooltip.js");
 const { paramToNorm, normToParam, deriveGroupViz } = __req("../patch.js");
-const { fanOuts, FAN_OUTS } = __req("./channels.js");
+const { fanOuts, FAN_OUTS, fanSpec } = __req("./channels.js");
 
 /* Mod amounts move in hundredths over -1..+1, as on the desktop.  Finer than
  * that is below what the span readout can distinguish anyway. */
@@ -12908,7 +12940,11 @@ class Inspector {
     }
 
     this._section(`knobs (${t.params.length})`);
-    t.params.forEach((spec, i) => {
+    t.params.forEach((spec0, i) => {
+      /* A FAN BLOCK'S SELECTOR offers only the outputs that are drawn — the
+       * same trim the board applies, from the same function, so the panel and
+       * the canvas cannot disagree about how many positions there are. */
+      const spec = fanSpec(t, spec0, this._node(u.id)?.outs);
       const row = mk('div', 'pk-row');
       /* attachTip, not `title`: the same panel the palette and the board use,
        * and the provider runs at SHOW time so the reading it quotes is the one
@@ -16611,7 +16647,7 @@ const { Palette } = __req("./ui/palette.js");
 const { Inspector } = __req("./ui/inspector.js");
 const { Panel } = __req("./ui/panel.js");
 const { Keys, Transport, isTyping } = __req("./ui/keys.js");
-const { viewPorts, lanePairs, canBeMono, hasPair, fanOuts, FAN_OUTS } = __req("./ui/channels.js");
+const { viewPorts, lanePairs, canBeMono, hasPair, fanOuts, FAN_OUTS, FAN_SEL } = __req("./ui/channels.js");
 const { Sequencer } = __req("./ui/sequencer.js");
 const { attachTip } = __req("./ui/tooltip.js");
 
@@ -17057,6 +17093,18 @@ class App {
     if (lost) {
       this.notify(`${id}: ${lost} wire${lost === 1 ? '' : 's'} dropped — `
                 + `${lost === 1 ? 'it was' : 'they were'} on an output you trimmed away`, 'warn');
+    }
+    /* AND THE SELECTOR ITSELF. Trimming the pins narrows the knob (channels.js
+     * fanSpec), but a value already past the new end would sit there — the
+     * signal going to an output with no pin, which is the state the trim exists
+     * to make unreachable. Clamped in the same gesture, so the block never
+     * exists in it. */
+    const pi = t.params.findIndex(p => p.key === FAN_SEL);
+    if (pi >= 0) {
+      const spec = t.params[pi];
+      const now = Math.round(normToParam(spec, audio.paramNorm(id, pi)));
+      const top = spec.min + (want - 1);
+      if (now > top) audio.setParam(id, pi, paramToNorm(spec, top));
     }
     this.afterCompile(audio.compile());
     this.board.invalidate();
