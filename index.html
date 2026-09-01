@@ -14793,12 +14793,45 @@ class Inspector {
 
     const meta = this.host.meta || {};
 
-    /* NAME AND AUTHOR ARE NOT HERE. They live on the face card above this one,
-     * which is the patch's identity and is always on screen. Kept in both, they
-     * were the same fact in two cards — and the card that hid itself until a
-     * group existed was the one that made the duplication visible. What stays
-     * here is what the face card is not about: how the instrument is played,
-     * and what the engine is doing right now. */
+    /* THE NAME IS HERE AND ON THE FACE CARD, deliberately. It was consolidated
+     * onto the face heading alone — "the same fact in two cards" — and a user
+     * then hunted for it in THIS card, the one that says "the patch's own
+     * settings", found nothing, and reported the name as impossible to change
+     * ("it's stored somewhere in json, but I can't modify it from the web
+     * app"). A heading that only reveals it is an input when hovered is not a
+     * place people look for a setting; a labelled row is. Both edit the one
+     * meta.name and both sync from it, so the fact still lives once. */
+    this._section('patch');
+    {
+      const field = mk('div', 'pk-field');
+      attachTip(field, { lead:
+        'What this instrument is called — the heading above edits the same '
+        + 'name. It is written into the saved file and names the download.' });
+      const input = mk('input', 'pk-numin');
+      input.type = 'text';
+      input.spellcheck = false;
+      input.style.textAlign = 'left';
+      input.value = String(meta.name ?? 'patch');
+      field.append(mk('label', null, 'name'), input);
+      this.body.append(field);
+      this._swallowKeys(input, () => input.blur());
+      const commit = () => {
+        const v = input.value.trim();
+        /* An empty name would leave the header blank and the saved file called
+         * ".json" — fall back rather than accept it, the face card's own law. */
+        if (!v) { input.value = String(this.host.meta?.name ?? 'patch'); return; }
+        if (v !== this.host.meta?.name)
+          this._emit({ type: 'meta', key: 'name', value: v });
+      };
+      input.addEventListener('change', commit);
+      input.addEventListener('blur', commit);
+      this._sync.push(() => {
+        if (this._editing(input)) return;
+        const want = String(this.host.meta?.name ?? 'patch');
+        if (input.value !== want) input.value = want;
+      });
+    }
+
     this._section('voice');
     this._selectField('mode', VOICE_MODES, meta.voiceMode ?? POLY,
       'poly plays chords; mono retriggers on every note; legato only retriggers '
@@ -20007,9 +20040,13 @@ class App {
     if (this._editedSince()) {
       this._editedShown = true;
       /* Parked on the head rather than on the entry, so the menu cannot be read
-       * as "this is Jupiter-8" when it is Jupiter-8 plus your changes. */
+       * as "this is Jupiter-8" when it is Jupiter-8 plus your changes. A patch
+       * the player RENAMED has been re-identified, not merely edited — the
+       * head takes the new name. */
       const name = [...s.options].find(o => o.value === this._loadedKey).textContent;
-      head.textContent = `${name} — edited`;
+      const renamed = this.meta?.name && this._loadedName
+                    && this.meta.name !== this._loadedName;
+      head.textContent = renamed ? String(this.meta.name) : `${name} — edited`;
       s.value = '';
     } else {
       head.textContent = 'choose an instrument…';
@@ -20234,6 +20271,10 @@ class App {
        * falls back to 'original' at menu time only. */
       category: patch.category ?? null,
     });
+    /* What the file called itself WHEN IT ARRIVED, so a later rename is
+     * detectable: the picker head shows the new name instead of claiming
+     * "<source> — edited" about a patch the player has re-identified. */
+    this._loadedName = patch.name ?? name ?? 'patch';
 
     const r = audio.compile();
     audio.sendPatch(patch, this.nodes);
@@ -20565,7 +20606,16 @@ class App {
          * one thing you did, exactly as a knob's is. */
         this.history.push(`the patch's ${ev.key}`, `meta|${ev.key}`);
         this.meta[ev.key] = ev.value;
-        if (ev.key === 'seed') {
+        if (ev.key === 'name') {
+          /* The rename must LAND somewhere visible beyond the field itself:
+           * the picker head kept saying "dimension — edited" and the change
+           * looked like it had not taken. The picker re-derives its head from
+           * meta, the face card re-reads it, and the toast says it out loud. */
+          this.syncInstrument?.(true);
+          this.panelCard?.refresh();
+          this.inspector?.refresh?.();
+          this.notify(`renamed to ${ev.value}`);
+        } else if (ev.key === 'seed') {
           /* set_seed INVALIDATES the schedule — it reseeds every node's RNG at
            * init — so this one must recompile or the patch goes silent with no
            * error anywhere. */
