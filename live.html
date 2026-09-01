@@ -5712,6 +5712,16 @@ function snapNorm(spec, norm, fine = false) {
  * is pos+1 positions, which over a LIN 0..1 knob is pos gaps — detent 1/pos.
  * Returns 0 for "off", which every caller treats as "no detent from here".
  */
+/* Which STOP a stepped knob is on. `null` for a smooth knob, so callers can
+ * fall back to the numeric readout — position arithmetic in ONE place, because
+ * "which stop" computed twice is two answers waiting to disagree. */
+function stepAt(norm, detent) {
+  if (!(detent > 0)) return null;
+  const total = Math.round(1 / detent) + 1;
+  const pos = Math.round(clamp01(norm) / detent);
+  return { pos, total };
+}
+
 function macroStepDetent(pos) {
   const p = pos | 0;
   return p >= 1 ? 1 / p : 0;
@@ -5788,6 +5798,7 @@ __x["present"] = present;
 __x["knobDrag"] = knobDrag;
 __x["knobStep"] = knobStep;
 __x["snapNorm"] = snapNorm;
+__x["stepAt"] = stepAt;
 __x["macroStepDetent"] = macroStepDetent;
 __x["macroDetent"] = macroDetent;
 __x["defaultNorm"] = defaultNorm;
@@ -8605,7 +8616,7 @@ __x["FAN_SEL"] = FAN_SEL;
 const { ALPHA, COLORS, DASH, FONT, cableHit, cablePath, lighten, nodeColor, portColor, roundRect, withAlpha } = __req("./theme.js");
 const { patchCost, fmtCycles } = __req("../cost.js");
 const { drawKnob, knobCenter, knobDrag, defaultNorm, hitKnob, snapNorm,
-         macroDetent, macroStepDetent, present, linkKind } = __req("./knob.js");
+         macroDetent, macroStepDetent, stepAt, present, linkKind } = __req("./knob.js");
 const { CURVE_POINTS, TAP_MODES, curvePoints, drawCurve, drawFigure, drawTap } = __req("./curves.js");
 const { PORT_AUDIO, PORT_CV, PORT_GATE, KNOB, SELECT, TOGGLE, selectIndex, formatValue, modLabel } = __req("../engine.js");
 const { showTipSoon, hideTip, typeTip, portTip, paramTip } = __req("./tooltip.js");
@@ -9544,6 +9555,39 @@ class Board {
    * NOT USED FOR DRAWING or for anything that loads a patch. A stored macro
    * value must arrive exactly as written, and the arc is the arc.
    */
+  /* WHAT A STEPPED MACRO'S KNOB SAYS, and it is a WORD when one exists.
+   *
+   * "0.6667" on a knob that switches a filter's mode is the number of a
+   * position, and the player asked the obvious question: why not the
+   * position's NAME? So: when the macro steps (its own `steps` selector, or
+   * stepping derived from a range link — both arrive here through
+   * _gestureSpec's detent) and a range link reaches a SELECTOR, the readout
+   * is that selector's label at the position the destination is actually on,
+   * read from the CORE's effective value rather than re-derived — the same
+   * rule every ring on the board follows. A stepped macro with no selector
+   * destination reads "2/4": the stop it is on, out of how many.
+   *
+   * Falls back to the plain number the moment the macro is smooth, which is
+   * every macro that has not been made a switch. */
+  _macroValueText(id, spec, norm) {
+    const gs = this._gestureSpec(id, spec);
+    const sl = stepAt(norm, +gs.detent || 0);
+    if (!sl) return valueText(spec, norm);
+    for (const m of this.ctl.mods?.() || []) {
+      if (m.src !== id || !Array.isArray(m.range)) continue;
+      const dt = this.ctl.reg.byType.get(this.ctl.nodes.get(m.dst)?.type);
+      const dspec = dt?.params?.[m.param];
+      if (!dspec || !(dspec.steps > 1) || !dspec.enums) continue;
+      const eff = this.ctl.effective(m.dst);
+      if (!eff || m.param >= eff.length) break;
+      const labels = String(dspec.enums).split('|');
+      const dp = Math.round(eff[m.param] * (dspec.steps - 1));
+      if (labels[dp] != null) return labels[dp];
+      break;
+    }
+    return `${sl.pos + 1}/${sl.total}`;
+  }
+
   /* The macro's `steps` selector, as a position: 0 = off. */
   _macroStepPos(nodeId) {
     const mt = this.ctl.reg.byType.get('mod.macro');
@@ -12312,7 +12356,9 @@ class Board {
       /* A cable in the air can land here too — the halo is the only thing that
        * says a knob is a target, on a card exactly as on a block. */
       drop: !!(targets && targets.knobs.includes(e.index)),
-      text: valueText(e.spec, this.ctl.paramNorm(e.node, e.index)),
+      text: e.type?.type === 'mod.macro' && e.spec?.key === 'value'
+          ? this._macroValueText(e.node, e.spec, this.ctl.paramNorm(e.node, e.index))
+          : valueText(e.spec, this.ctl.paramNorm(e.node, e.index)),
       /* The GROUP's word for the knob, which is what a face is for. */
       label: e.label,
       modSources: (byParam && byParam.get(e.index)) || null,
@@ -12488,13 +12534,15 @@ class Board {
     const byParam = this._modsBy.get(id);
     const spec = fanSpec(t, t.params[0], this.ctl.nodes.get(id)?.outs);
     const base = this.ctl.paramNorm(id, 0);
+    const text = t.type === 'mod.macro'
+               ? this._macroValueText(id, spec, base) : valueText(spec, base);
     drawKnob(ctx, K.cx, K.cy, K.r, spec, base, {
       tint: off ? COLORS.dim : tint,
       hover: !!(this._hover && this._hover.id === id && this._hover.knob === 0),
       drop: !!(targets && targets.knobs.includes(0)),
       effective: L && L.eff && L.eff.length ? L.eff[0] : null,
       modSources: (byParam && byParam.get(0)) || null,
-      text: valueText(spec, base),
+      text,
       /* NO CAPTION FROM knob.js — and empty rather than absent, because absent
        * falls back to the parameter's own label and draws the row anyway. */
       label: '',
