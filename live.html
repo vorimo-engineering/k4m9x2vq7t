@@ -8277,6 +8277,8 @@ __x["FIG_SHAPES"] = FIG_SHAPES;
  */
 
 /** The two keys that make a channel pair. Nothing else is treated as one. */
+const { PORT_AUDIO } = __req("../engine.js");
+
 const L = 'l', R = 'r';
 
 /** Does this list of ports carry an l/r pair? */
@@ -8326,7 +8328,20 @@ function hasPair(ports) {
     if (ports[i].key === L) l = i;
     else if (ports[i].key === R) r = i;
   }
-  return l >= 0 && r >= 0 ? { l, r } : null;
+  if (l >= 0 && r >= 0) return { l, r };
+  /* THE OTHER SPELLING OF THE SAME PAIR. Three oscillators name their channels
+   * `out`/`r` rather than `l`/`r` — deliberately, in C: osc.va's first pin is
+   * "the pin to take when patching into another oscillator's sync or fm", and
+   * `out` is the honest name for that. Its LABELS are still "out l"/"out r",
+   * so the pair was always meant to fold; only this key match missed it, which
+   * is why osc.va, osc.pd and osc.table had no stereo switch and sat on the
+   * board permanently two-pinned while osc.morph — same shape, `l`/`r` keys —
+   * folded fine. The rule: an `r` whose immediate neighbour to the left is any
+   * other AUDIO port is the right half of a pair. Audited over all 54 types:
+   * this adds exactly those three and changes nobody else. */
+  if (r > 0 && ports[r].kind === PORT_AUDIO && ports[r - 1].kind === PORT_AUDIO
+      && ports[r - 1].key !== R) return { l: r - 1, r };
+  return null;
 }
 
 /** Can this block be switched between mono and stereo at all? */
@@ -8432,7 +8447,7 @@ __x["pinOfLane"] = pinOfLane;
 __x["FAN_OUTS"] = FAN_OUTS;
 __x["FAN_SEL"] = FAN_SEL;
 
-}, {}],
+}, {"../engine.js":"web/js/engine.js"}],
 "web/js/ui/board.js": [async function(__x, __req){
 /* board.js — the node canvas.  The web port of pchsynth/ui/graph/canvas.py plus
  * the layout and painting half of nodeitem.py.
@@ -13043,7 +13058,7 @@ const { KNOB, SELECT, TOGGLE, LIN, POLY, MONO, LEGATO, PORT_AUDIO, PORT_CV, PORT
 const { patchCost } = __req("../cost.js");
 const { attachTip, hideTip, typeTip, paramTip, scopeLead } = __req("./tooltip.js");
 const { paramToNorm, normToParam, deriveGroupViz } = __req("../patch.js");
-const { fanOuts, FAN_OUTS, fanSpec } = __req("./channels.js");
+const { fanOuts, FAN_OUTS, fanSpec, canBeMono } = __req("./channels.js");
 const { present, macroStepDetent } = __req("./knob.js");
 
 /* Mod amounts move in hundredths over -1..+1, as on the desktop.  Finer than
@@ -13150,16 +13165,12 @@ function linkParts(link) {
   };
 }
 
-/** Whether a type is a stereo block — asked of its PORTS.
- *
- *  There is no stereo flag in the registry and there should not be one: a port
- *  carries one channel, and a "stereo" block is two of them each way sharing
- *  one set of knobs.  Asking the port table keeps this true for a block added
- *  in C tomorrow. */
-function isStereoType(t) {
-  return (t.inByKey.has('l') && t.inByKey.has('r'))
-      || (t.outByKey.has('l') && t.outByKey.has('r'));
-}
+/* Whether a type can fold to mono is channels.js's canBeMono — the SAME
+ * predicate the board folds pins with. This file used to keep its own copy
+ * matching keys `l`/`r`, and the two answers drifted exactly once: the three
+ * oscillators whose pair is spelled `out`/`r` folded nowhere and showed the
+ * checkbox nowhere, reading as "always stereo" while osc.morph — the same
+ * shape under `l`/`r` keys — behaved. One predicate, one answer. */
 
 /** One live viz field, in its own unit.
  *
@@ -13903,7 +13914,7 @@ class Inspector {
       + 'source off silences it.',
       (on) => this._emit({ type: 'enabled', node: u.id, value: on }));
 
-    if (isStereoType(t)) {
+    if (canBeMono(t)) {
       this._check('stereo', () => this._node(u.id).stereo === true,
         'Show both channels as separate pins. Blocks are MONO by default: one '
         + 'pin, one wire, and the signal fed to both channels so it sits in the '
