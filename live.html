@@ -11272,12 +11272,27 @@ class Board {
       return { rc: this.ctl.modulate(src, lane, dst, param, MOD_DEFAULT),
                how: `+${MOD_DEFAULT.toFixed(2)} (set the amount in the inspector)` };
     }
-    const n = spec.steps > 1 ? `${spec.steps} positions` : 'its whole travel';
-    const rc = this.ctl.modulateRange(src, lane, dst, param, 0, 1);
+    /* THE RANGE COVERS WHAT THE BLOCK DRAWS, not what the core declares.
+     *
+     * A router's selector is twenty positions in C and usually two or four on
+     * the board. A default range of [0,1] mapped the macro across all twenty:
+     * with two paths drawn, path 2 opened one-nineteenth of the way into the
+     * travel and the remaining ninety-five percent of the knob selected
+     * silent, invisible outputs — wired up and apparently broken, which is
+     * how it was reported. fanSpec is the same trim the knob itself draws
+     * with, so the link's top end lands on the last position that exists. */
+    const dn = this.ctl.nodes.get(dst);
+    const dt = dn && this.ctl.reg.byType.get(dn.type);
+    const trimmed = dt ? fanSpec(dt, spec, dn.outs) : spec;
+    const hi = trimmed.steps > 1 && spec.steps > trimmed.steps
+             ? (trimmed.steps - 1) / (spec.steps - 1) : 1;
+    const shown = trimmed.steps > 1 ? trimmed.steps : spec.steps;
+    const n = shown > 1 ? `${shown} positions` : 'its whole travel';
+    const rc = this.ctl.modulateRange(src, lane, dst, param, 0, hi);
     /* A macro aimed at a selector STEPS from this moment — macroDetent derives
      * the stops from the range link — so say so, instead of leaving the player
      * hunting for a setting that is not needed. */
-    const stepped = !rc && spec.steps > 1
+    const stepped = !rc && shown > 1
                  && this.ctl.nodes.get(src)?.type === 'mod.macro';
     return { rc, how: stepped
         ? `sets ${n} — the macro's knob now steps between them`
