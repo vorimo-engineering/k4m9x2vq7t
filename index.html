@@ -5722,8 +5722,7 @@ function macroDetent(dests) {
   let step = 0;
   for (const d of dests) {
     const spec = d && d.spec;
-    const amt = Math.abs(Number(d && d.amount) || 0);
-    if (!spec || !(amt > 1e-9)) return 0;
+    if (!spec) return 0;
     const n = (spec.steps | 0) - 1;
     let dstNorm;                       /* one stop, in the DESTINATION's 0..1 */
     if (n > 0) dstNorm = 1 / n;
@@ -5733,10 +5732,21 @@ function macroDetent(dests) {
       if (!(span > 0)) return 0;
       dstNorm = (+spec.detent) / span;
     } else return 0;                   /* a continuous destination */
-    /* The macro's travel is scaled by the link amount on its way out, so one
-     * stop over there is a bigger move over here the weaker the link. */
+    /* The macro's travel reaches the destination scaled by the LINK — the
+     * amount for an additive link, |hi - lo| for a range link — so one stop
+     * over there is a bigger move over here the weaker the link.
+     *
+     * The range branch is what makes "point a macro at a filter's mode" work
+     * with NO setup at all: the drop makes a range link with amount 0, and
+     * the amount-only version of this returned 0 for it — so the knob that
+     * had just become a mode switch still dragged as a smooth float, and the
+     * player was left hunting for a `steps` setting they should not need. */
+    const rng = Array.isArray(d.range) && d.range.length === 2
+              ? Math.abs(Number(d.range[1]) - Number(d.range[0])) : 0;
+    const amt = rng > 1e-9 ? rng : Math.abs(Number(d.amount) || 0);
+    if (!(amt > 1e-9)) return 0;
     const s = dstNorm / amt;
-    if (!(s > 0) || s > 1) return 0;   /* coarser than the whole knob */
+    if (!(s > 0) || s > 1.0 + 1e-9) return 0;   /* coarser than the whole knob */
     if (step && Math.abs(s - step) > 1e-9) return 0;
     step = s;
   }
@@ -9577,7 +9587,7 @@ class Board {
     for (const m of this.ctl.mods?.() || []) {
       if (m.src !== nodeId) continue;
       const t = this.ctl.reg.byType.get(this.ctl.nodes.get(m.dst)?.type);
-      dests.push({ spec: t?.params?.[m.param], amount: m.amount });
+      dests.push({ spec: t?.params?.[m.param], amount: m.amount, range: m.range });
     }
     const d = macroDetent(dests);
     return d > 0 ? { ...spec, detent: d } : spec;
@@ -11204,8 +11214,15 @@ class Board {
                how: `+${MOD_DEFAULT.toFixed(2)} (set the amount in the inspector)` };
     }
     const n = spec.steps > 1 ? `${spec.steps} positions` : 'its whole travel';
-    return { rc: this.ctl.modulateRange(src, lane, dst, param, 0, 1),
-             how: `sets ${n} (set the ends in the inspector)` };
+    const rc = this.ctl.modulateRange(src, lane, dst, param, 0, 1);
+    /* A macro aimed at a selector STEPS from this moment — macroDetent derives
+     * the stops from the range link — so say so, instead of leaving the player
+     * hunting for a setting that is not needed. */
+    const stepped = !rc && spec.steps > 1
+                 && this.ctl.nodes.get(src)?.type === 'mod.macro';
+    return { rc, how: stepped
+        ? `sets ${n} — the macro's knob now steps between them`
+        : `sets ${n} (set the ends in the inspector)` };
   }
 
   /**
