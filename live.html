@@ -15634,6 +15634,23 @@ class Panel {
       hint: 'Kept in memory; it reaches a file the next time you press save.',
     });
 
+    /* UPDATE IS THE OTHER HALF OF SAVE. "save preset…" always makes a NEW
+     * one, so a preset you had chosen and then improved could only be saved
+     * beside itself — reported as wanting to "create new OR update selected".
+     * It aims at the preset the picker is ON, which is the one you were
+     * hearing BEFORE you turned anything, so it stays live exactly when the
+     * head reads "— edited": that is the whole case it exists for. */
+    const upd = mk('button', 'pk-btn', 'update');
+    upd.disabled = true;
+    upd.addEventListener('click', () => this._updatePreset());
+    this._tip(upd, {
+      title: 'update preset',
+      lead: 'Writes what you can hear right now into the preset the picker is '
+          + 'on, keeping its name and its character.',
+      hint: 'Undo puts the old values back; it reaches the file at the next save.',
+    });
+    this.presetUpd = upd;
+
     /* DELETE SITS BESIDE SAVE because they are the same kind of thing — the
      * bank's two edits — and it acts on whatever the picker is ON, so there is
      * nothing to aim: it is disabled until a preset is actually selected,
@@ -15649,7 +15666,7 @@ class Panel {
     });
     this.presetDel = del;
 
-    bar.append(sel, save, del);
+    bar.append(sel, save, upd, del);
     this.el.append(bar);
     this.presetSel = sel;
     this.syncPreset(true);
@@ -15757,8 +15774,11 @@ class Panel {
     const opt = at != null ? [...sel.options].find(o => o.value === String(at)) : null;
     /* Deletable exactly when the picker NAMES one: an edited patch shows the
      * head option and deletes nothing, which is the same rule the readout
-     * follows. */
+     * follows. UPDATE is the exception and deliberately so — it aims at the
+     * preset you are on WHETHER OR NOT the knobs have moved off it, because
+     * moving them is what you are about to store. */
     if (this.presetDel) this.presetDel.disabled = !opt;
+    if (this.presetUpd) this.presetUpd.disabled = at == null || !this.ctl.presets?.[at];
 
     if (!opt) {
       this._presetEdited = false;
@@ -15778,12 +15798,28 @@ class Panel {
     }
   }
 
+  _updatePreset() {
+    const at = this._presetIdx;
+    const p = at != null ? this.ctl.presets?.[at] : null;
+    if (!p) return;
+    /* No confirm(): overwriting the preset you are sitting on is the ordinary
+     * gesture this button exists for, it is one undo step, and a question in
+     * front of every one of them would be a tax. The toast says what changed. */
+    if (this.ctl.updatePreset(at)) {
+      this._presetSig = this._presetKnobs(at);   /* it IS the preset now */
+      this.refresh();
+    }
+  }
+
   _deletePreset() {
-    const sel = this.presetSel;
-    if (!sel || sel.value === '') return;
-    const i = Number(sel.value);
-    const p = this.ctl.presets?.[i];
-    if (!Number.isInteger(i) || !p) return;
+    /* `_presetIdx`, not the picker's VALUE. The value goes empty the moment a
+     * knob moves — the head then reads "X — edited" — and a delete button that
+     * is lit but does nothing is worse than one that is greyed: measured, it
+     * enabled itself on an edited patch and swallowed the click. The preset
+     * you are on is the preset you meant, and confirm() names it either way. */
+    const i = this._presetIdx;
+    const p = i != null ? this.ctl.presets?.[i] : null;
+    if (!p) return;
     /* confirm() for the same reason _savePreset uses prompt(): one question,
      * and a fourth kind of overlay would buy nothing. */
     if (!confirm(`Delete the preset “${p.name}”?\n\n`
@@ -19589,6 +19625,53 @@ class App {
    * would fail the gate at the far end for a reason nobody saw here.
    */
   /**
+   * OVERWRITE a preset with what the knobs say now, keeping its name and the
+   * character it claims.
+   *
+   * A NEW ENTRY OBJECT, never an edit of the old one. History snapshots the
+   * document, and the document carries the face's entries VERBATIM (only the
+   * list is copied — see savePatch), so writing into the entry already on the
+   * undo stack would rewrite history exactly the way the in-place splice did
+   * before it was fixed. Replacing the slot leaves every snapshot holding the
+   * object it was given.
+   *
+   * The picker's target is `_presetIdx`, which is the preset you are ON even
+   * once the knobs have moved off it — and that is the whole case: you choose
+   * a preset, turn something, and want the preset to keep it.
+   */
+  updatePreset(i) {
+    const idx = Number(i);
+    const cur = this.presets[idx];
+    if (!cur) { this.notify('no such preset', 'error'); return false; }
+    const params = this._presetParams();
+    if (!params) return false;
+
+    const raw = this._face.presets;
+    const j = Array.isArray(raw) && cur.raw ? raw.indexOf(cur.raw) : -1;
+    if (j < 0) { this.notify('that preset is not in this patch any more', 'error'); return false; }
+
+    this.history.push(`update preset ${cur.name}`);
+    const next = cur.raw.character
+      ? { name: cur.raw.name, character: cur.raw.character, params }
+      : { name: cur.raw.name, params };
+    raw[j] = next;
+
+    /* Resolved through the LOADER for capturePreset's reason: readFace is the
+     * one place that decides what an entry means. */
+    const warn = [];
+    const res = readFace(this.reg, this.nodes, { presets: [next] }, warn);
+    for (const x of warn) console.warn('preset:', x);
+    if (!res.presets.length) { this.notify('the update did not resolve', 'error'); return false; }
+    this.presets[idx] = res.presets[0];
+
+    const knobs = Object.values(params).reduce((n, o) => n + Object.keys(o).length, 0);
+    this.notify(`updated “${next.name}” — ${knobs} knob${knobs === 1 ? '' : 's'}; `
+              + 'it reaches a file the next time you save the patch');
+    if (this.panelCard) this.panelCard.refresh();
+    return true;
+  }
+
+  /**
    * REMOVE a preset — the resolved entry and the raw one it was built from.
    *
    * BY IDENTITY, not by index. `readFace` DROPS a malformed entry from the
@@ -19617,13 +19700,10 @@ class App {
     return true;
   }
 
-  capturePreset(name, character = null) {
-    const c = character == null ? null : String(character).trim().toLowerCase();
-    if (c && !CHARACTERS.includes(c)) {
-      this.notify(`"${character}" is not a character — one of ${CHARACTERS.join(', ')}`,
-                  'error');
-      return null;
-    }
+  /** WHAT THE KNOBS SAY RIGHT NOW, in a preset's own shape — or null with the
+   *  reason already reported. Shared by capturePreset and updatePreset so a
+   *  saved preset and an updated one cannot come to mean different things. */
+  _presetParams() {
     const params = {};
     const put = (node, key, value) => {
       if (!params[node]) params[node] = {};
@@ -19655,6 +19735,18 @@ class App {
       this.notify('nothing to save — every knob is at its default', 'error');
       return null;
     }
+    return params;
+  }
+
+  capturePreset(name, character = null) {
+    const c = character == null ? null : String(character).trim().toLowerCase();
+    if (c && !CHARACTERS.includes(c)) {
+      this.notify(`"${character}" is not a character — one of ${CHARACTERS.join(', ')}`,
+                  'error');
+      return null;
+    }
+    const params = this._presetParams();
+    if (!params) return null;
 
     /* Key order matters only to a person reading the diff, and `character`
      * belongs beside the name it qualifies rather than after 40 lines of knobs. */
