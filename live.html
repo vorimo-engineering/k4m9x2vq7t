@@ -15360,10 +15360,19 @@ const CSS = `
 .pk-face .pk-face-name:focus{outline:none;text-transform:none;
   background:${COLORS.bg};border-color:${COLORS.accent}88;color:${COLORS.header}}
 .pk-face .pk-face-sub{font-size:10px;color:${COLORS.dim};margin-top:2px}
-.pk-face .pk-face-bar{display:flex;gap:6px;align-items:center;margin:8px 0 2px}
-.pk-face .pk-face-bar>select{flex:1 1 auto;min-width:0;font-size:11px;
+/* THE PICKER GETS ITS OWN LINE. It was one flex row of select + button, and
+ * a third button (update) squeezed the select — min-width:0 lets it collapse
+ * — down to four characters of a preset's name and then to nothing:
+ * reported as "the preset dropdown is not visible". The NAME is the thing
+ * being read here, so the select takes the full width and the actions wrap
+ * under it; the column is ~220 px and three labels do not fit beside it at
+ * any font this card uses. */
+.pk-face .pk-face-bar{display:flex;flex-wrap:wrap;gap:6px;align-items:center;
+  margin:8px 0 2px}
+.pk-face .pk-face-bar>select{flex:1 1 100%;min-width:0;font-size:11px;
   padding:3px 6px;cursor:pointer}
-.pk-face .pk-face-bar>button{flex:0 0 auto;font-size:11px;padding:3px 8px}
+.pk-face .pk-face-bar>button{flex:1 1 auto;font-size:10px;padding:3px 5px;
+  white-space:nowrap}
 .pk-face .pk-face-row{padding:5px 0 6px;
   border-bottom:1px solid rgba(42,46,55,.5)}
 .pk-face .pk-face-row:last-child{border-bottom:0}
@@ -15632,7 +15641,10 @@ class Panel {
                            : 'Save one with the button beside this.',
     });
 
-    const save = mk('button', 'pk-btn', 'save preset…');
+    /* "save as…" rather than "save preset…" now that `update` sits beside it:
+     * the pair has to say WHICH of the two saves this one is, and the row is
+     * 198 px wide with three labels to fit. */
+    const save = mk('button', 'pk-btn', 'save as…');
     save.addEventListener('click', () => this._savePreset());
     this._tip(save, {
       title: 'save preset',
