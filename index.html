@@ -12205,7 +12205,15 @@ class Board {
           if (src || dst) { lit.set(c.key, 'trace'); continue; }
         } else if (h.knob >= 0
                    && c.kind === 'mod' && c.dst === h.id && c.param === h.knob) {
-          lit.set(c.key, 'trace'); continue;
+          /* CONTEXT, NOT TRACE, and this one is a lesson: a cable that LANDS
+           * on the knob you are pointing at covers that knob by definition if
+           * it is lifted over the block. Reported as "when a macro is selected
+           * the wires still render on top of the knobs" — the pointer is still
+           * ON the macro after the click, its knob is the modulation's own
+           * destination, and three or four router cables then sat across the
+           * cap. Promotion is for cables leaving a PIN, where the ends are on
+           * the block's edge and nothing readable is underneath. */
+          lit.set(c.key, 'context'); continue;
         }
       }
       /* CONTEXT: a whole BLOCK is selected, so this is "everything wired to
