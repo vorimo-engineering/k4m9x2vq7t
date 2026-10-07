@@ -593,6 +593,16 @@ class Graph {
   kept(id)                { return !!this.w.x.pcks_graph_kept(this.g, this.w.id(id, 0)); }
   /** THE HOST'S AUDIO for this graph's in.synth during the NEXT render only (pcks_graph_set_input):
    *  `l` / `r` are WASM POINTERS to `frames` frames `stride` floats apart (`r` 0 = mono). */
+  /** A block's DATA (pcks_graph_data_alloc): the graph reserves `data.length` floats for node `id`
+   *  in its own memory and the numbers are written straight in. false when the block reads no data
+   *  or there is no room — the block then plays its own default. Structural: compile after. */
+  setData(id, data) {
+    const n = data?.length | 0;
+    const p = n > 0 ? this.w.x.pcks_graph_data_alloc(this.g, this.w.id(id, 0), n) : 0;
+    if (!p) return false;
+    this.w.F32.set(data, p >> 2);
+    return true;
+  }
   setInput(l, r, stride, frames) { this.w.x.pcks_graph_set_input(this.g, l, r, stride | 0, frames | 0); }
 
   /* -- render --
