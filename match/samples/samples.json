@@ -1,0 +1,646 @@
+{
+ "groups": [
+  {
+   "title": "famous synthesizers",
+   "samples": [
+    {
+     "name": "Yamaha DX7 · E. Piano 1",
+     "synth": "Yamaha DX7",
+     "year": 1983,
+     "patch": "E. Piano 1",
+     "kind": "FM electric piano",
+     "file": "dx7-epiano.wav",
+     "midi": 48.741,
+     "gate_s": 3.5,
+     "secs": 3.5,
+     "named": "C3",
+     "prepared": "mono, 44.1 kHz, from the onset; cut at 3.5 s, still held",
+     "source": {
+      "page": "https://freewavesamples.com/yamaha-dx7-e-piano-1-c3",
+      "url": "https://freewavesamples.com/files/Yamaha-DX7-E-Piano-1-C3.wav",
+      "site": "FreeWaveSamples",
+      "author": "FreeWaveSamples.com",
+      "license": "royalty-free; web apps may host them",
+      "license_url": "https://freewavesamples.com/about-us-license"
+     },
+     "source_sha256": "b4e4285d255eea01"
+    },
+    {
+     "name": "Yamaha DX7 · Bell-Flute",
+     "synth": "Yamaha DX7",
+     "year": 1983,
+     "patch": "Bell-Flute",
+     "kind": "FM bell",
+     "file": "dx7-bellflute.wav",
+     "midi": 72.724,
+     "gate_s": 3.0,
+     "secs": 3.62,
+     "named": "C5",
+     "prepared": "mono, 44.1 kHz, from the onset",
+     "source": {
+      "page": "https://freewavesamples.com/yamaha-dx7-bell-flute-c5",
+      "url": "https://freewavesamples.com/files/Yamaha-DX7-Bell-Flute-C5.wav",
+      "site": "FreeWaveSamples",
+      "author": "FreeWaveSamples.com",
+      "license": "royalty-free; web apps may host them",
+      "license_url": "https://freewavesamples.com/about-us-license"
+     },
+     "source_sha256": "eeecd772a387319c"
+    },
+    {
+     "name": "Yamaha DX7 · E. Organ 1",
+     "synth": "Yamaha DX7",
+     "year": 1983,
+     "patch": "E. Organ 1",
+     "kind": "FM organ",
+     "file": "dx7-organ.wav",
+     "midi": 48.785,
+     "gate_s": 1.196,
+     "secs": 1.229,
+     "named": "C3",
+     "prepared": "mono, 44.1 kHz, from the onset",
+     "source": {
+      "page": "https://freewavesamples.com/yamaha-dx7-e-organ-1-c3",
+      "url": "https://freewavesamples.com/files/Yamaha-DX7-E-Organ-1-C3.wav",
+      "site": "FreeWaveSamples",
+      "author": "FreeWaveSamples.com",
+      "license": "royalty-free; web apps may host them",
+      "license_url": "https://freewavesamples.com/about-us-license"
+     },
+     "source_sha256": "bad388f7a02ae6ec"
+    },
+    {
+     "name": "Yamaha TX81Z · Lately Bass",
+     "synth": "Yamaha TX81Z",
+     "year": 1987,
+     "patch": "Lately Bass",
+     "kind": "FM bass",
+     "file": "tx81z-lately.wav",
+     "midi": 35.978,
+     "gate_s": 1.997,
+     "secs": 2.139,
+     "named": "C4",
+     "prepared": "mono, 44.1 kHz, from the onset",
+     "source": {
+      "page": "https://freewavesamples.com/yamaha-tx81z-lately-bass-c4",
+      "url": "https://freewavesamples.com/files/Yamaha-TX81Z-Lately-Bass-C4.wav",
+      "site": "FreeWaveSamples",
+      "author": "FreeWaveSamples.com",
+      "license": "royalty-free; web apps may host them",
+      "license_url": "https://freewavesamples.com/about-us-license"
+     },
+     "source_sha256": "450aa7517ceff41f"
+    },
+    {
+     "name": "Moog Minimoog · Bass",
+     "synth": "Moog Minimoog",
+     "year": 1970,
+     "patch": "Bass",
+     "kind": "analog bass",
+     "file": "minimoog-bass.wav",
+     "midi": 24.089,
+     "gate_s": 2.25,
+     "secs": 2.289,
+     "named": "C4",
+     "prepared": "mono, 44.1 kHz, from the onset; held 2.0 s of 10.0 (then its own release)",
+     "source": {
+      "site": "Freesound",
+      "author": "Garzul",
+      "page": "https://freesound.org/people/Garzul/sounds/213900/",
+      "url": "https://cdn.freesound.org/previews/213/213900_862453-hq.mp3",
+      "license": "CC0 1.0 (public domain)",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+     },
+     "source_sha256": "6f45c5cde339eb02"
+    },
+    {
+     "name": "Roland TB-303 · Saw",
+     "synth": "Roland TB-303",
+     "year": 1981,
+     "patch": "Saw",
+     "kind": "acid bass",
+     "file": "tb303.wav",
+     "midi": 48.058,
+     "gate_s": 1.73,
+     "secs": 1.762,
+     "named": "C1",
+     "prepared": "mono, 44.1 kHz, from the onset",
+     "source": {
+      "site": "Freesound",
+      "author": "DJMini",
+      "page": "https://freesound.org/people/DJMini/sounds/89075/",
+      "url": "https://cdn.freesound.org/previews/89/89075_792998-hq.mp3",
+      "license": "CC0 1.0 (public domain)",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+     },
+     "source_sha256": "843c7b3661a6d73d"
+    },
+    {
+     "name": "Roland TR-08 (TR-808 model) · Bass Drum",
+     "synth": "Roland TR-08 (TR-808 model)",
+     "year": 2017,
+     "patch": "Bass Drum",
+     "kind": "drum: kick",
+     "file": "tr08-kick.wav",
+     "midi": 30.448,
+     "gate_s": 1.209,
+     "secs": 1.24,
+     "named": "",
+     "prepared": "mono, 44.1 kHz, from the onset",
+     "source": {
+      "site": "Freesound",
+      "author": "Karman_Lyne",
+      "page": "https://freesound.org/people/Karman_Lyne/sounds/519306/",
+      "url": "https://cdn.freesound.org/previews/519/519306_1478679-hq.mp3",
+      "license": "CC0 1.0 (public domain)",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+     },
+     "source_sha256": "0b1d261d67a07801"
+    },
+    {
+     "name": "Roland TR-08 (TR-808 model) · Cowbell",
+     "synth": "Roland TR-08 (TR-808 model)",
+     "year": 2017,
+     "patch": "Cowbell",
+     "kind": "drum: cowbell",
+     "file": "tr08-cowbell.wav",
+     "midi": 79.665,
+     "gate_s": 1.332,
+     "secs": 1.4,
+     "named": "",
+     "prepared": "mono, 44.1 kHz, from the onset",
+     "source": {
+      "site": "Freesound",
+      "author": "Karman_Lyne",
+      "page": "https://freesound.org/people/Karman_Lyne/sounds/519303/",
+      "url": "https://cdn.freesound.org/previews/519/519303_1478679-hq.mp3",
+      "license": "CC0 1.0 (public domain)",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+     },
+     "source_sha256": "3c529155de4967fd"
+    },
+    {
+     "name": "Roland Juno-6 · Open Pad",
+     "synth": "Roland Juno-6",
+     "year": 1982,
+     "patch": "Open Pad",
+     "kind": "analog pad",
+     "file": "juno6-pad.wav",
+     "midi": 48.012,
+     "gate_s": 2.75,
+     "secs": 3.165,
+     "named": "C4",
+     "prepared": "mono, 44.1 kHz, from the onset; held 2.5 s of 10.8 (then its own release)",
+     "source": {
+      "site": "Freesound",
+      "author": "modularsamples",
+      "page": "https://freesound.org/people/modularsamples/sounds/302576/",
+      "url": "https://cdn.freesound.org/previews/302/302576_2050105-hq.mp3",
+      "license": "CC0 1.0 (public domain)",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+     },
+     "source_sha256": "b2737d588519366d"
+    },
+    {
+     "name": "Roland Jupiter-4 · PWM Strings",
+     "synth": "Roland Jupiter-4",
+     "year": 1978,
+     "patch": "PWM Strings",
+     "kind": "analog strings",
+     "file": "jupiter4-strings.wav",
+     "midi": 48.026,
+     "gate_s": 2.25,
+     "secs": 3.452,
+     "named": "C4",
+     "prepared": "mono, 44.1 kHz, from the onset; held 2.0 s of 8.0 (then its own release)",
+     "source": {
+      "site": "Freesound",
+      "author": "modularsamples",
+      "page": "https://freesound.org/people/modularsamples/sounds/304788/",
+      "url": "https://cdn.freesound.org/previews/304/304788_2050105-hq.mp3",
+      "license": "CC0 1.0 (public domain)",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+     },
+     "source_sha256": "8957bd4b1d7c567c"
+    },
+    {
+     "name": "Roland JX-3P · Wobble Brass",
+     "synth": "Roland JX-3P",
+     "year": 1983,
+     "patch": "Wobble Brass",
+     "kind": "analog brass",
+     "file": "jx3p-brass.wav",
+     "midi": 47.909,
+     "gate_s": 2.25,
+     "secs": 2.9,
+     "named": "C4",
+     "prepared": "mono, 44.1 kHz, from the onset; held 2.0 s of 10.0 (then its own release)",
+     "source": {
+      "site": "Freesound",
+      "author": "modularsamples",
+      "page": "https://freesound.org/people/modularsamples/sounds/307764/",
+      "url": "https://cdn.freesound.org/previews/307/307764_2050105-hq.mp3",
+      "license": "CC0 1.0 (public domain)",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+     },
+     "source_sha256": "f25fb323aa6185f8"
+    },
+    {
+     "name": "Roland JX-8P · Sync Lead",
+     "synth": "Roland JX-8P",
+     "year": 1985,
+     "patch": "Sync Lead",
+     "kind": "sync lead",
+     "file": "jx8p-sync.wav",
+     "midi": 35.977,
+     "gate_s": 1.984,
+     "secs": 2.016,
+     "named": "C4",
+     "prepared": "mono, 44.1 kHz, from the onset",
+     "source": {
+      "page": "https://freewavesamples.com/roland-jx-8p-sync-lead-c4",
+      "url": "https://freewavesamples.com/files/Roland-JX-8P-Sync-Lead-C4.wav",
+      "site": "FreeWaveSamples",
+      "author": "FreeWaveSamples.com",
+      "license": "royalty-free; web apps may host them",
+      "license_url": "https://freewavesamples.com/about-us-license"
+     },
+     "source_sha256": "e92c370850eb3c65"
+    },
+    {
+     "name": "Roland SH-2 · Rezzy Sqr",
+     "synth": "Roland SH-2",
+     "year": 1979,
+     "patch": "Rezzy Sqr",
+     "kind": "resonant pluck",
+     "file": "sh2-pluck.wav",
+     "midi": 48.038,
+     "gate_s": 0.485,
+     "secs": 0.92,
+     "named": "C5",
+     "prepared": "mono, 44.1 kHz, from the onset",
+     "source": {
+      "site": "Freesound",
+      "author": "modularsamples",
+      "page": "https://freesound.org/people/modularsamples/sounds/311012/",
+      "url": "https://cdn.freesound.org/previews/311/311012_2050105-hq.mp3",
+      "license": "CC0 1.0 (public domain)",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+     },
+     "source_sha256": "1c4e79835fa81887"
+    },
+    {
+     "name": "Korg Mono/Poly · Sweet Lead",
+     "synth": "Korg Mono/Poly",
+     "year": 1981,
+     "patch": "Sweet Lead",
+     "kind": "analog lead",
+     "file": "monopoly-lead.wav",
+     "midi": 72.001,
+     "gate_s": 2.25,
+     "secs": 2.403,
+     "named": "C5",
+     "prepared": "mono, 44.1 kHz, from the onset; held 2.0 s of 10.0 (then its own release)",
+     "source": {
+      "site": "Freesound",
+      "author": "modularsamples",
+      "page": "https://freesound.org/people/modularsamples/sounds/295242/",
+      "url": "https://cdn.freesound.org/previews/295/295242_2050105-hq.mp3",
+      "license": "CC0 1.0 (public domain)",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+     },
+     "source_sha256": "db9f6b091ccebd84"
+    },
+    {
+     "name": "Oberheim Xpander · Big Stack",
+     "synth": "Oberheim Xpander",
+     "year": 1984,
+     "patch": "Big Stack",
+     "kind": "analog stack",
+     "file": "xpander-stack.wav",
+     "midi": 47.96,
+     "gate_s": 2.25,
+     "secs": 2.46,
+     "named": "C4",
+     "prepared": "mono, 44.1 kHz, from the onset; held 2.0 s of 10.0 (then its own release)",
+     "source": {
+      "site": "Freesound",
+      "author": "modularsamples",
+      "page": "https://freesound.org/people/modularsamples/sounds/300008/",
+      "url": "https://cdn.freesound.org/previews/300/300008_2050105-hq.mp3",
+      "license": "CC0 1.0 (public domain)",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+     },
+     "source_sha256": "21e9b7ed13c58ca1"
+    },
+    {
+     "name": "Sequential MAX · Sad Lead",
+     "synth": "Sequential MAX",
+     "year": 1984,
+     "patch": "Sad Lead",
+     "kind": "lead",
+     "file": "max-lead.wav",
+     "midi": 60.239,
+     "gate_s": 2.25,
+     "secs": 3.195,
+     "named": "C5",
+     "prepared": "mono, 44.1 kHz, from the onset; held 2.0 s of 8.0 (then its own release)",
+     "source": {
+      "site": "Freesound",
+      "author": "modularsamples",
+      "page": "https://freesound.org/people/modularsamples/sounds/311649/",
+      "url": "https://cdn.freesound.org/previews/311/311649_2050105-hq.mp3",
+      "license": "CC0 1.0 (public domain)",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+     },
+     "source_sha256": "9855abf5b359e48c"
+    },
+    {
+     "name": "Korg M1 · Angels",
+     "synth": "Korg M1",
+     "year": 1988,
+     "patch": "Angels",
+     "kind": "choir (ROM sample)",
+     "file": "m1-angels.wav",
+     "midi": 59.805,
+     "gate_s": 1.843,
+     "secs": 3.38,
+     "named": "C4",
+     "prepared": "mono, 44.1 kHz, from the onset",
+     "source": {
+      "page": "https://freewavesamples.com/korg-m1-angels-c4",
+      "url": "https://freewavesamples.com/files/Korg-M1-Angels-C4.wav",
+      "site": "FreeWaveSamples",
+      "author": "FreeWaveSamples.com",
+      "license": "royalty-free; web apps may host them",
+      "license_url": "https://freewavesamples.com/about-us-license"
+     },
+     "source_sha256": "f6096b5f10e7e6a2"
+    },
+    {
+     "name": "Roland D-550 (D-50) · Strings",
+     "synth": "Roland D-550 (D-50)",
+     "year": 1987,
+     "patch": "Strings",
+     "kind": "LA strings",
+     "file": "d550-strings.wav",
+     "midi": 58.902,
+     "gate_s": 3.24,
+     "secs": 4.0,
+     "named": "C4",
+     "prepared": "mono, 44.1 kHz, from the onset; its tail cut at 4.0 s",
+     "source": {
+      "page": "https://freewavesamples.com/roland-d-550-strings-c4",
+      "url": "https://freewavesamples.com/files/Roland-D-550-Strings-C4.wav",
+      "site": "FreeWaveSamples",
+      "author": "FreeWaveSamples.com",
+      "license": "royalty-free; web apps may host them",
+      "license_url": "https://freewavesamples.com/about-us-license"
+     },
+     "source_sha256": "ca8906146b1e3195"
+    },
+    {
+     "name": "Casio CZ-5000 · Synth Brass",
+     "synth": "Casio CZ-5000",
+     "year": 1985,
+     "patch": "Synth Brass",
+     "kind": "phase-distortion brass",
+     "file": "cz5000-brass.wav",
+     "midi": 36.179,
+     "gate_s": 0.971,
+     "secs": 1.88,
+     "named": "C2",
+     "prepared": "mono, 44.1 kHz, from the onset",
+     "source": {
+      "page": "https://freewavesamples.com/casio-cz-5000-synthbrass-c2",
+      "url": "https://freewavesamples.com/files/Casio-CZ-5000-Synth-Brass-C2.wav",
+      "site": "FreeWaveSamples",
+      "author": "FreeWaveSamples.com",
+      "license": "royalty-free; web apps may host them",
+      "license_url": "https://freewavesamples.com/about-us-license"
+     },
+     "source_sha256": "5cb7004c500d785b"
+    },
+    {
+     "name": "Ensoniq ESQ-1 · Wave Bell",
+     "synth": "Ensoniq ESQ-1",
+     "year": 1986,
+     "patch": "Wave Bell",
+     "kind": "digital-wave bell",
+     "file": "esq1-bell.wav",
+     "midi": 60.091,
+     "gate_s": 2.437,
+     "secs": 2.7,
+     "named": "C4",
+     "prepared": "mono, 44.1 kHz, from the onset",
+     "source": {
+      "page": "https://freewavesamples.com/ensoniq-esq-1-wave-bell-c4",
+      "url": "https://freewavesamples.com/files/Ensoniq-ESQ-1-Wave-Bell-C4.wav",
+      "site": "FreeWaveSamples",
+      "author": "FreeWaveSamples.com",
+      "license": "royalty-free; web apps may host them",
+      "license_url": "https://freewavesamples.com/about-us-license"
+     },
+     "source_sha256": "a24a280269d567ca"
+    }
+   ]
+  },
+  {
+   "title": "this synth's own patches (the matcher's bench)",
+   "samples": [
+    {
+     "name": "prophet5 PWM Strings",
+     "file": "analog_prophet5_pwm_strings.wav",
+     "midi": 60.0,
+     "gate_s": 1.1958,
+     "secs": 2.844,
+     "made": "pchkraft-synth patches/pk-prophet5.json"
+    },
+    {
+     "name": "prophet5 Sync Lead",
+     "file": "analog_prophet5_sync_lead.wav",
+     "midi": 60.0,
+     "gate_s": 1.1958,
+     "secs": 1.66,
+     "made": "pchkraft-synth patches/pk-prophet5.json"
+    },
+    {
+     "name": "prophet5 Brass Section",
+     "file": "analog_prophet5_brass_section.wav",
+     "midi": 60.0,
+     "gate_s": 1.1958,
+     "secs": 1.765,
+     "made": "pchkraft-synth patches/pk-prophet5.json"
+    },
+    {
+     "name": "prophet5 Choir Pad",
+     "file": "analog_prophet5_choir_pad.wav",
+     "midi": 60.0,
+     "gate_s": 1.1958,
+     "secs": 3.29,
+     "made": "pchkraft-synth patches/pk-prophet5.json"
+    },
+    {
+     "name": "prophet5 Poly-Mod Bells",
+     "file": "analog_prophet5_poly_mod_bells.wav",
+     "midi": 60.0,
+     "gate_s": 1.1958,
+     "secs": 1.336,
+     "made": "pchkraft-synth patches/pk-prophet5.json"
+    },
+    {
+     "name": "prophet5 Fat Bass",
+     "file": "analog_prophet5_fat_bass.wav",
+     "midi": 24.0,
+     "gate_s": 1.1958,
+     "secs": 1.478,
+     "made": "pchkraft-synth patches/pk-prophet5.json"
+    },
+    {
+     "name": "minimoog Emerson Lead",
+     "file": "analog_minimoog_emerson_lead.wav",
+     "midi": 48.0,
+     "gate_s": 1.1958,
+     "secs": 2.072,
+     "made": "pchkraft-synth patches/pk-minimoog.json"
+    },
+    {
+     "name": "minimoog Whistle Lead",
+     "file": "analog_minimoog_whistle_lead.wav",
+     "midi": 72.0,
+     "gate_s": 1.1958,
+     "secs": 2.364,
+     "made": "pchkraft-synth patches/pk-minimoog.json"
+    },
+    {
+     "name": "minimoog Wind",
+     "file": "analog_minimoog_wind.wav",
+     "midi": 60.0,
+     "gate_s": 1.1958,
+     "secs": 4.125,
+     "made": "pchkraft-synth patches/pk-minimoog.json"
+    },
+    {
+     "name": "minimoog Cosmic Drone",
+     "file": "analog_minimoog_cosmic_drone.wav",
+     "midi": 24.0,
+     "gate_s": 1.1958,
+     "secs": 4.191,
+     "made": "pchkraft-synth patches/pk-minimoog.json"
+    },
+    {
+     "name": "jupiter8 Mellow Strings",
+     "file": "analog_jupiter8_mellow_strings.wav",
+     "midi": 60.0,
+     "gate_s": 1.1958,
+     "secs": 4.152,
+     "made": "pchkraft-synth patches/pk-jupiter8.json"
+    },
+    {
+     "name": "jupiter8 Sync Sweep",
+     "file": "analog_jupiter8_sync_sweep.wav",
+     "midi": 60.0,
+     "gate_s": 1.1958,
+     "secs": 1.693,
+     "made": "pchkraft-synth patches/pk-jupiter8.json"
+    },
+    {
+     "name": "jupiter8 Hi Brass",
+     "file": "analog_jupiter8_hi_brass.wav",
+     "midi": 60.0,
+     "gate_s": 1.1958,
+     "secs": 1.762,
+     "made": "pchkraft-synth patches/pk-jupiter8.json"
+    },
+    {
+     "name": "jupiter8 Chime",
+     "file": "analog_jupiter8_chime.wav",
+     "midi": 72.0,
+     "gate_s": 1.1958,
+     "secs": 1.356,
+     "made": "pchkraft-synth patches/pk-jupiter8.json"
+    },
+    {
+     "name": "tb303 Acid Trax",
+     "file": "analog_tb303_acid_trax.wav",
+     "midi": 36.0,
+     "gate_s": 1.1958,
+     "secs": 1.255,
+     "made": "pchkraft-synth patches/pk-tb303.json"
+    },
+    {
+     "name": "tb303 Held Sweep",
+     "file": "analog_tb303_held_sweep.wav",
+     "midi": 36.0,
+     "gate_s": 1.1958,
+     "secs": 1.255,
+     "made": "pchkraft-synth patches/pk-tb303.json"
+    },
+    {
+     "name": "poly Organ",
+     "file": "analog_poly_organ.wav",
+     "midi": 60.0,
+     "gate_s": 1.1958,
+     "secs": 4.187,
+     "made": "pchkraft-synth patches/pk-poly.json"
+    },
+    {
+     "name": "poly String Pad",
+     "file": "analog_poly_string_pad.wav",
+     "midi": 60.0,
+     "gate_s": 1.1958,
+     "secs": 4.191,
+     "made": "pchkraft-synth patches/pk-poly.json"
+    },
+    {
+     "name": "elektron-swarmer Hyper Saw",
+     "file": "analog_elektron_swarmer_hyper_saw.wav",
+     "midi": 60.0,
+     "gate_s": 1.1958,
+     "secs": 2.777,
+     "made": "pchkraft-synth patches/elektron-swarmer.json"
+    },
+    {
+     "name": "dimension Reese Bass",
+     "file": "analog_dimension_reese_bass.wav",
+     "midi": 24.0,
+     "gate_s": 1.1958,
+     "secs": 2.273,
+     "made": "pchkraft-synth patches/dimension.json"
+    },
+    {
+     "name": "dimension Air Sweep",
+     "file": "analog_dimension_air_sweep.wav",
+     "midi": 60.0,
+     "gate_s": 1.1958,
+     "secs": 4.185,
+     "made": "pchkraft-synth patches/dimension.json"
+    },
+    {
+     "name": "weather-six-slow-modulators- Slow Front",
+     "file": "analog_weather_six_slow_modulators__slow_front.wav",
+     "midi": 36.0,
+     "gate_s": 1.1958,
+     "secs": 4.191,
+     "made": "pchkraft-synth patches/pk-pk-weather-six-slow-modulators-.json"
+    },
+    {
+     "name": "vorimo-wave Wide Choir",
+     "file": "analog_vorimo_wave_wide_choir.wav",
+     "midi": 60.0,
+     "gate_s": 1.1958,
+     "secs": 3.082,
+     "made": "pchkraft-synth patches/vorimo-wave.json"
+    },
+    {
+     "name": "wave Wave Pad",
+     "file": "analog_wave_wave_pad.wav",
+     "midi": 60.0,
+     "gate_s": 1.1958,
+     "secs": 4.191,
+     "made": "pchkraft-synth patches/pk-wave.json"
+    }
+   ]
+  }
+ ]
+}
