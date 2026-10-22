@@ -19165,10 +19165,20 @@ const PRESET_NONE = 'the patch as saved';
  *                  omitted by a host with no matrix. Two presets of a matrix
  *                  bank can set the same knobs and aim the modulation apart,
  *                  so a picker that compared knobs alone would name the first.
+ * @param prefer    the preset last chosen, asked FIRST: two presets that set the
+ *                  same numbers both match, and naming the first took the other
+ *                  away (Volo 2026-10-22: arcade-minor, saved identical to
+ *                  arcade-init, "won't open" — picking it read arcade-init, and
+ *                  UPDATE then wrote into arcade-init).
  */
-function matchPreset(presets, normOf, hasNode, cellsOf = null) {
+function matchPreset(presets, normOf, hasNode, cellsOf = null, prefer = null) {
   if (!Array.isArray(presets) || !presets.length) return null;
-  for (let i = 0; i < presets.length; i++) {
+  const order = [...presets.keys()];
+  if (Number.isInteger(prefer) && prefer >= 0 && prefer < presets.length) {
+    order.splice(prefer, 1);
+    order.unshift(prefer);
+  }
+  for (const i of order) {
     const sets = (presets[i] && presets[i].sets) || [];
     const cells = (cellsOf && presets[i] && presets[i].cells) || [];
     if (!Array.isArray(sets) || (!sets.length && !cells.length)) continue;
@@ -19640,7 +19650,8 @@ class Panel {
                        (node, index) => this.ctl.paramNorm(node, index),
                        (node) => this.ctl.nodes?.has?.(node) !== false,
                        typeof this.ctl.matrixCells === 'function'
-                         ? (node, index) => this.ctl.matrixCells(node, index) : null);
+                         ? (node, index) => this.ctl.matrixCells(node, index) : null,
+                       this._presetIdx);
   }
 
   /** Remember where a preset put its knobs, the instant it landed. */
@@ -27963,21 +27974,29 @@ class App {
     };
     const seen = new Set();
 
-    /* Every knob on a FACE, whether or not it has been moved — the patch's own
-     * and every group's. A face knob left out would inherit whatever the
-     * previous preset put there, and a group's face is a face. */
-    for (const k of [...this.panel, ...this.groups.flatMap(g => g.panel || [])]) {
+    /* Every knob on a FACE, whether or not it has been moved — the patch's own,
+     * every group's and the DASHBOARD's (2026-10-22: the arcade's ARP TYPE and
+     * TUNE were not on the old panel, so a preset left them out). A face knob
+     * left out would inherit whatever the previous preset put there. */
+    for (const k of [...this.panel, ...this.groups.flatMap(g => g.panel || []), ...this._dashFace()]) {
       if (!this.nodes.has(k.node) || seen.has(`${k.node}|${k.index}`)) continue;
       put(k.node, k.key, normToParam(k.spec, audio.paramNorm(k.node, k.index)));
       seen.add(`${k.node}|${k.index}`);
     }
+    /* …and every other knob that differs from what APPLYING this preset would
+     * otherwise put there: the patch's saved value where the preset surface
+     * restores one (applyPreset, _presetOnto), else the block's default. It was
+     * the default alone, and a macro the patch saves at 0 but the hand set to
+     * the middle — its default — was left out and came back at 0 (Volo
+     * 2026-10-22: "ARP TYPE resets to off, TUNE is not saved either"). */
     for (const [id, u] of this.nodes) {
       const t = this.reg.byType.get(u.type);
       if (!t) continue;
       t.params.forEach((spec, i) => {
         if (seen.has(`${id}|${i}`)) return;
         const norm = audio.paramNorm(id, i);
-        if (Math.abs(norm - inverseCurve(spec, spec.def)) > 1e-6) {
+        const base = this._surface?.get(id + '\u0000' + i) ?? inverseCurve(spec, spec.def);
+        if (Math.abs(norm - base) > 1e-6) {
           put(id, spec.key, normToParam(spec, norm));
         }
       });
@@ -27988,6 +28007,17 @@ class App {
       return null;
     }
     return params;
+  }
+
+  /** THE DASHBOARD AS A FACE: every macro its tabs name, as { node, index, key, spec } on the
+   *  macro's `value` — what a preset always writes and what choosing one puts back. */
+  _dashFace() {
+    const MT = this.reg.byType.get('mod.macro');
+    const vi = MT?.paramByKey?.get('value');
+    if (vi === undefined) return [];
+    return dashMembers(this._face?.dashboard)
+      .filter(id => this.nodes.get(id)?.type === 'mod.macro')
+      .map(id => ({ node: id, index: vi, key: 'value', spec: MT.params[vi] }));
   }
 
   /** WHAT THE MATRIX SAYS RIGHT NOW, in a preset's own shape, or null for a
@@ -29474,6 +29504,7 @@ class App {
       for (const pr of this.presets) for (const st of pr.sets) add(st.node, st.index);
       for (const b of this.panel) bind(b);
       for (const gr of this.groups) for (const b of gr.panel || []) bind(b);
+      for (const k of this._dashFace()) add(k.node, k.index);     /* the dashboard is a face too */
     }
 
     this._matrixSurface();
