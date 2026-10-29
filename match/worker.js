@@ -124,12 +124,17 @@ function readRegistry(w) {
   if (p !== w.scratch) w.free(p);
 
   const reg = JSON.parse(json);
-  for (const t of reg.types) {
+  reg.types.forEach((t, ti) => {
     t.isVoice = t.scope === SCOPE_VOICE;
     t.paramByKey = new Map(t.params.map((x, i) => [x.key, i]));
     t.inByKey    = new Map(t.in.map((x, i) => [x.key, i]));
     t.outByKey   = new Map(t.out.map((x, i) => [x.key, i]));
-  }
+    /* THE CORE'S CONVERSION, carried by each knob (see inverseCurve). Not enumerable, so a spec
+     * still clones and serialises as the plain record the registry printed. */
+    if (w.x.pw_param_unmap) t.params.forEach((p, pi) => Object.defineProperty(p, 'unmap', {
+      value: (v) => w.x.pw_param_unmap(ti, pi, v),
+    }));
+  });
   reg.byType = new Map(reg.types.map(t => [t.type, t]));
   reg.groups = new Map();
   for (const t of reg.types) {
@@ -214,7 +219,15 @@ function applyCurve(spec, t) {
   }
 }
 
+/* A REGISTRY KNOB IS CONVERTED BY THE CORE (2026-10-27, the iOS / web parity harness,
+ * tools/device_parity). These laws in double over the registry's nine-digit bounds and
+ * pcks_param_unmap in float over the exact ones disagree in the last bit of a float, and a
+ * document read here set some knobs one float away from where the phone and the board set them
+ * from the same file — so a spec readRegistry gave `unmap` (pcks_web.c pw_param_unmap) is converted
+ * by the core's own function, the one its reader and pchsynth/graph.py call. The laws below remain
+ * for a spec that does not carry it. */
 function inverseCurve(spec, v) {
+  if (spec.unmap) return spec.unmap(v);
   const clamp01 = (x) => Math.min(1, Math.max(0, x));
   switch (spec.curve) {
     case LIN:  return spec.max > spec.min
