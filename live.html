@@ -1101,6 +1101,17 @@ const isPresetKind = (c) => CHARACTERS.includes(c) || PRESET_GROUPS.includes(c);
 /** A group as the dialog lists it: "Keys". */
 const groupLabel = (g) => (g ? g[0].toUpperCase() + g.slice(1) : g);
 
+/* A PRESET'S DEFAULT OCTAVE (2026-11-04, Volo: "each saved preset will know this"). Whole octaves from the
+ * keyboard's HOME — the browser's C3, where `z` plays (keys.js baseMidi 48) — so a bass that is played an
+ * octave down says -1 and choosing it puts the keyboard on C2. A SHIFT rather than a note because the hosts'
+ * homes differ: a device moves its own home octave by the same number. Absent: the preset leaves the keyboard
+ * where it is, as every preset did before. */
+const PRESET_OCTAVE_MIN = -3;
+const PRESET_OCTAVE_MAX = 3;
+const PRESET_OCTAVE_HOME = 48;
+/** The keyboard octave a shift names, as the keyboard reads it: -1 -> "C2". */
+const presetOctaveName = (o) => `C${3 + o}`;
+
 /** A PRESET AS A LIST SHOWS IT (2026-10-26, Volo: "in preset name lets show group as (lead)"): its name
  *  and, when it declares one, its character after it — "arcade-init (lead)". Takes a resolved preset or a
  *  file's raw entry (both carry `name` and `character`); `fallback` names one with no name. */
@@ -1759,9 +1770,10 @@ function completePreset(reg, nodes, raw, knobs, cells) {
  * @returns {{panel, presets, face}}
  *   panel    [{label, node, key, index, spec, type, raw}]  — knob order is the
  *            file's order, because that is the order they are laid out in
- *   presets  [{name, character, sets: [{node, key, index, spec, norm, value}], raw}]
+ *   presets  [{name, character, octave, sets: [{node, key, index, spec, norm, value}], raw}]
  *            `character` is one of CHARACTERS or PRESET_GROUPS, or null when the
- *            preset declares none or declares a word this build does not know
+ *            preset declares none or declares a word this build does not know;
+ *            `octave` its default octave (PRESET_OCTAVE_*), or null
  *   face     {panel, presets} — the file's own arrays, copied but not rewritten
  */
 function readFace(reg, nodes, patch, warn = [], sources = []) {
@@ -1807,6 +1819,15 @@ function readFace(reg, nodes, patch, warn = [], sources = []) {
       else warn.push(`${what}: character "${p.character}" is not one of `
                    + `${[...new Set([...CHARACTERS, ...PRESET_GROUPS])].join(', ')} — kept in the file, not judged`);
     }
+    /* `octave` — its default octave, whole octaves from the keyboard's home (PRESET_OCTAVE_*). A number off
+     * the range or not whole is said and left out of the resolved preset; the file keeps it (`raw`). */
+    let octave = null;
+    if (p.octave != null) {
+      const o = Number(p.octave);
+      if (Number.isInteger(o) && o >= PRESET_OCTAVE_MIN && o <= PRESET_OCTAVE_MAX) octave = o;
+      else warn.push(`${what}: octave ${JSON.stringify(p.octave)} is not a whole number of octaves from `
+                   + `${PRESET_OCTAVE_MIN} to ${PRESET_OCTAVE_MAX} — kept in the file, not applied`);
+    }
     const sets = [];
     for (const [node, knobs0] of Object.entries(p.params ?? {})) {
       if (!knobs0 || typeof knobs0 !== 'object') {
@@ -1846,7 +1867,7 @@ function readFace(reg, nodes, patch, warn = [], sources = []) {
     /* A preset that reaches nothing is not a preset. Choosing it would report
      * success and change no sound at all, which is worse than not offering it. */
     if (!sets.length && !cells.length) { warn.push(`${what}: nothing in it survived — dropped`); return; }
-    presets.push({ name, character, sets, cells, raw: p });
+    presets.push({ name, character, octave, sets, cells, raw: p });
   });
 
   return {
@@ -2753,6 +2774,10 @@ __x["CHARACTERS"] = CHARACTERS;
 __x["PRESET_GROUPS"] = PRESET_GROUPS;
 __x["isPresetKind"] = isPresetKind;
 __x["groupLabel"] = groupLabel;
+__x["PRESET_OCTAVE_MIN"] = PRESET_OCTAVE_MIN;
+__x["PRESET_OCTAVE_MAX"] = PRESET_OCTAVE_MAX;
+__x["PRESET_OCTAVE_HOME"] = PRESET_OCTAVE_HOME;
+__x["presetOctaveName"] = presetOctaveName;
 __x["DASH_ID"] = DASH_ID;
 __x["DASH_TABS"] = DASH_TABS;
 __x["DASH_SECTIONS"] = DASH_SECTIONS;
@@ -16926,7 +16951,8 @@ const { patchCost } = __req("../cost.js");
 const { attachTip, hideTip, typeTip, paramTip, scopeLead } = __req("./tooltip.js");
 const { paramToNorm, normToParam, deriveGroupViz, DASH_ID, DASH_SECTIONS, DASH_SOURCES,
          DASH_SYNTH_MAX, dashSynthMax, DASH_LAYOUTS, DASH_ICONS, DASH_TABS, DASH_SLOT_LABELS, FX_DASH_SLOTS,
-         FX_SLOT_WORDS, FX_LABEL_MAX } = __req("../patch.js");
+         FX_SLOT_WORDS, FX_LABEL_MAX, PRESET_GROUPS, groupLabel, PRESET_OCTAVE_MIN, PRESET_OCTAVE_MAX,
+         presetOctaveName } = __req("../patch.js");
 const { fanOuts, FAN_OUTS, FAN_SEL, fanSpec, canBeMono,
          fanDisp, fanCore, fanConnLabels } = __req("./channels.js");
 const { isBareKnob } = __req("./board.js");
@@ -18999,6 +19025,94 @@ class Inspector {
 
   /* --------------------------------------------------------- patch view */
 
+  /* THE PRESET THE PICKER IS ON — its name, its group and its default octave (2026-11-04, Volo: "maybe we could
+   * move this from popup to properties? so it will be easy to change/update", "and name of preset as well"). They
+   * were asked for by save as… and update's dialog (2026-10-26 / 29); here they are three rows of the preset you
+   * are on, each change one undo step (app.editPreset), and save as / update leave them as they are. The rows
+   * follow the picker: another preset chosen, made or deleted rebuilds them. */
+  _presetRows() {
+    const on = typeof this.host.presetOn === 'function' ? this.host.presetOn() : null;
+    this._section('preset');
+    if (!on) {
+      this._line('No preset chosen — the menu above picks one, and save as makes one from what you hear.', DIM);
+      this._sync.push(() => { if (this.host.presetOn?.()) this._rebuildSoon(); });
+      return;
+    }
+    const { index, preset: p } = on;
+    const raw = p.raw || {};
+    const emit = (key, value) => this._emit({ type: 'preset', index, key, value });
+
+    /* name — the picker's label, "arcade-init (lead)" */
+    {
+      const field = mk('div', 'pk-field');
+      attachTip(field, { lead: 'What the preset is called in the menus. It is written into the saved file.' });
+      const input = mk('input', 'pk-numin');
+      input.type = 'text';
+      input.spellcheck = false;
+      input.style.textAlign = 'left';
+      input.value = String(raw.name ?? p.name ?? '');
+      field.append(mk('label', null, 'name'), input);
+      this.body.append(field);
+      this._swallowKeys(input, () => input.blur());
+      const commit = () => {
+        const v = input.value.trim();
+        if (!v) { input.value = String(raw.name ?? p.name ?? ''); return; }   /* a preset keeps a name */
+        if (v !== raw.name) emit('name', v);
+      };
+      input.addEventListener('change', commit);
+      input.addEventListener('blur', commit);
+    }
+    /* group — patch.js PRESET_GROUPS; a gate word a library preset carries (pluck, brass…) stays a choice of its own */
+    {
+      const field = mk('div', 'pk-field');
+      attachTip(field, { lead: 'Which group the preset is filed under — Keys, Lead, Pad, Bass or Other. The menus show '
+                             + 'it after the name.' });
+      const sel = mk('select', 'pk-sel');
+      const opts = [['', '—'], ...PRESET_GROUPS.map(g => [g, groupLabel(g)])];
+      const c = typeof raw.character === 'string' ? raw.character.trim().toLowerCase() : '';
+      if (c && !PRESET_GROUPS.includes(c)) opts.push([c, c]);
+      for (const [v, text] of opts) { const o = mk('option', null, text); o.value = v; sel.append(o); }
+      sel.value = c;
+      field.append(mk('label', null, 'group'), sel);
+      this.body.append(field);
+      this._swallowKeys(sel);
+      sel.addEventListener('change', () => emit('character', sel.value));
+    }
+    /* default octave — PRESET_OCTAVE_*: where choosing it puts the keyboard */
+    {
+      const field = mk('div', 'pk-field');
+      attachTip(field, { lead: 'The octave the preset is played from: choosing it puts the keyboard there — a bass an '
+                             + 'octave down, a lead up. "—" leaves the keyboard where it is. Save as takes the octave '
+                             + 'the keyboard is on.' });
+      const sel = mk('select', 'pk-sel');
+      const none = mk('option', null, '— keyboard stays');
+      none.value = '';
+      sel.append(none);
+      for (let o = PRESET_OCTAVE_MIN; o <= PRESET_OCTAVE_MAX; o++) {
+        const opt = mk('option', null, `${presetOctaveName(o)}${o ? ` (${o > 0 ? '+' : ''}${o})` : ' (home)'}`);
+        opt.value = String(o);
+        sel.append(opt);
+      }
+      sel.value = Number.isInteger(p.octave) ? String(p.octave) : '';
+      field.append(mk('label', null, 'octave'), sel);
+      this.body.append(field);
+      this._swallowKeys(sel);
+      sel.addEventListener('change', () => emit('octave', sel.value === '' ? null : Number(sel.value)));
+    }
+    /* another preset chosen, made, edited or deleted: these rows are of that one now */
+    this._sync.push(() => {
+      const now = this.host.presetOn?.();
+      if (!now || now.index !== index || now.preset.raw !== raw) this._rebuildSoon();
+    });
+  }
+
+  /** A rebuild after the pass that asked for it — never from inside the sync loop itself. */
+  _rebuildSoon() {
+    if (this._rebuildQueued) return;
+    this._rebuildQueued = true;
+    queueMicrotask(() => { this._rebuildQueued = false; this.refresh(); });
+  }
+
   _buildPatch(missingType) {
     /* AN FX GRAPH (2026-10-06) is named here and nothing else: no voice settings — it has no keyboard;
      * the synth that plays it does — and no presets (the face card says so too). */
@@ -19053,6 +19167,7 @@ class Inspector {
     }
 
     if (fxDoc) { this._engineFacts(); return; }
+    this._presetRows();
     this._section('voice');
     /* A `note.voice` BLOCK TAKES THREE OF THESE OVER while it is on the board,
      * and saying so here is not decoration. The rows below go on editing what
@@ -19369,7 +19484,7 @@ __x["Inspector"] = Inspector;
  * face with no edit in this file.
  */
 const { SELECT, TOGGLE, formatValue, enumLabels, inverseCurve } = __req("../engine.js");
-const { paramToNorm, normToParam, PRESET_GROUPS, groupLabel, presetLabel } = __req("../patch.js");
+const { paramToNorm, normToParam, presetLabel } = __req("../patch.js");
 const { attachTip } = __req("./tooltip.js");
 const { COLORS } = __req("./theme.js");
 
@@ -19491,19 +19606,6 @@ const CSS = `
   padding:3px 6px;cursor:pointer}
 .pk-face .pk-face-bar>button{flex:1 1 auto;font-size:10px;padding:3px 5px;
   white-space:nowrap}
-/* SAVE AS: the name typed, the kind chosen from the list (_savePreset). A native modal dialog,
- * outside the card (it is appended to the page), so its rules are not under .pk-face. */
-.pk-face-dlg{background:${COLORS.panel};color:${COLORS.text};border:1px solid ${COLORS.edge};
-  border-radius:8px;padding:14px;min-width:260px;
-  font:13px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif}
-.pk-face-dlg::backdrop{background:rgba(0,0,0,.45)}
-.pk-face-dlg form{display:flex;flex-direction:column;gap:8px}
-.pk-face-dlg .pk-face-dlg-title{font-size:11px;font-weight:600;letter-spacing:.15em;
-  text-transform:uppercase;color:${COLORS.accent}}
-.pk-face-dlg .pk-input,.pk-face-dlg .pk-select{font-size:12px;padding:5px 8px;width:100%;box-sizing:border-box}
-.pk-face-dlg .pk-face-dlg-name{font-size:12px;color:${COLORS.header};overflow:hidden;text-overflow:ellipsis;
-  white-space:nowrap}
-.pk-face-dlg .pk-face-dlg-row{display:flex;gap:6px;justify-content:flex-end;margin-top:4px}
 .pk-face .pk-face-row{padding:5px 0 6px;
   border-bottom:1px solid rgba(42,46,55,.5)}
 .pk-face .pk-face-row:last-child{border-bottom:0}
@@ -19789,14 +19891,15 @@ class Panel {
     /* "save as…" rather than "save preset…" now that `update` sits beside it:
      * the pair has to say WHICH of the two saves this one is, and the row is
      * 198 px wide with three labels to fit. */
-    const save = mk('button', 'pk-btn', 'save as…');
+    const save = mk('button', 'pk-btn', 'save as');
     save.addEventListener('click', () => this._savePreset());
     this._tip(save, {
-      title: 'save preset',
+      title: 'save as a new preset',
       lead: 'Snapshots what you can hear right now — every panel knob plus every '
           + 'other knob that differs from its block\'s default — as a new preset '
-          + 'on this synth.',
-      hint: 'Kept in memory; it reaches a file the next time you press save.',
+          + 'on this synth, played from the octave the keyboard is on.',
+      hint: 'Its name, group and octave are in the patch card below, to change. Kept in memory; it reaches a '
+          + 'file the next time you press save.',
     });
 
     /* UPDATE IS THE OTHER HALF OF SAVE. "save preset…" always makes a NEW
@@ -19811,7 +19914,7 @@ class Panel {
     this._tip(upd, {
       title: 'update preset',
       lead: 'Writes what you can hear right now into the preset the picker is '
-          + 'on, keeping its name and its character.',
+          + 'on, keeping its name, its group and its octave (the patch card below changes those).',
       hint: 'Undo puts the old values back; it reaches the file at the next save.',
     });
     this.presetUpd = upd;
@@ -19990,19 +20093,12 @@ class Panel {
     const at = this._presetIdx;
     const p = at != null ? this.ctl.presets?.[at] : null;
     if (!p) return;
-    /* THE SAME DIALOG, NAME FIXED (2026-10-29, Volo: update should show the dropdown too — a preset's kind
-     * could only be chosen when it was first saved). It starts on the preset's own kind with UPDATE
-     * focused, so Enter overwrites as quickly as the bare button did — overwriting the preset you are on
-     * is the ordinary gesture here, one undo step — and the list is there to change the kind with it. A
-     * preset that declares none (a bank's Default) may keep declaring none. */
-    this._presetDialog({
-      title: 'update', name: p.name, kind: p.character, ok: 'update', required: false,
-      onOk: (_, kind) => {
-        if (!this.ctl.updatePreset(at, kind || undefined)) return false;
-        this._presetSig = this._presetKnobs(at);   /* it IS the preset now */
-        return true;
-      },
-    });
+    /* ONE CLICK, ONE UNDO STEP: what you hear into the preset you are on. Its name, group and octave are its
+     * properties and stay as they are — they are changed in the patch card (2026-11-04; the 10-29 dialog asked
+     * for the kind here). */
+    if (!this.ctl.updatePreset(at)) return;
+    this._presetSig = this._presetKnobs(at);   /* it IS the preset now */
+    this.refresh();
   }
 
   _deletePreset() {
@@ -20023,71 +20119,19 @@ class Panel {
   }
 
   _savePreset() {
-    /* ONE DIALOG, THE KIND FROM A LIST (2026-10-26, Volo: "lets change text input to dropdown"). It was
-     * two prompt()s, and the second asked for a word to be TYPED — a word outside CHARACTERS loaded with a
-     * warning and named a row the gate does not have. Now the name is typed and the kind is chosen.
-     *
-     * The kind is still a CLAIM a person makes — the gate measures whether the sound keeps it
-     * (scripts/preset_gate.py) — and since the picker shows it after every name ("arcade-init (lead)"),
-     * it is how a bank is browsed: so it is required here, and the dialog starts on the kind of the preset
-     * you are on, because save as… is most often a variation of it. */
-    const suggested = `preset ${(this.ctl.presets?.length ?? 0) + 1}`;
+    /* A NEW PRESET AT ONCE (2026-11-04, Volo: name, kind and octave "from popup to properties … so it will be easy
+     * to change"). It is made from what you hear, named `preset N`, filed under the group of the preset you are on
+     * (save as is most often a variation of it) and played from the octave the keyboard is on — and the picker
+     * lands on it, so the patch card below (inspector.js, "preset") shows its name, group and octave to change.
+     * Before, one dialog asked for the name and the kind (2026-10-26 / 29). */
     const cur = this._presetIdx != null ? this.ctl.presets?.[this._presetIdx] : null;
-    this._presetDialog({
-      title: 'save as…', name: suggested, editName: true, kind: cur?.character, ok: 'save', required: true,
-      onOk: (name, kind) => !!this.ctl.capturePreset(name || suggested, kind),
-    });
-  }
-
-  /** The preset dialog save as… and update share: a name — typed (`editName`) or shown — and the group
-   *  chosen from PRESET_GROUPS (Keys, Lead, Pad, Bass, Other — 2026-10-31), starting on `kind` when it is one;
-   *  `required` keeps OK off until one is chosen.
-   *  `onOk(name, kind)` returns true when it changed the bank; the card is redrawn then. Escape or cancel
-   *  does nothing, and no key in it reaches the keyboard. */
-  _presetDialog({ title, name, editName = false, kind: start = null, ok, required, onOk }) {
-    const dlg = mk('dialog', 'pk-face-dlg');
-    const form = mk('form');
-    let nameIn = null;
-    if (editName) {
-      nameIn = mk('input', 'pk-input');
-      nameIn.type = 'text';
-      nameIn.value = name;
-      nameIn.spellcheck = false;
-      nameIn.setAttribute('aria-label', 'preset name');
-    }
-    const kind = mk('select', 'pk-select');
-    kind.setAttribute('aria-label', 'what kind of sound it is');
-    const none = new Option('what kind of sound is it?', '');
-    none.disabled = required;
-    kind.append(none);
-    for (const c of PRESET_GROUPS) kind.append(new Option(groupLabel(c), c));
-    kind.value = start && PRESET_GROUPS.includes(start) ? start : '';
-    const row = mk('div', 'pk-face-dlg-row');
-    const cancel = mk('button', 'pk-btn', 'cancel');
-    cancel.type = 'button';
-    const okBtn = mk('button', 'pk-btn', ok);
-    okBtn.type = 'submit';
-    okBtn.disabled = required && !kind.value;
-    row.append(cancel, okBtn);
-    form.append(mk('div', 'pk-face-dlg-title', title),
-                nameIn ?? mk('div', 'pk-face-dlg-name', name), kind, row);
-    dlg.append(form);
-
-    const close = () => { dlg.close(); dlg.remove(); };
-    kind.addEventListener('change', () => { okBtn.disabled = required && !kind.value; });
-    cancel.addEventListener('click', close);
-    dlg.addEventListener('cancel', (e) => { e.preventDefault(); close(); });      /* Escape */
-    dlg.addEventListener('keydown', (e) => e.stopPropagation());                /* not the keyboard's */
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
-      if (required && !kind.value) { kind.focus(); return; }
-      const changed = onOk(nameIn ? nameIn.value.trim() : name, kind.value);
-      close();
-      if (changed) this.refresh();
-    });
-    document.body.append(dlg);
-    dlg.showModal();
-    if (nameIn) nameIn.select(); else okBtn.focus();
+    const taken = new Set((this.ctl.presets || []).map(q => q.name));
+    let n = (this.ctl.presets?.length ?? 0) + 1;
+    while (taken.has(`preset ${n}`)) n++;
+    if (!this.ctl.capturePreset(`preset ${n}`, cur?.character ?? null)) return;
+    this.refresh();
+    this.markPresetApplied((this.ctl.presets?.length ?? 1) - 1);
+    this.ctl.inspector?.refresh?.();
   }
 
   /* -- knobs ------------------------------------------------------------- */
@@ -25929,7 +25973,8 @@ const { loadPatch, savePatch, modToFile, readFace, readGroups, renameInGroups, p
          cellsToFile, renameInMatrix, renameInDashboard, dashGroup: dashCard, dashMembers, DASH_ID,
          DASH_SECTIONS, DASH_SOURCES, DASH_SYNTH_MAX, dashSynthMax, DASH_LAYOUTS, DASH_WIRING, DASH_KEYTRACK, dashTargets,
          dashFixedSlot, dashSensors, keepDashboard, FX_DASH_SLOTS, FX_SLOT_WORDS, fxSlotLabel, fxLabelClean,
-         macroStepsOf, fxSlotStepsIn, presetKnob, completePreset, presetLabel } = __req("./patch.js");
+         macroStepsOf, fxSlotStepsIn, presetKnob, completePreset, presetLabel,
+         PRESET_OCTAVE_MIN, PRESET_OCTAVE_MAX, PRESET_OCTAVE_HOME, presetOctaveName } = __req("./patch.js");
 const { Project, defaultProject, docKind, newFxDoc, newSynthDoc, libraryShelves, chainFor, carryFx, fxListOf,
          fxSteps, slug, starterOrder, fxTypeId, fxKnobTarget, fxPosition, FX_KIND } = __req("./project.js");
 const { instantiate, moduleFromGroup, freshId } = __req("./modules.js");
@@ -28122,6 +28167,9 @@ class App {
      * the change and the graph this one picks comes back from a reset (pcks_chain_restart). After the
      * knobs, which the chain reads before it chooses. */
     audio.restartChain();
+    /* …AND THE KEYBOARD TO ITS OCTAVE (2026-11-04): a preset that says where it is played puts the keys there
+     * — a bass an octave down, a lead an octave up; one that says nothing leaves them where they are. */
+    if (p.octave != null && this.keys) this.keys.setBaseMidi(PRESET_OCTAVE_HOME + 12 * p.octave);
     if (this.panelCard) this.panelCard.markPresetApplied(Number(i));
 
     if (!n && !lists) {
@@ -28305,6 +28353,8 @@ class App {
        * an update that dropped it turned the bank's Default into an ordinary preset at the next save */
       ...(cur.raw.default ? { default: true } : {}),
       ...(kind ? { character: kind } : {}),
+      /* its default octave is a property of the preset, like its name: update writes the sound, not that */
+      ...(cur.raw.octave != null ? { octave: cur.raw.octave } : {}),
       ...(params ? { params } : {}),
       ...(matrix ? { matrix } : {}),
     };
@@ -28445,7 +28495,7 @@ class App {
     return Object.keys(out).length ? out : null;
   }
 
-  capturePreset(name, character = null) {
+  capturePreset(name, character = null, octave = this.keysOctave()) {
     const c = character == null ? null : String(character).trim().toLowerCase();
     if (c && !isPresetKind(c)) {
       this.notify(`"${character}" is not a group — one of ${PRESET_GROUPS.join(', ')}`,
@@ -28459,6 +28509,7 @@ class App {
     /* Key order matters only to a person reading the diff, and `character`
      * belongs beside the name it qualifies rather than after 40 lines of knobs. */
     const raw = { name: String(name), ...(c ? { character: c } : {}),
+                  ...(Number.isInteger(octave) ? { octave } : {}),
                   ...(params ? { params } : {}), ...(matrix ? { matrix } : {}) };
     this.history.push(`save preset ${raw.name}`);
     if (!this._face.presets) this._face.presets = [];
@@ -28477,6 +28528,73 @@ class App {
     this.notify(`saved “${raw.name}” — ${knobs} knob${knobs === 1 ? '' : 's'}; `
               + 'it reaches a file the next time you save the patch');
     return raw;
+  }
+
+  /** The keyboard's octave as a preset stores it: whole octaves from its home, C3 (patch.js PRESET_OCTAVE_*). */
+  keysOctave() {
+    const b = this.keys?.baseMidi;
+    if (!Number.isFinite(b)) return 0;
+    return Math.max(PRESET_OCTAVE_MIN, Math.min(PRESET_OCTAVE_MAX, Math.round((b - PRESET_OCTAVE_HOME) / 12)));
+  }
+
+  /** The preset the picker is ON — {index, preset} — or null: the one the properties edit and update writes. */
+  presetOn() {
+    const i = this.panelCard?.presetMemory?.idx;
+    return Number.isInteger(i) && this.presets?.[i] ? { index: i, preset: this.presets[i] } : null;
+  }
+
+  /**
+   * A PRESET'S PROPERTIES — its name, its group and its default octave — edited where they are shown (2026-11-04,
+   * Volo: "maybe we could move this from popup to properties? … and name of preset as well"). They are what the
+   * preset IS, not values of it, so this writes the entry and nothing else: no knob moves, and update (which
+   * writes the sound) keeps them. `changes` holds any of {name, character, octave}; an empty character or a null
+   * octave takes the field away. One undo step.
+   */
+  editPreset(i, changes = {}) {
+    const idx = Number(i);
+    const cur = this.presets[idx];
+    if (!cur) { this.notify('no such preset', 'error'); return false; }
+    const raw = this._face.presets;
+    const j = Array.isArray(raw) && cur.raw ? raw.indexOf(cur.raw) : -1;
+    if (j < 0) { this.notify('that preset is not in this patch any more', 'error'); return false; }
+    const next = { ...cur.raw };
+    if ('name' in changes) {
+      const n = String(changes.name ?? '').trim();
+      if (!n) { this.notify('a preset needs a name', 'error'); return false; }
+      next.name = n;
+    }
+    if ('character' in changes) {
+      const c = String(changes.character ?? '').trim().toLowerCase();
+      if (c && !isPresetKind(c)) {
+        this.notify(`"${changes.character}" is not a group — one of ${PRESET_GROUPS.join(', ')}`, 'error');
+        return false;
+      }
+      if (c) next.character = c; else delete next.character;
+    }
+    if ('octave' in changes) {
+      const o = changes.octave;
+      if (o == null || o === '') delete next.octave;
+      else if (Number.isInteger(Number(o)) && Number(o) >= PRESET_OCTAVE_MIN && Number(o) <= PRESET_OCTAVE_MAX)
+        next.octave = Number(o);
+      else { this.notify(`the octave is a whole number from ${PRESET_OCTAVE_MIN} to ${PRESET_OCTAVE_MAX}`, 'error'); return false; }
+    }
+    /* key order, for the person reading the diff: name, default, character, octave, then the values */
+    const { name, default: dflt, character, octave, ...rest } = next;
+    const entry = { name, ...(dflt ? { default: true } : {}), ...(character ? { character } : {}),
+                    ...(octave != null ? { octave } : {}), ...rest };
+    if (JSON.stringify(entry) === JSON.stringify(cur.raw)) return true;
+    this.history.push(`preset ${cur.name}: its properties`);
+    raw[j] = entry;
+    const warn = [];
+    const res = readFace(this.reg, this.nodes, { presets: [entry] }, warn, audio.matrixSources());
+    for (const x of warn) console.warn('preset:', x);
+    if (!res.presets.length) { this.notify('the preset did not resolve', 'error'); return false; }
+    this.presets[idx] = res.presets[0];
+    this.notify(`“${entry.name}”${entry.character ? ` (${entry.character})` : ''}`
+              + `${entry.octave != null ? `, plays from ${presetOctaveName(entry.octave)}` : ''} — it reaches a file the `
+              + 'next time you save the patch');
+    if (this.panelCard) this.panelCard.refresh();
+    return true;
   }
 
   /* -- MIDI ---------------------------------------------------------------
@@ -30423,6 +30541,11 @@ class App {
         break;
       case 'outs':
         this.setNodeOuts(ev.node, ev.value);
+        break;
+      case 'preset':
+        if (!this.editPreset(ev.index, { [ev.key]: ev.value })) { this.inspector.refresh(); break; }
+        /* an octave given to the preset you are on is heard at once: the keyboard goes there, as choosing it does */
+        if (ev.key === 'octave' && ev.value != null && this.keys) this.keys.setBaseMidi(PRESET_OCTAVE_HOME + 12 * ev.value);
         break;
       case 'rename':
         if (!this.rename(ev.node, ev.to)) {
