@@ -254,6 +254,22 @@
       "gate_by_hand": false
      },
      "distance": 0.951
+    },
+    "resynth": {
+     "file": "80952213.resynth.f32",
+     "release": 1,
+     "markers": {
+      "onset": 0,
+      "gate": 4.25,
+      "loop": [
+       0.18575963718820862,
+       4.249251700680272
+      ],
+      "loop_by_hand": false,
+      "loop_off": false,
+      "gate_by_hand": false
+     },
+     "distance": 3.251
     }
    }
   },
@@ -1851,6 +1867,19 @@
       "gate_by_hand": false
      },
      "distance": 0.711
+    },
+    "psola": {
+     "file": "889EB1A1.psola.f32",
+     "release": 0.55,
+     "markers": {
+      "onset": 0,
+      "gate": null,
+      "loop": null,
+      "loop_by_hand": false,
+      "loop_off": false,
+      "gate_by_hand": false
+     },
+     "distance": 0.708
     }
    }
   },
@@ -1897,6 +1926,22 @@
       "gate_by_hand": false
      },
      "distance": 2.536
+    },
+    "psola": {
+     "file": "292E7558.psola.f32",
+     "release": 1,
+     "markers": {
+      "onset": 0,
+      "gate": 4.25,
+      "loop": [
+       0.18258503401360546,
+       4.25
+      ],
+      "loop_by_hand": false,
+      "loop_off": false,
+      "gate_by_hand": false
+     },
+     "distance": 0.455
     }
    }
   },
@@ -2262,6 +2307,22 @@
       "gate_by_hand": false
      },
      "distance": 0.464
+    },
+    "resynth": {
+     "file": "55092C09.resynth.f32",
+     "release": 1,
+     "markers": {
+      "onset": 0,
+      "gate": 4.249954648526077,
+      "loop": [
+       0.034829931972789115,
+       4.249251700680272
+      ],
+      "loop_by_hand": false,
+      "loop_off": false,
+      "gate_by_hand": false
+     },
+     "distance": 5.105
     }
    }
   },
@@ -2382,6 +2443,22 @@
       "gate_by_hand": false
      },
      "distance": 3.548
+    },
+    "psola": {
+     "file": "8723C1F9.psola.f32",
+     "release": 1,
+     "markers": {
+      "onset": 0,
+      "gate": 3.25,
+      "loop": [
+       0.05625850340136054,
+       3.25
+      ],
+      "loop_by_hand": false,
+      "loop_off": false,
+      "gate_by_hand": false
+     },
+     "distance": 1.015
     }
    }
   },
