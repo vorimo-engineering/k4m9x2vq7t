@@ -1,0 +1,5790 @@
+{
+ "format": "youtone-library",
+ "version": 1,
+ "keys": {
+  "acoustic-closed-hat": "ABF8CBC7",
+  "acoustic-kick": "53EB8E91",
+  "acoustic-open-hat": "11949EBC",
+  "acoustic-ride": "7FB882CE",
+  "acoustic-snare": "A54CA44F",
+  "acoustic-tom-high": "39522F07",
+  "acoustic-tom-low": "013768F0",
+  "arcade-bass": "B7569E2F",
+  "choir-ahh": "50D774C2",
+  "cp80-A3": "6A04CB52",
+  "cp80-As2": "330553D2",
+  "cp80-As5": "672F86B6",
+  "cp80-B1": "6AD283C2",
+  "cp80-B6": "01C33FDB",
+  "cp80-B7": "32B450B0",
+  "cp80-C4": "C254EE6F",
+  "cp80-C5": "D5822548",
+  "cp80-Cs6": "FA57E39A",
+  "cp80-Cs7": "56AA6E37",
+  "cp80-D3": "52504BAD",
+  "cp80-Ds1": "954DC6D4",
+  "cp80-Ds4": "4E421C6D",
+  "cp80-E5": "2075A18F",
+  "cp80-E6": "5A91BF7C",
+  "cp80-F3": "0082B889",
+  "cp80-F4": "396BA5A3",
+  "cp80-Fs2": "8CAB8570",
+  "cp80-Fs7": "2AF56FED",
+  "cp80-G6": "BB9ADA05",
+  "cp80-Gs4": "8965AC29",
+  "cp80-Gs5": "E944B9D4",
+  "cs30l-strings-36": "3EC48515",
+  "cs30l-strings-42": "112BD5DF",
+  "cs30l-strings-48": "EFE29819",
+  "cs30l-strings-54": "15999FD6",
+  "cs30l-strings-60": "A720B899",
+  "cs30l-strings-66": "3F49BF6B",
+  "cs30l-strings-72": "E1FA0CCC",
+  "flute-60": "3F47FA95",
+  "flute-64": "20B1BAE8",
+  "flute-69": "BF25550B",
+  "flute-72": "B8421783",
+  "flute-76": "AF43135B",
+  "flute-81": "5A19BE02",
+  "flute-84": "68080405",
+  "flute-88": "FDFA94DF",
+  "flute-93": "3E98C0E9",
+  "flute-96": "0EDFB123",
+  "flute-vib-a5": "FC298510",
+  "fm-glass-tubes": "89C4E1AA",
+  "fm-klav": "9B3E9066",
+  "fm-toy-piano": "889EB1A1",
+  "juno6-pad": "292E7558",
+  "juno6-pad-36": "72EE2B10",
+  "juno6-pad-42": "36399BB6",
+  "juno6-pad-48": "6345EA3B",
+  "juno6-pad-54": "41903E86",
+  "juno6-pad-60": "592AE147",
+  "juno6-pad-66": "7649092D",
+  "juno6-pad-72": "A4DC42F0",
+  "juno6-pad-78": "56C912E0",
+  "juno6-pad-84": "93CFABE4",
+  "juno6-pad-90": "240CE2F1",
+  "juno6-pad-96": "35009C3D",
+  "jupiter4-strings": "80952213",
+  "jx3p-brass": "55092C09",
+  "jx8p-brass": "86B67AFD",
+  "jx8p-sync": "F9B9D7A8",
+  "max-lead": "8723C1F9",
+  "minimoog-bass": "D5A9C76B",
+  "modular-closed-hat": "4409B4C1",
+  "modular-cymbal": "172E056D",
+  "modular-kick": "0D57A98A",
+  "modular-open-hat": "071E6AF5",
+  "modular-snare": "43FA53DD",
+  "modular-tom-high": "76F12F07",
+  "modular-tom-low": "B0008AD9",
+  "monopoly-lead": "3E76C300",
+  "organ-club": "E53F0737",
+  "piano-A0-loud": "72422B37",
+  "piano-A0-soft": "9F691026",
+  "piano-A1-loud": "5E9989DE",
+  "piano-A1-soft": "E2B84641",
+  "piano-A2-loud": "94D9F193",
+  "piano-A2-soft": "46AA74F2",
+  "piano-A3-loud": "3BA6F5B1",
+  "piano-A3-soft": "EAF390EA",
+  "piano-A4-loud": "41EB2522",
+  "piano-A4-soft": "D141F621",
+  "piano-A5-loud": "96F5285A",
+  "piano-A5-soft": "8F65C2A0",
+  "piano-A6-loud": "D67A6A3D",
+  "piano-A6-soft": "D015ABC4",
+  "piano-A7-loud": "43911B8C",
+  "piano-A7-soft": "7841FA24",
+  "piano-C1-loud": "A883D153",
+  "piano-C1-soft": "37DEB996",
+  "piano-C2-loud": "22D3284A",
+  "piano-C2-soft": "FCCE2C18",
+  "piano-C3-loud": "867A5CF3",
+  "piano-C3-soft": "089AEDCF",
+  "piano-C4-loud": "38CD7B03",
+  "piano-C4-soft": "A2BD7A01",
+  "piano-C5-loud": "661FD4D7",
+  "piano-C5-soft": "E52A2278",
+  "piano-C6-loud": "C7FBE258",
+  "piano-C6-soft": "7AD05BBC",
+  "piano-C7-loud": "37E6C254",
+  "piano-C7-soft": "F40D7B25",
+  "piano-C8-loud": "167715EF",
+  "piano-C8-soft": "5871E5F0",
+  "piano-Ds1-loud": "A3C1D4AA",
+  "piano-Ds1-soft": "C97C1349",
+  "piano-Ds2-loud": "8376EB53",
+  "piano-Ds2-soft": "2BC52AB2",
+  "piano-Ds3-loud": "C0118858",
+  "piano-Ds3-soft": "0883D823",
+  "piano-Ds4-loud": "82024224",
+  "piano-Ds4-soft": "175594CA",
+  "piano-Ds5-loud": "44BA7178",
+  "piano-Ds5-soft": "A9046A4D",
+  "piano-Ds6-loud": "EF063B6C",
+  "piano-Ds6-soft": "1548BEAC",
+  "piano-Ds7-loud": "0ECB587F",
+  "piano-Ds7-soft": "A64884AE",
+  "piano-Fs1-loud": "E8FDF787",
+  "piano-Fs1-soft": "E98FCA11",
+  "piano-Fs2-loud": "8219CF40",
+  "piano-Fs2-soft": "6B2E628C",
+  "piano-Fs3-loud": "A0286F9C",
+  "piano-Fs3-soft": "B5DD9801",
+  "piano-Fs4-loud": "2EDE909A",
+  "piano-Fs4-soft": "C5F1B6D1",
+  "piano-Fs5-loud": "9FED97BF",
+  "piano-Fs5-soft": "3FD1ECE3",
+  "piano-Fs6-loud": "57F9CD02",
+  "piano-Fs6-soft": "91C4CE52",
+  "piano-Fs7-loud": "7CB47DB8",
+  "piano-Fs7-soft": "F32E0FA1",
+  "sh2-pluck": "EF211808",
+  "tb303": "2AD140E7",
+  "tr08-clap": "FA9E3CBF",
+  "tr08-closed-hat": "90D0C890",
+  "tr08-conga-high": "05318AFB",
+  "tr08-conga-low": "60BF3B5C",
+  "tr08-conga-mid": "D7CFAB12",
+  "tr08-cowbell": "A28C9EF9",
+  "tr08-cymbal": "46313BB8",
+  "tr08-kick": "B20045A7",
+  "tr08-maracas": "911AC666",
+  "tr08-open-hat": "A83B6C22",
+  "tr08-rim": "954F79D6",
+  "tr08-snare": "0B34111E",
+  "tr08-tom-high": "E2C4F254",
+  "tr08-tom-low": "081D08E2",
+  "tr08-tom-mid": "79E6E43E",
+  "tubular-bell-b4": "5C5B7655",
+  "tubular-bell-c4": "2B384E73",
+  "tubular-bell-d5": "123667F5",
+  "tubular-bell-e4": "125EEF0A",
+  "tubular-bell-f5": "21DE33C8",
+  "tubular-bell-g4": "3926EED6",
+  "wine-glass": "963309D7",
+  "wurli-A1": "BD4A415F",
+  "wurli-B2": "CEC1DB8C",
+  "wurli-C2": "26156C40",
+  "wurli-Cs4": "E9F104B7",
+  "wurli-Cs5": "55FE0A06",
+  "wurli-Cs6": "51CC9BF7",
+  "wurli-E3": "93BE68CA",
+  "wurli-F2": "94515D00",
+  "wurli-G5": "B091CEC7",
+  "wurli-Gs3": "D9890402",
+  "wurli-Gs4": "68E417CA",
+  "wurli-Gs6": "35DAD7F5",
+  "xpander-stack": "896193D0",
+  "z1-strings": "4C78A5DB"
+ },
+ "sounds": {
+  "68080405": {
+   "id": "68080405",
+   "key": "flute-84",
+   "file": "68080405.flac",
+   "name": "Flute C6",
+   "group": "flute",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 132300,
+   "root": 84,
+   "loop": [
+    113498,
+    131197
+   ],
+   "reading": {
+    "midi": 84,
+    "gate_s": 3
+   },
+   "named": "C6",
+   "tuned": "read",
+   "credit": {
+    "site": "GitHub",
+    "author": "Versilian Studios (VSCO 2 CE)",
+    "page": "https://github.com/sgossner/VSCO-2-CE",
+    "licence": "CC0 1.0 (public domain)",
+    "licence_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "attribution": "VSCO 2 Community Edition — Versilian Studios / Sam Gossner, Ivy Audio / Simon Dalzell"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset; cut at 3.0 s"
+  },
+  "80952213": {
+   "id": "80952213",
+   "key": "jupiter4-strings",
+   "file": "80952213.flac",
+   "name": "Jupiter-4 Strings",
+   "group": "jupiter4-strings",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 240438,
+   "root": 48.026,
+   "loop": [
+    161969,
+    186542
+   ],
+   "reading": {
+    "midi": 48.026,
+    "gate_s": 4.25
+   },
+   "tuned": "read",
+   "credit": {
+    "site": "Freesound",
+    "author": "modularsamples",
+    "page": "https://freesound.org/people/modularsamples/sounds/304788/",
+    "licence": "CC0 1.0 (public domain)",
+    "licence_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset; held 4.0 s of 8.0 (then its own release)",
+   "measures": {
+    "psola": {
+     "file": "80952213.psola.f32",
+     "release": 1,
+     "markers": {
+      "onset": 0,
+      "gate": 4.25,
+      "loop": [
+       0.19900226757369616,
+       4.25
+      ],
+      "loop_by_hand": false,
+      "loop_off": false,
+      "gate_by_hand": false
+     },
+     "distance": 0.951
+    }
+   }
+  },
+  "82024224": {
+   "id": "82024224",
+   "key": "piano-Ds4-loud",
+   "file": "82024224.flac",
+   "name": "Grand D#4 loud",
+   "group": "grand-piano",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 132300,
+   "root": 63,
+   "loop": [
+    0,
+    0
+   ],
+   "reading": {
+    "midi": 63.035,
+    "gate_s": 3
+   },
+   "named": "D#4",
+   "layer": [
+    90,
+    127
+   ],
+   "tuned": "nominal",
+   "credit": {
+    "site": "GitHub",
+    "author": "Alexander Holm",
+    "page": "https://github.com/sfzinstruments/SalamanderGrandPiano",
+    "licence": "CC BY 3.0",
+    "licence_url": "https://creativecommons.org/licenses/by/3.0/",
+    "attribution": "Salamander Grand Piano V3 by Alexander Holm, CC BY 3.0"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset; cut at 3.0 s"
+  },
+  "ABF8CBC7": {
+   "id": "ABF8CBC7",
+   "key": "acoustic-closed-hat",
+   "file": "ABF8CBC7.flac",
+   "name": "Acoustic Closed Hat",
+   "group": "acoustic",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 33516,
+   "root": 60,
+   "loop": [
+    0,
+    0
+   ],
+   "drum": 42,
+   "tuned": "kit",
+   "credit": {
+    "site": "GitHub",
+    "author": "Versilian Studios with Karoryfer Samples (Virtuosity Drums)",
+    "page": "https://github.com/sfzinstruments/virtuosity_drums",
+    "licence": "CC0 1.0 (public domain)",
+    "licence_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset"
+  },
+  "53EB8E91": {
+   "id": "53EB8E91",
+   "key": "acoustic-kick",
+   "file": "53EB8E91.flac",
+   "name": "Acoustic Kick",
+   "group": "acoustic",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 87318,
+   "root": 60,
+   "loop": [
+    0,
+    0
+   ],
+   "drum": 36,
+   "tuned": "kit",
+   "credit": {
+    "site": "GitHub",
+    "author": "Versilian Studios with Karoryfer Samples (Virtuosity Drums)",
+    "page": "https://github.com/sfzinstruments/virtuosity_drums",
+    "licence": "CC0 1.0 (public domain)",
+    "licence_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset; cut at 2.0 s"
+  },
+  "11949EBC": {
+   "id": "11949EBC",
+   "key": "acoustic-open-hat",
+   "file": "11949EBC.flac",
+   "name": "Acoustic Open Hat",
+   "group": "acoustic",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 176400,
+   "root": 60,
+   "loop": [
+    0,
+    0
+   ],
+   "drum": 46,
+   "tuned": "kit",
+   "credit": {
+    "site": "GitHub",
+    "author": "Versilian Studios with Karoryfer Samples (Virtuosity Drums)",
+    "page": "https://github.com/sfzinstruments/virtuosity_drums",
+    "licence": "CC0 1.0 (public domain)",
+    "licence_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset; cut at 4.0 s"
+  },
+  "7FB882CE": {
+   "id": "7FB882CE",
+   "key": "acoustic-ride",
+   "file": "7FB882CE.flac",
+   "name": "Acoustic Ride",
+   "group": "acoustic",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 176400,
+   "root": 60,
+   "loop": [
+    0,
+    0
+   ],
+   "drum": 51,
+   "tuned": "kit",
+   "credit": {
+    "site": "GitHub",
+    "author": "Versilian Studios with Karoryfer Samples (Virtuosity Drums)",
+    "page": "https://github.com/sfzinstruments/virtuosity_drums",
+    "licence": "CC0 1.0 (public domain)",
+    "licence_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset; cut at 4.0 s"
+  },
+  "A54CA44F": {
+   "id": "A54CA44F",
+   "key": "acoustic-snare",
+   "file": "A54CA44F.flac",
+   "name": "Acoustic Snare",
+   "group": "acoustic",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 69678,
+   "root": 60,
+   "loop": [
+    0,
+    0
+   ],
+   "drum": 38,
+   "tuned": "kit",
+   "credit": {
+    "site": "GitHub",
+    "author": "Versilian Studios with Karoryfer Samples (Virtuosity Drums)",
+    "page": "https://github.com/sfzinstruments/virtuosity_drums",
+    "licence": "CC0 1.0 (public domain)",
+    "licence_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset"
+  },
+  "39522F07": {
+   "id": "39522F07",
+   "key": "acoustic-tom-high",
+   "file": "39522F07.flac",
+   "name": "Acoustic Tom High",
+   "group": "acoustic",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 67914,
+   "root": 60,
+   "loop": [
+    0,
+    0
+   ],
+   "drum": 50,
+   "tuned": "kit",
+   "credit": {
+    "site": "GitHub",
+    "author": "Versilian Studios with Karoryfer Samples (Virtuosity Drums)",
+    "page": "https://github.com/sfzinstruments/virtuosity_drums",
+    "licence": "CC0 1.0 (public domain)",
+    "licence_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset"
+  },
+  "013768F0": {
+   "id": "013768F0",
+   "key": "acoustic-tom-low",
+   "file": "013768F0.flac",
+   "name": "Acoustic Tom Low",
+   "group": "acoustic",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 88200,
+   "root": 60,
+   "loop": [
+    0,
+    0
+   ],
+   "drum": 43,
+   "tuned": "kit",
+   "credit": {
+    "site": "GitHub",
+    "author": "Versilian Studios with Karoryfer Samples (Virtuosity Drums)",
+    "page": "https://github.com/sfzinstruments/virtuosity_drums",
+    "licence": "CC0 1.0 (public domain)",
+    "licence_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset; cut at 2.0 s"
+  },
+  "B7569E2F": {
+   "id": "B7569E2F",
+   "key": "arcade-bass",
+   "file": "B7569E2F.flac",
+   "name": "Arcade Bass",
+   "group": "arcade-bass",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 148176,
+   "root": 36.009,
+   "loop": [
+    100286,
+    131285
+   ],
+   "reading": {
+    "midi": 36.009,
+    "gate_s": 2.997
+   },
+   "named": "C4",
+   "tuned": "read",
+   "credit": {
+    "site": "YouTone",
+    "author": "Volo's machines (patches/projects/volo-machines.project.json)",
+    "made": "the arcade machine, preset arcade-bass4, key C4",
+    "licence": "YouTone's own: rendered by its synth engine from Volo's own presets"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset",
+   "measures": {
+    "psola": {
+     "file": "B7569E2F.psola.f32",
+     "release": 1,
+     "markers": {
+      "onset": 0,
+      "gate": 2.9970068027210885,
+      "loop": [
+       0.04673469387755102,
+       2.9970068027210885
+      ],
+      "loop_by_hand": false,
+      "loop_off": false,
+      "gate_by_hand": false
+     },
+     "distance": 0.29
+    },
+    "resynth": {
+     "file": "B7569E2F.resynth.f32",
+     "release": 1,
+     "markers": {
+      "onset": 0,
+      "gate": 2.997,
+      "loop": [
+       0.023219954648526078,
+       2.995374149659864
+      ],
+      "loop_by_hand": false,
+      "loop_off": false,
+      "gate_by_hand": false
+     },
+     "distance": 2.219
+    }
+   }
+  },
+  "50D774C2": {
+   "id": "50D774C2",
+   "key": "choir-ahh",
+   "file": "50D774C2.flac",
+   "name": "Choir Ahh",
+   "group": "choir-ahh",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 279059,
+   "root": 52.92,
+   "loop": [
+    81073,
+    105177
+   ],
+   "reading": {
+    "midi": 52.92,
+    "gate_s": 2.405
+   },
+   "tuned": "read",
+   "credit": {
+    "site": "Freesound",
+    "author": "ShangusBurger",
+    "page": "https://freesound.org/people/ShangusBurger/sounds/763909/",
+    "licence": "CC0 1.0 (public domain)",
+    "licence_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset; from 1.30 s after the onset"
+  },
+  "6A04CB52": {
+   "id": "6A04CB52",
+   "key": "cp80-A3",
+   "file": "6A04CB52.flac",
+   "name": "CP80 A3",
+   "group": "cp80",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 132300,
+   "root": 56.962,
+   "loop": [
+    0,
+    0
+   ],
+   "reading": {
+    "midi": 56.962,
+    "gate_s": 3
+   },
+   "named": "A3",
+   "tuned": "read",
+   "credit": {
+    "site": "GitHub",
+    "author": "Greg Sullivan",
+    "page": "https://github.com/sfzinstruments/GregSullivan.E-Pianos",
+    "licence": "CC BY 3.0",
+    "licence_url": "https://creativecommons.org/licenses/by/3.0/",
+    "attribution": "Yamaha CP80 and Wurlitzer EP200 samples by Greg Sullivan, CC BY 3.0"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset; cut at 3.0 s"
+  },
+  "330553D2": {
+   "id": "330553D2",
+   "key": "cp80-As2",
+   "file": "330553D2.flac",
+   "name": "CP80 A#2",
+   "group": "cp80",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 132300,
+   "root": 46.027,
+   "loop": [
+    0,
+    0
+   ],
+   "reading": {
+    "midi": 46.027,
+    "gate_s": 3
+   },
+   "named": "A#2",
+   "tuned": "read",
+   "credit": {
+    "site": "GitHub",
+    "author": "Greg Sullivan",
+    "page": "https://github.com/sfzinstruments/GregSullivan.E-Pianos",
+    "licence": "CC BY 3.0",
+    "licence_url": "https://creativecommons.org/licenses/by/3.0/",
+    "attribution": "Yamaha CP80 and Wurlitzer EP200 samples by Greg Sullivan, CC BY 3.0"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset; cut at 3.0 s"
+  },
+  "672F86B6": {
+   "id": "672F86B6",
+   "key": "cp80-As5",
+   "file": "672F86B6.flac",
+   "name": "CP80 A#5",
+   "group": "cp80",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 88200,
+   "root": 82.038,
+   "loop": [
+    0,
+    0
+   ],
+   "reading": {
+    "midi": 82.038,
+    "gate_s": 2
+   },
+   "named": "A#5",
+   "tuned": "read",
+   "credit": {
+    "site": "GitHub",
+    "author": "Greg Sullivan",
+    "page": "https://github.com/sfzinstruments/GregSullivan.E-Pianos",
+    "licence": "CC BY 3.0",
+    "licence_url": "https://creativecommons.org/licenses/by/3.0/",
+    "attribution": "Yamaha CP80 and Wurlitzer EP200 samples by Greg Sullivan, CC BY 3.0"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset; cut at 2.0 s"
+  },
+  "6AD283C2": {
+   "id": "6AD283C2",
+   "key": "cp80-B1",
+   "file": "6AD283C2.flac",
+   "name": "CP80 B1",
+   "group": "cp80",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 132300,
+   "root": 35.009,
+   "loop": [
+    0,
+    0
+   ],
+   "reading": {
+    "midi": 35.009,
+    "gate_s": 3
+   },
+   "named": "B1",
+   "tuned": "read",
+   "credit": {
+    "site": "GitHub",
+    "author": "Greg Sullivan",
+    "page": "https://github.com/sfzinstruments/GregSullivan.E-Pianos",
+    "licence": "CC BY 3.0",
+    "licence_url": "https://creativecommons.org/licenses/by/3.0/",
+    "attribution": "Yamaha CP80 and Wurlitzer EP200 samples by Greg Sullivan, CC BY 3.0"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset; cut at 3.0 s"
+  },
+  "01C33FDB": {
+   "id": "01C33FDB",
+   "key": "cp80-B6",
+   "file": "01C33FDB.flac",
+   "name": "CP80 B6",
+   "group": "cp80",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 88200,
+   "root": 95.133,
+   "loop": [
+    0,
+    0
+   ],
+   "reading": {
+    "midi": 95.133,
+    "gate_s": 2
+   },
+   "named": "B6",
+   "tuned": "read",
+   "credit": {
+    "site": "GitHub",
+    "author": "Greg Sullivan",
+    "page": "https://github.com/sfzinstruments/GregSullivan.E-Pianos",
+    "licence": "CC BY 3.0",
+    "licence_url": "https://creativecommons.org/licenses/by/3.0/",
+    "attribution": "Yamaha CP80 and Wurlitzer EP200 samples by Greg Sullivan, CC BY 3.0"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset; cut at 2.0 s"
+  },
+  "32B450B0": {
+   "id": "32B450B0",
+   "key": "cp80-B7",
+   "file": "32B450B0.flac",
+   "name": "CP80 B6",
+   "group": "cp80",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 88200,
+   "root": 95.41,
+   "loop": [
+    0,
+    0
+   ],
+   "reading": {
+    "midi": 95.41,
+    "gate_s": 2
+   },
+   "named": "B7",
+   "tuned": "read",
+   "credit": {
+    "site": "GitHub",
+    "author": "Greg Sullivan",
+    "page": "https://github.com/sfzinstruments/GregSullivan.E-Pianos",
+    "licence": "CC BY 3.0",
+    "licence_url": "https://creativecommons.org/licenses/by/3.0/",
+    "attribution": "Yamaha CP80 and Wurlitzer EP200 samples by Greg Sullivan, CC BY 3.0"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset; cut at 2.0 s"
+  },
+  "C254EE6F": {
+   "id": "C254EE6F",
+   "key": "cp80-C4",
+   "file": "C254EE6F.flac",
+   "name": "CP80 C4",
+   "group": "cp80",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 88200,
+   "root": 60.02,
+   "loop": [
+    0,
+    0
+   ],
+   "reading": {
+    "midi": 60.02,
+    "gate_s": 2
+   },
+   "named": "C4",
+   "tuned": "read",
+   "credit": {
+    "site": "GitHub",
+    "author": "Greg Sullivan",
+    "page": "https://github.com/sfzinstruments/GregSullivan.E-Pianos",
+    "licence": "CC BY 3.0",
+    "licence_url": "https://creativecommons.org/licenses/by/3.0/",
+    "attribution": "Yamaha CP80 and Wurlitzer EP200 samples by Greg Sullivan, CC BY 3.0"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset; cut at 2.0 s"
+  },
+  "D5822548": {
+   "id": "D5822548",
+   "key": "cp80-C5",
+   "file": "D5822548.flac",
+   "name": "CP80 C5",
+   "group": "cp80",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 88200,
+   "root": 71.998,
+   "loop": [
+    0,
+    0
+   ],
+   "reading": {
+    "midi": 71.998,
+    "gate_s": 2
+   },
+   "named": "C5",
+   "tuned": "read",
+   "credit": {
+    "site": "GitHub",
+    "author": "Greg Sullivan",
+    "page": "https://github.com/sfzinstruments/GregSullivan.E-Pianos",
+    "licence": "CC BY 3.0",
+    "licence_url": "https://creativecommons.org/licenses/by/3.0/",
+    "attribution": "Yamaha CP80 and Wurlitzer EP200 samples by Greg Sullivan, CC BY 3.0"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset; cut at 2.0 s"
+  },
+  "FA57E39A": {
+   "id": "FA57E39A",
+   "key": "cp80-Cs6",
+   "file": "FA57E39A.flac",
+   "name": "CP80 C#6",
+   "group": "cp80",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 88200,
+   "root": 85.042,
+   "loop": [
+    0,
+    0
+   ],
+   "reading": {
+    "midi": 85.042,
+    "gate_s": 2
+   },
+   "named": "C#6",
+   "tuned": "read",
+   "credit": {
+    "site": "GitHub",
+    "author": "Greg Sullivan",
+    "page": "https://github.com/sfzinstruments/GregSullivan.E-Pianos",
+    "licence": "CC BY 3.0",
+    "licence_url": "https://creativecommons.org/licenses/by/3.0/",
+    "attribution": "Yamaha CP80 and Wurlitzer EP200 samples by Greg Sullivan, CC BY 3.0"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset; cut at 2.0 s"
+  },
+  "56AA6E37": {
+   "id": "56AA6E37",
+   "key": "cp80-Cs7",
+   "file": "56AA6E37.flac",
+   "name": "CP80 C#7",
+   "group": "cp80",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 88200,
+   "root": 97.138,
+   "loop": [
+    0,
+    0
+   ],
+   "reading": {
+    "midi": 97.138,
+    "gate_s": 2
+   },
+   "named": "C#7",
+   "tuned": "read",
+   "credit": {
+    "site": "GitHub",
+    "author": "Greg Sullivan",
+    "page": "https://github.com/sfzinstruments/GregSullivan.E-Pianos",
+    "licence": "CC BY 3.0",
+    "licence_url": "https://creativecommons.org/licenses/by/3.0/",
+    "attribution": "Yamaha CP80 and Wurlitzer EP200 samples by Greg Sullivan, CC BY 3.0"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset; cut at 2.0 s"
+  },
+  "52504BAD": {
+   "id": "52504BAD",
+   "key": "cp80-D3",
+   "file": "52504BAD.flac",
+   "name": "CP80 D3",
+   "group": "cp80",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 132300,
+   "root": 50.048,
+   "loop": [
+    0,
+    0
+   ],
+   "reading": {
+    "midi": 50.048,
+    "gate_s": 3
+   },
+   "named": "D3",
+   "tuned": "read",
+   "credit": {
+    "site": "GitHub",
+    "author": "Greg Sullivan",
+    "page": "https://github.com/sfzinstruments/GregSullivan.E-Pianos",
+    "licence": "CC BY 3.0",
+    "licence_url": "https://creativecommons.org/licenses/by/3.0/",
+    "attribution": "Yamaha CP80 and Wurlitzer EP200 samples by Greg Sullivan, CC BY 3.0"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset; cut at 3.0 s"
+  },
+  "954DC6D4": {
+   "id": "954DC6D4",
+   "key": "cp80-Ds1",
+   "file": "954DC6D4.flac",
+   "name": "CP80 D#1",
+   "group": "cp80",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 132300,
+   "root": 27.122,
+   "loop": [
+    0,
+    0
+   ],
+   "reading": {
+    "midi": 27.122,
+    "gate_s": 3
+   },
+   "named": "D#1",
+   "tuned": "read",
+   "credit": {
+    "site": "GitHub",
+    "author": "Greg Sullivan",
+    "page": "https://github.com/sfzinstruments/GregSullivan.E-Pianos",
+    "licence": "CC BY 3.0",
+    "licence_url": "https://creativecommons.org/licenses/by/3.0/",
+    "attribution": "Yamaha CP80 and Wurlitzer EP200 samples by Greg Sullivan, CC BY 3.0"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset; cut at 3.0 s"
+  },
+  "4E421C6D": {
+   "id": "4E421C6D",
+   "key": "cp80-Ds4",
+   "file": "4E421C6D.flac",
+   "name": "CP80 D#4",
+   "group": "cp80",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 88200,
+   "root": 63.024,
+   "loop": [
+    0,
+    0
+   ],
+   "reading": {
+    "midi": 63.024,
+    "gate_s": 2
+   },
+   "named": "D#4",
+   "tuned": "read",
+   "credit": {
+    "site": "GitHub",
+    "author": "Greg Sullivan",
+    "page": "https://github.com/sfzinstruments/GregSullivan.E-Pianos",
+    "licence": "CC BY 3.0",
+    "licence_url": "https://creativecommons.org/licenses/by/3.0/",
+    "attribution": "Yamaha CP80 and Wurlitzer EP200 samples by Greg Sullivan, CC BY 3.0"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset; cut at 2.0 s"
+  },
+  "2075A18F": {
+   "id": "2075A18F",
+   "key": "cp80-E5",
+   "file": "2075A18F.flac",
+   "name": "CP80 E5",
+   "group": "cp80",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 88200,
+   "root": 76.02,
+   "loop": [
+    0,
+    0
+   ],
+   "reading": {
+    "midi": 76.02,
+    "gate_s": 2
+   },
+   "named": "E5",
+   "tuned": "read",
+   "credit": {
+    "site": "GitHub",
+    "author": "Greg Sullivan",
+    "page": "https://github.com/sfzinstruments/GregSullivan.E-Pianos",
+    "licence": "CC BY 3.0",
+    "licence_url": "https://creativecommons.org/licenses/by/3.0/",
+    "attribution": "Yamaha CP80 and Wurlitzer EP200 samples by Greg Sullivan, CC BY 3.0"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset; cut at 2.0 s"
+  },
+  "5A91BF7C": {
+   "id": "5A91BF7C",
+   "key": "cp80-E6",
+   "file": "5A91BF7C.flac",
+   "name": "CP80 E6",
+   "group": "cp80",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 88200,
+   "root": 88.102,
+   "loop": [
+    0,
+    0
+   ],
+   "reading": {
+    "midi": 88.102,
+    "gate_s": 2
+   },
+   "named": "E6",
+   "tuned": "read",
+   "credit": {
+    "site": "GitHub",
+    "author": "Greg Sullivan",
+    "page": "https://github.com/sfzinstruments/GregSullivan.E-Pianos",
+    "licence": "CC BY 3.0",
+    "licence_url": "https://creativecommons.org/licenses/by/3.0/",
+    "attribution": "Yamaha CP80 and Wurlitzer EP200 samples by Greg Sullivan, CC BY 3.0"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset; cut at 2.0 s"
+  },
+  "0082B889": {
+   "id": "0082B889",
+   "key": "cp80-F3",
+   "file": "0082B889.flac",
+   "name": "CP80 F3",
+   "group": "cp80",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 132300,
+   "root": 53.021,
+   "loop": [
+    0,
+    0
+   ],
+   "reading": {
+    "midi": 53.021,
+    "gate_s": 3
+   },
+   "named": "F3",
+   "tuned": "read",
+   "credit": {
+    "site": "GitHub",
+    "author": "Greg Sullivan",
+    "page": "https://github.com/sfzinstruments/GregSullivan.E-Pianos",
+    "licence": "CC BY 3.0",
+    "licence_url": "https://creativecommons.org/licenses/by/3.0/",
+    "attribution": "Yamaha CP80 and Wurlitzer EP200 samples by Greg Sullivan, CC BY 3.0"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset; cut at 3.0 s"
+  },
+  "396BA5A3": {
+   "id": "396BA5A3",
+   "key": "cp80-F4",
+   "file": "396BA5A3.flac",
+   "name": "CP80 F4",
+   "group": "cp80",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 88200,
+   "root": 65.019,
+   "loop": [
+    0,
+    0
+   ],
+   "reading": {
+    "midi": 65.019,
+    "gate_s": 2
+   },
+   "named": "F4",
+   "tuned": "read",
+   "credit": {
+    "site": "GitHub",
+    "author": "Greg Sullivan",
+    "page": "https://github.com/sfzinstruments/GregSullivan.E-Pianos",
+    "licence": "CC BY 3.0",
+    "licence_url": "https://creativecommons.org/licenses/by/3.0/",
+    "attribution": "Yamaha CP80 and Wurlitzer EP200 samples by Greg Sullivan, CC BY 3.0"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset; cut at 2.0 s"
+  },
+  "8CAB8570": {
+   "id": "8CAB8570",
+   "key": "cp80-Fs2",
+   "file": "8CAB8570.flac",
+   "name": "CP80 F#2",
+   "group": "cp80",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 132300,
+   "root": 42.009,
+   "loop": [
+    0,
+    0
+   ],
+   "reading": {
+    "midi": 42.009,
+    "gate_s": 3
+   },
+   "named": "F#2",
+   "tuned": "read",
+   "credit": {
+    "site": "GitHub",
+    "author": "Greg Sullivan",
+    "page": "https://github.com/sfzinstruments/GregSullivan.E-Pianos",
+    "licence": "CC BY 3.0",
+    "licence_url": "https://creativecommons.org/licenses/by/3.0/",
+    "attribution": "Yamaha CP80 and Wurlitzer EP200 samples by Greg Sullivan, CC BY 3.0"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset; cut at 3.0 s"
+  },
+  "2AF56FED": {
+   "id": "2AF56FED",
+   "key": "cp80-Fs7",
+   "file": "2AF56FED.flac",
+   "name": "CP80 F#6",
+   "group": "cp80",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 88200,
+   "root": 90.332,
+   "loop": [
+    0,
+    0
+   ],
+   "reading": {
+    "midi": 90.332,
+    "gate_s": 2
+   },
+   "named": "F#7",
+   "tuned": "read",
+   "credit": {
+    "site": "GitHub",
+    "author": "Greg Sullivan",
+    "page": "https://github.com/sfzinstruments/GregSullivan.E-Pianos",
+    "licence": "CC BY 3.0",
+    "licence_url": "https://creativecommons.org/licenses/by/3.0/",
+    "attribution": "Yamaha CP80 and Wurlitzer EP200 samples by Greg Sullivan, CC BY 3.0"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset; cut at 2.0 s"
+  },
+  "BB9ADA05": {
+   "id": "BB9ADA05",
+   "key": "cp80-G6",
+   "file": "BB9ADA05.flac",
+   "name": "CP80 G6",
+   "group": "cp80",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 88200,
+   "root": 91.117,
+   "loop": [
+    0,
+    0
+   ],
+   "reading": {
+    "midi": 91.117,
+    "gate_s": 2
+   },
+   "named": "G6",
+   "tuned": "read",
+   "credit": {
+    "site": "GitHub",
+    "author": "Greg Sullivan",
+    "page": "https://github.com/sfzinstruments/GregSullivan.E-Pianos",
+    "licence": "CC BY 3.0",
+    "licence_url": "https://creativecommons.org/licenses/by/3.0/",
+    "attribution": "Yamaha CP80 and Wurlitzer EP200 samples by Greg Sullivan, CC BY 3.0"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset; cut at 2.0 s"
+  },
+  "8965AC29": {
+   "id": "8965AC29",
+   "key": "cp80-Gs4",
+   "file": "8965AC29.flac",
+   "name": "CP80 G#4",
+   "group": "cp80",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 88200,
+   "root": 68.027,
+   "loop": [
+    0,
+    0
+   ],
+   "reading": {
+    "midi": 68.027,
+    "gate_s": 2
+   },
+   "named": "G#4",
+   "tuned": "read",
+   "credit": {
+    "site": "GitHub",
+    "author": "Greg Sullivan",
+    "page": "https://github.com/sfzinstruments/GregSullivan.E-Pianos",
+    "licence": "CC BY 3.0",
+    "licence_url": "https://creativecommons.org/licenses/by/3.0/",
+    "attribution": "Yamaha CP80 and Wurlitzer EP200 samples by Greg Sullivan, CC BY 3.0"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset; cut at 2.0 s"
+  },
+  "E944B9D4": {
+   "id": "E944B9D4",
+   "key": "cp80-Gs5",
+   "file": "E944B9D4.flac",
+   "name": "CP80 G#5",
+   "group": "cp80",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 88200,
+   "root": 80.034,
+   "loop": [
+    0,
+    0
+   ],
+   "reading": {
+    "midi": 80.034,
+    "gate_s": 2
+   },
+   "named": "G#5",
+   "tuned": "read",
+   "credit": {
+    "site": "GitHub",
+    "author": "Greg Sullivan",
+    "page": "https://github.com/sfzinstruments/GregSullivan.E-Pianos",
+    "licence": "CC BY 3.0",
+    "licence_url": "https://creativecommons.org/licenses/by/3.0/",
+    "attribution": "Yamaha CP80 and Wurlitzer EP200 samples by Greg Sullivan, CC BY 3.0"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset; cut at 2.0 s"
+  },
+  "3EC48515": {
+   "id": "3EC48515",
+   "key": "cs30l-strings-36",
+   "file": "3EC48515.flac",
+   "name": "CS-30L Strings C4",
+   "group": "cs30l-strings",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 143037,
+   "root": 59.91,
+   "loop": [
+    80574,
+    120392
+   ],
+   "reading": {
+    "midi": 59.91,
+    "gate_s": 2.75
+   },
+   "named": "C2",
+   "tuned": "read",
+   "credit": {
+    "site": "Freesound",
+    "author": "modularsamples",
+    "page": "https://freesound.org/people/modularsamples/sounds/312108/",
+    "licence": "CC0 1.0 (public domain)",
+    "licence_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset; held 2.5 s of 10.0 (then its own release)"
+  },
+  "112BD5DF": {
+   "id": "112BD5DF",
+   "key": "cs30l-strings-42",
+   "file": "112BD5DF.flac",
+   "name": "CS-30L Strings F#4",
+   "group": "cs30l-strings",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 147361,
+   "root": 65.941,
+   "loop": [
+    89895,
+    120392
+   ],
+   "reading": {
+    "midi": 65.941,
+    "gate_s": 2.75
+   },
+   "named": "F#2",
+   "tuned": "read",
+   "credit": {
+    "site": "Freesound",
+    "author": "modularsamples",
+    "page": "https://freesound.org/people/modularsamples/sounds/312114/",
+    "licence": "CC0 1.0 (public domain)",
+    "licence_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset; held 2.5 s of 10.0 (then its own release)"
+  },
+  "EFE29819": {
+   "id": "EFE29819",
+   "key": "cs30l-strings-48",
+   "file": "EFE29819.flac",
+   "name": "CS-30L Strings C5",
+   "group": "cs30l-strings",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 142237,
+   "root": 71.959,
+   "loop": [
+    88999,
+    120172
+   ],
+   "reading": {
+    "midi": 71.959,
+    "gate_s": 2.75
+   },
+   "named": "C3",
+   "tuned": "read",
+   "credit": {
+    "site": "Freesound",
+    "author": "modularsamples",
+    "page": "https://freesound.org/people/modularsamples/sounds/312120/",
+    "licence": "CC0 1.0 (public domain)",
+    "licence_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset; held 2.5 s of 10.0 (then its own release)"
+  },
+  "15999FD6": {
+   "id": "15999FD6",
+   "key": "cs30l-strings-54",
+   "file": "15999FD6.flac",
+   "name": "CS-30L Strings F#5",
+   "group": "cs30l-strings",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 146480,
+   "root": 77.969,
+   "loop": [
+    63555,
+    120392
+   ],
+   "reading": {
+    "midi": 77.969,
+    "gate_s": 2.75
+   },
+   "named": "F#3",
+   "tuned": "read",
+   "credit": {
+    "site": "Freesound",
+    "author": "modularsamples",
+    "page": "https://freesound.org/people/modularsamples/sounds/312126/",
+    "licence": "CC0 1.0 (public domain)",
+    "licence_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset; held 2.5 s of 10.0 (then its own release)"
+  },
+  "A720B899": {
+   "id": "A720B899",
+   "key": "cs30l-strings-60",
+   "file": "A720B899.flac",
+   "name": "CS-30L Strings C6",
+   "group": "cs30l-strings",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 140684,
+   "root": 84.003,
+   "loop": [
+    42446,
+    109143
+   ],
+   "reading": {
+    "midi": 84.003,
+    "gate_s": 2.75
+   },
+   "named": "C4",
+   "tuned": "read",
+   "credit": {
+    "site": "Freesound",
+    "author": "modularsamples",
+    "page": "https://freesound.org/people/modularsamples/sounds/312132/",
+    "licence": "CC0 1.0 (public domain)",
+    "licence_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset; held 2.5 s of 10.0 (then its own release)",
+   "measures": {
+    "psola": {
+     "file": "A720B899.psola.f32",
+     "release": 1,
+     "markers": {
+      "onset": 0.005079365079365079,
+      "gate": 2.7308843537414966,
+      "loop": [
+       0.13959183673469389,
+       2.7308843537414966
+      ],
+      "loop_by_hand": false,
+      "loop_off": false,
+      "gate_by_hand": false
+     },
+     "distance": 0.553
+    }
+   }
+  },
+  "3F49BF6B": {
+   "id": "3F49BF6B",
+   "key": "cs30l-strings-66",
+   "file": "3F49BF6B.flac",
+   "name": "CS-30L Strings F#6",
+   "group": "cs30l-strings",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 146444,
+   "root": 90.011,
+   "loop": [
+    54521,
+    120392
+   ],
+   "reading": {
+    "midi": 90.011,
+    "gate_s": 2.75
+   },
+   "named": "F#4",
+   "tuned": "read",
+   "credit": {
+    "site": "Freesound",
+    "author": "modularsamples",
+    "page": "https://freesound.org/people/modularsamples/sounds/312138/",
+    "licence": "CC0 1.0 (public domain)",
+    "licence_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset; held 2.5 s of 10.0 (then its own release)"
+  },
+  "E1FA0CCC": {
+   "id": "E1FA0CCC",
+   "key": "cs30l-strings-72",
+   "file": "E1FA0CCC.flac",
+   "name": "CS-30L Strings C7",
+   "group": "cs30l-strings",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 138877,
+   "root": 96.009,
+   "loop": [
+    43625,
+    118849
+   ],
+   "reading": {
+    "midi": 96.009,
+    "gate_s": 2.75
+   },
+   "named": "C5",
+   "tuned": "read",
+   "credit": {
+    "site": "Freesound",
+    "author": "modularsamples",
+    "page": "https://freesound.org/people/modularsamples/sounds/312144/",
+    "licence": "CC0 1.0 (public domain)",
+    "licence_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset; held 2.5 s of 10.0 (then its own release)"
+  },
+  "3F47FA95": {
+   "id": "3F47FA95",
+   "key": "flute-60",
+   "file": "3F47FA95.flac",
+   "name": "Flute C4",
+   "group": "flute",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 132300,
+   "root": 59.979,
+   "loop": [
+    46983,
+    131197
+   ],
+   "reading": {
+    "midi": 59.979,
+    "gate_s": 3
+   },
+   "named": "C4",
+   "tuned": "read",
+   "credit": {
+    "site": "GitHub",
+    "author": "Versilian Studios (VSCO 2 CE)",
+    "page": "https://github.com/sgossner/VSCO-2-CE",
+    "licence": "CC0 1.0 (public domain)",
+    "licence_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "attribution": "VSCO 2 Community Edition — Versilian Studios / Sam Gossner, Ivy Audio / Simon Dalzell"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset; cut at 3.0 s"
+  },
+  "20B1BAE8": {
+   "id": "20B1BAE8",
+   "key": "flute-64",
+   "file": "20B1BAE8.flac",
+   "name": "Flute E4",
+   "group": "flute",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 132300,
+   "root": 63.983,
+   "loop": [
+    80536,
+    130756
+   ],
+   "reading": {
+    "midi": 63.983,
+    "gate_s": 3
+   },
+   "named": "E4",
+   "tuned": "read",
+   "credit": {
+    "site": "GitHub",
+    "author": "Versilian Studios (VSCO 2 CE)",
+    "page": "https://github.com/sgossner/VSCO-2-CE",
+    "licence": "CC0 1.0 (public domain)",
+    "licence_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "attribution": "VSCO 2 Community Edition — Versilian Studios / Sam Gossner, Ivy Audio / Simon Dalzell"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset; cut at 3.0 s"
+  },
+  "BF25550B": {
+   "id": "BF25550B",
+   "key": "flute-69",
+   "file": "BF25550B.flac",
+   "name": "Flute A4",
+   "group": "flute",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 132300,
+   "root": 68.994,
+   "loop": [
+    122474,
+    131197
+   ],
+   "reading": {
+    "midi": 68.994,
+    "gate_s": 3
+   },
+   "named": "A4",
+   "tuned": "read",
+   "credit": {
+    "site": "GitHub",
+    "author": "Versilian Studios (VSCO 2 CE)",
+    "page": "https://github.com/sgossner/VSCO-2-CE",
+    "licence": "CC0 1.0 (public domain)",
+    "licence_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "attribution": "VSCO 2 Community Edition — Versilian Studios / Sam Gossner, Ivy Audio / Simon Dalzell"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset; cut at 3.0 s"
+  },
+  "B8421783": {
+   "id": "B8421783",
+   "key": "flute-72",
+   "file": "B8421783.flac",
+   "name": "Flute C5",
+   "group": "flute",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 132300,
+   "root": 71.998,
+   "loop": [
+    53481,
+    131197
+   ],
+   "reading": {
+    "midi": 71.998,
+    "gate_s": 3
+   },
+   "named": "C5",
+   "tuned": "read",
+   "credit": {
+    "site": "GitHub",
+    "author": "Versilian Studios (VSCO 2 CE)",
+    "page": "https://github.com/sgossner/VSCO-2-CE",
+    "licence": "CC0 1.0 (public domain)",
+    "licence_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "attribution": "VSCO 2 Community Edition — Versilian Studios / Sam Gossner, Ivy Audio / Simon Dalzell"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset; cut at 3.0 s"
+  },
+  "AF43135B": {
+   "id": "AF43135B",
+   "key": "flute-76",
+   "file": "AF43135B.flac",
+   "name": "Flute E5",
+   "group": "flute",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 132300,
+   "root": 75.999,
+   "loop": [
+    123130,
+    130756
+   ],
+   "reading": {
+    "midi": 75.999,
+    "gate_s": 3
+   },
+   "named": "E5",
+   "tuned": "read",
+   "credit": {
+    "site": "GitHub",
+    "author": "Versilian Studios (VSCO 2 CE)",
+    "page": "https://github.com/sgossner/VSCO-2-CE",
+    "licence": "CC0 1.0 (public domain)",
+    "licence_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "attribution": "VSCO 2 Community Edition — Versilian Studios / Sam Gossner, Ivy Audio / Simon Dalzell"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset; cut at 3.0 s"
+  },
+  "5A19BE02": {
+   "id": "5A19BE02",
+   "key": "flute-81",
+   "file": "5A19BE02.flac",
+   "name": "Flute A5",
+   "group": "flute",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 132300,
+   "root": 81.001,
+   "loop": [
+    123129,
+    131197
+   ],
+   "reading": {
+    "midi": 81.001,
+    "gate_s": 3
+   },
+   "named": "A5",
+   "tuned": "read",
+   "credit": {
+    "site": "GitHub",
+    "author": "Versilian Studios (VSCO 2 CE)",
+    "page": "https://github.com/sgossner/VSCO-2-CE",
+    "licence": "CC0 1.0 (public domain)",
+    "licence_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "attribution": "VSCO 2 Community Edition — Versilian Studios / Sam Gossner, Ivy Audio / Simon Dalzell"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset; cut at 3.0 s"
+  },
+  "FDFA94DF": {
+   "id": "FDFA94DF",
+   "key": "flute-88",
+   "file": "FDFA94DF.flac",
+   "name": "Flute E6",
+   "group": "flute",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 132300,
+   "root": 87.999,
+   "loop": [
+    74140,
+    102973
+   ],
+   "reading": {
+    "midi": 87.999,
+    "gate_s": 3
+   },
+   "named": "E6",
+   "tuned": "read",
+   "credit": {
+    "site": "GitHub",
+    "author": "Versilian Studios (VSCO 2 CE)",
+    "page": "https://github.com/sgossner/VSCO-2-CE",
+    "licence": "CC0 1.0 (public domain)",
+    "licence_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "attribution": "VSCO 2 Community Edition — Versilian Studios / Sam Gossner, Ivy Audio / Simon Dalzell"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset; cut at 3.0 s"
+  },
+  "3E98C0E9": {
+   "id": "3E98C0E9",
+   "key": "flute-93",
+   "file": "3E98C0E9.flac",
+   "name": "Flute A6",
+   "group": "flute",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 132300,
+   "root": 93.001,
+   "loop": [
+    89129,
+    131197
+   ],
+   "reading": {
+    "midi": 93.001,
+    "gate_s": 3
+   },
+   "named": "A6",
+   "tuned": "read",
+   "credit": {
+    "site": "GitHub",
+    "author": "Versilian Studios (VSCO 2 CE)",
+    "page": "https://github.com/sgossner/VSCO-2-CE",
+    "licence": "CC0 1.0 (public domain)",
+    "licence_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "attribution": "VSCO 2 Community Edition — Versilian Studios / Sam Gossner, Ivy Audio / Simon Dalzell"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset; cut at 3.0 s"
+  },
+  "0EDFB123": {
+   "id": "0EDFB123",
+   "key": "flute-96",
+   "file": "0EDFB123.flac",
+   "name": "Flute C7",
+   "group": "flute",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 132300,
+   "root": 95.999,
+   "loop": [
+    99655,
+    130756
+   ],
+   "reading": {
+    "midi": 95.999,
+    "gate_s": 3
+   },
+   "named": "C7",
+   "tuned": "read",
+   "credit": {
+    "site": "GitHub",
+    "author": "Versilian Studios (VSCO 2 CE)",
+    "page": "https://github.com/sgossner/VSCO-2-CE",
+    "licence": "CC0 1.0 (public domain)",
+    "licence_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "attribution": "VSCO 2 Community Edition — Versilian Studios / Sam Gossner, Ivy Audio / Simon Dalzell"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset; cut at 3.0 s"
+  },
+  "FC298510": {
+   "id": "FC298510",
+   "key": "flute-vib-a5",
+   "file": "FC298510.flac",
+   "name": "Flute A5 vibrato",
+   "group": "flute-vib-a5",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 154350,
+   "root": 81.057,
+   "loop": [
+    133376,
+    152806
+   ],
+   "reading": {
+    "midi": 81.057,
+    "gate_s": 3.5
+   },
+   "named": "A5",
+   "tuned": "read",
+   "credit": {
+    "site": "GitHub",
+    "author": "Versilian Studios (VSCO 2 CE)",
+    "page": "https://github.com/sgossner/VSCO-2-CE",
+    "licence": "CC0 1.0 (public domain)",
+    "licence_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "attribution": "VSCO 2 Community Edition — Versilian Studios / Sam Gossner, Ivy Audio / Simon Dalzell"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset; cut at 3.5 s",
+   "measures": {
+    "psola": {
+     "file": "FC298510.psola.f32",
+     "release": 0.65,
+     "markers": {
+      "onset": 0,
+      "gate": 3.5,
+      "loop": [
+       0.08943310657596372,
+       3.4981632653061223
+      ],
+      "loop_by_hand": false,
+      "loop_off": false,
+      "gate_by_hand": false
+     },
+     "distance": 1.723
+    }
+   }
+  },
+  "89C4E1AA": {
+   "id": "89C4E1AA",
+   "key": "fm-glass-tubes",
+   "file": "89C4E1AA.flac",
+   "name": "FM Glass Tubes",
+   "group": "fm-glass-tubes",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 37926,
+   "root": 72,
+   "loop": [
+    0,
+    0
+   ],
+   "reading": {
+    "midi": 74.666,
+    "gate_s": 0.08
+   },
+   "named": "C5",
+   "tuned": "nominal",
+   "credit": {
+    "site": "YouTone",
+    "author": "Volo's machines (patches/projects/volo-machines.project.json)",
+    "made": "the FM machine, preset FM-glass-tubes, key C5",
+    "licence": "YouTone's own: rendered by its synth engine from Volo's own presets"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset"
+  },
+  "9B3E9066": {
+   "id": "9B3E9066",
+   "key": "fm-klav",
+   "file": "9B3E9066.flac",
+   "name": "FM Klav",
+   "group": "fm-klav",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 42336,
+   "root": 60,
+   "loop": [
+    0,
+    0
+   ],
+   "reading": {
+    "midi": 79.019,
+    "gate_s": 0.924
+   },
+   "named": "C4",
+   "tuned": "nominal",
+   "credit": {
+    "site": "YouTone",
+    "author": "Volo's machines (patches/projects/volo-machines.project.json)",
+    "made": "the FM machine, preset FM-klav, key C4",
+    "licence": "YouTone's own: rendered by its synth engine from Volo's own presets"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset"
+  },
+  "889EB1A1": {
+   "id": "889EB1A1",
+   "key": "fm-toy-piano",
+   "file": "889EB1A1.flac",
+   "name": "FM Toy Piano",
+   "group": "fm-toy-piano",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 89964,
+   "root": 72,
+   "loop": [
+    0,
+    0
+   ],
+   "reading": {
+    "midi": 72,
+    "gate_s": 2.003
+   },
+   "named": "C5",
+   "tuned": "read",
+   "credit": {
+    "site": "YouTone",
+    "author": "Volo's machines (patches/projects/volo-machines.project.json)",
+    "made": "the FM machine, preset FM-toy-piano, key C5",
+    "licence": "YouTone's own: rendered by its synth engine from Volo's own presets"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset",
+   "measures": {
+    "resynth": {
+     "file": "889EB1A1.resynth.f32",
+     "release": 0.55,
+     "markers": {
+      "onset": 0,
+      "gate": null,
+      "loop": null,
+      "loop_by_hand": false,
+      "loop_off": false,
+      "gate_by_hand": false
+     },
+     "distance": 0.711
+    }
+   }
+  },
+  "292E7558": {
+   "id": "292E7558",
+   "key": "juno6-pad",
+   "file": "292E7558.flac",
+   "name": "Juno-6 Pad",
+   "group": "juno6-pad",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 207068,
+   "root": 48.012,
+   "loop": [
+    176601,
+    183676
+   ],
+   "reading": {
+    "midi": 48.012,
+    "gate_s": 4.25
+   },
+   "tuned": "read",
+   "credit": {
+    "site": "Freesound",
+    "author": "modularsamples",
+    "page": "https://freesound.org/people/modularsamples/sounds/302576/",
+    "licence": "CC0 1.0 (public domain)",
+    "licence_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset; held 4.0 s of 10.8 (then its own release)",
+   "measures": {
+    "resynth": {
+     "file": "292E7558.resynth.f32",
+     "release": 1,
+     "markers": {
+      "onset": 0,
+      "gate": 4.25,
+      "loop": [
+       0.1741496598639456,
+       4.20281179138322
+      ],
+      "loop_by_hand": false,
+      "loop_off": false,
+      "gate_by_hand": false
+     },
+     "distance": 2.536
+    }
+   }
+  },
+  "72EE2B10": {
+   "id": "72EE2B10",
+   "key": "juno6-pad-36",
+   "file": "72EE2B10.flac",
+   "name": "Juno-6 Pad C1",
+   "group": "juno6-pad-multi",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 132353,
+   "root": 23.994,
+   "loop": [
+    101507,
+    120392
+   ],
+   "reading": {
+    "midi": 23.994,
+    "gate_s": 2.75
+   },
+   "named": "C2",
+   "tuned": "read",
+   "credit": {
+    "site": "Freesound",
+    "author": "modularsamples",
+    "page": "https://freesound.org/people/modularsamples/sounds/302552/",
+    "licence": "CC0 1.0 (public domain)",
+    "licence_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset; held 2.5 s of 11.3 (then its own release)"
+  },
+  "36399BB6": {
+   "id": "36399BB6",
+   "key": "juno6-pad-42",
+   "file": "36399BB6.flac",
+   "name": "Juno-6 Pad F#1",
+   "group": "juno6-pad-multi",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 126474,
+   "root": 30.002,
+   "loop": [
+    116578,
+    120392
+   ],
+   "reading": {
+    "midi": 30.002,
+    "gate_s": 2.75
+   },
+   "named": "F#2",
+   "tuned": "read",
+   "credit": {
+    "site": "Freesound",
+    "author": "modularsamples",
+    "page": "https://freesound.org/people/modularsamples/sounds/302558/",
+    "licence": "CC0 1.0 (public domain)",
+    "licence_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset; held 2.5 s of 11.6 (then its own release)"
+  },
+  "6345EA3B": {
+   "id": "6345EA3B",
+   "key": "juno6-pad-48",
+   "file": "6345EA3B.flac",
+   "name": "Juno-6 Pad C2",
+   "group": "juno6-pad-multi",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 151243,
+   "root": 36.004,
+   "loop": [
+    76576,
+    120392
+   ],
+   "reading": {
+    "midi": 36.004,
+    "gate_s": 2.75
+   },
+   "named": "C3",
+   "tuned": "read",
+   "credit": {
+    "site": "Freesound",
+    "author": "modularsamples",
+    "page": "https://freesound.org/people/modularsamples/sounds/302564/",
+    "licence": "CC0 1.0 (public domain)",
+    "licence_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset; held 2.5 s of 10.4 (then its own release)"
+  },
+  "41903E86": {
+   "id": "41903E86",
+   "key": "juno6-pad-54",
+   "file": "41903E86.flac",
+   "name": "Juno-6 Pad F#2",
+   "group": "juno6-pad-multi",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 145952,
+   "root": 42.011,
+   "loop": [
+    83228,
+    120392
+   ],
+   "reading": {
+    "midi": 42.011,
+    "gate_s": 2.75
+   },
+   "named": "F#3",
+   "tuned": "read",
+   "credit": {
+    "site": "Freesound",
+    "author": "modularsamples",
+    "page": "https://freesound.org/people/modularsamples/sounds/302570/",
+    "licence": "CC0 1.0 (public domain)",
+    "licence_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset; held 2.5 s of 11.0 (then its own release)"
+  },
+  "592AE147": {
+   "id": "592AE147",
+   "key": "juno6-pad-60",
+   "file": "592AE147.flac",
+   "name": "Juno-6 Pad C3",
+   "group": "juno6-pad-multi",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 147092,
+   "root": 48.012,
+   "loop": [
+    112577,
+    117967
+   ],
+   "reading": {
+    "midi": 48.012,
+    "gate_s": 2.75
+   },
+   "named": "C4",
+   "tuned": "read",
+   "credit": {
+    "site": "Freesound",
+    "author": "modularsamples",
+    "page": "https://freesound.org/people/modularsamples/sounds/302576/",
+    "licence": "CC0 1.0 (public domain)",
+    "licence_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset; held 2.5 s of 10.7 (then its own release)"
+  },
+  "7649092D": {
+   "id": "7649092D",
+   "key": "juno6-pad-66",
+   "file": "7649092D.flac",
+   "name": "Juno-6 Pad F#3",
+   "group": "juno6-pad-multi",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 137458,
+   "root": 54.016,
+   "loop": [
+    71569,
+    120392
+   ],
+   "reading": {
+    "midi": 54.016,
+    "gate_s": 2.75
+   },
+   "named": "F#4",
+   "tuned": "read",
+   "credit": {
+    "site": "Freesound",
+    "author": "modularsamples",
+    "page": "https://freesound.org/people/modularsamples/sounds/302582/",
+    "licence": "CC0 1.0 (public domain)",
+    "licence_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset; held 2.5 s of 11.5 (then its own release)"
+  },
+  "A4DC42F0": {
+   "id": "A4DC42F0",
+   "key": "juno6-pad-72",
+   "file": "A4DC42F0.flac",
+   "name": "Juno-6 Pad C4",
+   "group": "juno6-pad-multi",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 148409,
+   "root": 60.016,
+   "loop": [
+    79675,
+    118408
+   ],
+   "reading": {
+    "midi": 60.016,
+    "gate_s": 2.75
+   },
+   "named": "C5",
+   "tuned": "read",
+   "credit": {
+    "site": "Freesound",
+    "author": "modularsamples",
+    "page": "https://freesound.org/people/modularsamples/sounds/302588/",
+    "licence": "CC0 1.0 (public domain)",
+    "licence_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset; held 2.5 s of 11.0 (then its own release)"
+  },
+  "56C912E0": {
+   "id": "56C912E0",
+   "key": "juno6-pad-78",
+   "file": "56C912E0.flac",
+   "name": "Juno-6 Pad F#4",
+   "group": "juno6-pad-multi",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 121737,
+   "root": 66.02,
+   "loop": [
+    79676,
+    120392
+   ],
+   "reading": {
+    "midi": 66.02,
+    "gate_s": 2.75
+   },
+   "named": "F#5",
+   "tuned": "read",
+   "credit": {
+    "site": "Freesound",
+    "author": "modularsamples",
+    "page": "https://freesound.org/people/modularsamples/sounds/302594/",
+    "licence": "CC0 1.0 (public domain)",
+    "licence_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset; held 2.5 s of 11.7 (then its own release)"
+  },
+  "93CFABE4": {
+   "id": "93CFABE4",
+   "key": "juno6-pad-84",
+   "file": "93CFABE4.flac",
+   "name": "Juno-6 Pad C5",
+   "group": "juno6-pad-multi",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 146053,
+   "root": 72.022,
+   "loop": [
+    66437,
+    120392
+   ],
+   "reading": {
+    "midi": 72.022,
+    "gate_s": 2.75
+   },
+   "named": "C6",
+   "tuned": "read",
+   "credit": {
+    "site": "Freesound",
+    "author": "modularsamples",
+    "page": "https://freesound.org/people/modularsamples/sounds/302600/",
+    "licence": "CC0 1.0 (public domain)",
+    "licence_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset; held 2.5 s of 10.6 (then its own release)"
+  },
+  "240CE2F1": {
+   "id": "240CE2F1",
+   "key": "juno6-pad-90",
+   "file": "240CE2F1.flac",
+   "name": "Juno-6 Pad F#5",
+   "group": "juno6-pad-multi",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 148841,
+   "root": 78.019,
+   "loop": [
+    91341,
+    120392
+   ],
+   "reading": {
+    "midi": 78.019,
+    "gate_s": 2.75
+   },
+   "named": "F#6",
+   "tuned": "read",
+   "credit": {
+    "site": "Freesound",
+    "author": "modularsamples",
+    "page": "https://freesound.org/people/modularsamples/sounds/302606/",
+    "licence": "CC0 1.0 (public domain)",
+    "licence_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset; held 2.5 s of 10.7 (then its own release)"
+  },
+  "35009C3D": {
+   "id": "35009C3D",
+   "key": "juno6-pad-96",
+   "file": "35009C3D.flac",
+   "name": "Juno-6 Pad C6",
+   "group": "juno6-pad-multi",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 144203,
+   "root": 84.02,
+   "loop": [
+    65495,
+    120172
+   ],
+   "reading": {
+    "midi": 84.02,
+    "gate_s": 2.75
+   },
+   "named": "C7",
+   "tuned": "read",
+   "credit": {
+    "site": "Freesound",
+    "author": "modularsamples",
+    "page": "https://freesound.org/people/modularsamples/sounds/302612/",
+    "licence": "CC0 1.0 (public domain)",
+    "licence_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset; held 2.5 s of 10.9 (then its own release)"
+  },
+  "55092C09": {
+   "id": "55092C09",
+   "key": "jx3p-brass",
+   "file": "55092C09.flac",
+   "name": "JX-3P Brass",
+   "group": "jx3p-brass",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 215800,
+   "root": 47.909,
+   "loop": [
+    112323,
+    186542
+   ],
+   "reading": {
+    "midi": 47.909,
+    "gate_s": 4.25
+   },
+   "tuned": "read",
+   "credit": {
+    "site": "Freesound",
+    "author": "modularsamples",
+    "page": "https://freesound.org/people/modularsamples/sounds/307764/",
+    "licence": "CC0 1.0 (public domain)",
+    "licence_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset; held 4.0 s of 10.0 (then its own release)",
+   "measures": {
+    "psola": {
+     "file": "55092C09.psola.f32",
+     "release": 1,
+     "markers": {
+      "onset": 0,
+      "gate": 4.249954648526077,
+      "loop": [
+       0.039070294784580496,
+       4.2431065759637185
+      ],
+      "loop_by_hand": false,
+      "loop_off": false,
+      "gate_by_hand": false
+     },
+     "distance": 0.464
+    }
+   }
+  },
+  "86B67AFD": {
+   "id": "86B67AFD",
+   "key": "jx8p-brass",
+   "file": "86B67AFD.flac",
+   "name": "JX-8P Brass",
+   "group": "jx8p-brass",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 229170,
+   "root": 48.001,
+   "loop": [
+    88301,
+    182353
+   ],
+   "reading": {
+    "midi": 48.001,
+    "gate_s": 4.25
+   },
+   "tuned": "read",
+   "credit": {
+    "site": "Freesound",
+    "author": "modularsamples",
+    "page": "https://freesound.org/people/modularsamples/sounds/309815/",
+    "licence": "CC0 1.0 (public domain)",
+    "licence_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset; held 4.0 s of 8.1 (then its own release)"
+  },
+  "F9B9D7A8": {
+   "id": "F9B9D7A8",
+   "key": "jx8p-sync",
+   "file": "F9B9D7A8.flac",
+   "name": "JX-8P Sync Lead",
+   "group": "jx8p-sync",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 187740,
+   "root": 35.984,
+   "loop": [
+    89310,
+    175693
+   ],
+   "reading": {
+    "midi": 35.984,
+    "gate_s": 4.004
+   },
+   "tuned": "read",
+   "credit": {
+    "site": "Freesound",
+    "author": "modularsamples",
+    "page": "https://freesound.org/people/modularsamples/sounds/309228/",
+    "licence": "CC0 1.0 (public domain)",
+    "licence_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset",
+   "measures": {
+    "psola": {
+     "file": "F9B9D7A8.psola.f32",
+     "release": 1,
+     "markers": {
+      "onset": 0.005079365079365079,
+      "gate": 4.003990929705215,
+      "loop": [
+       0.15643990929705215,
+       3.9941723356009073
+      ],
+      "loop_by_hand": false,
+      "loop_off": false,
+      "gate_by_hand": false
+     },
+     "distance": 0.312
+    }
+   }
+  },
+  "8723C1F9": {
+   "id": "8723C1F9",
+   "key": "max-lead",
+   "file": "8723C1F9.flac",
+   "name": "MAX Lead",
+   "group": "max-lead",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 186302,
+   "root": 60.239,
+   "loop": [
+    105368,
+    142442
+   ],
+   "reading": {
+    "midi": 60.239,
+    "gate_s": 3.25
+   },
+   "tuned": "read",
+   "credit": {
+    "site": "Freesound",
+    "author": "modularsamples",
+    "page": "https://freesound.org/people/modularsamples/sounds/311649/",
+    "licence": "CC0 1.0 (public domain)",
+    "licence_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset; held 3.0 s of 8.0 (then its own release)",
+   "measures": {
+    "resynth": {
+     "file": "8723C1F9.resynth.f32",
+     "release": 1,
+     "markers": {
+      "onset": 0,
+      "gate": 3.25,
+      "loop": [
+       0.046439909297052155,
+       3.250793650793651
+      ],
+      "loop_by_hand": false,
+      "loop_off": false,
+      "gate_by_hand": false
+     },
+     "distance": 3.548
+    }
+   }
+  },
+  "D5A9C76B": {
+   "id": "D5A9C76B",
+   "key": "minimoog-bass",
+   "file": "D5A9C76B.flac",
+   "name": "Minimoog Bass",
+   "group": "minimoog-bass",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 143715,
+   "root": 24.089,
+   "loop": [
+    115502,
+    134284
+   ],
+   "reading": {
+    "midi": 24.089,
+    "gate_s": 3.25
+   },
+   "tuned": "read",
+   "credit": {
+    "site": "Freesound",
+    "author": "Garzul",
+    "page": "https://freesound.org/people/Garzul/sounds/213900/",
+    "licence": "CC0 1.0 (public domain)",
+    "licence_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset; held 3.0 s of 10.0 (then its own release)"
+  },
+  "4409B4C1": {
+   "id": "4409B4C1",
+   "key": "modular-closed-hat",
+   "file": "4409B4C1.flac",
+   "name": "Modular Closed Hat",
+   "group": "modular",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 6913,
+   "root": 60,
+   "loop": [
+    0,
+    0
+   ],
+   "drum": 42,
+   "tuned": "kit",
+   "credit": {
+    "site": "Freesound",
+    "author": "modularsamples",
+    "page": "https://freesound.org/people/modularsamples/sounds/328580/",
+    "licence": "CC0 1.0 (public domain)",
+    "licence_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset"
+  },
+  "172E056D": {
+   "id": "172E056D",
+   "key": "modular-cymbal",
+   "file": "172E056D.flac",
+   "name": "Modular Cymbal",
+   "group": "modular",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 27144,
+   "root": 60,
+   "loop": [
+    0,
+    0
+   ],
+   "drum": 51,
+   "tuned": "kit",
+   "credit": {
+    "site": "Freesound",
+    "author": "modularsamples",
+    "page": "https://freesound.org/people/modularsamples/sounds/328590/",
+    "licence": "CC0 1.0 (public domain)",
+    "licence_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset"
+  },
+  "0D57A98A": {
+   "id": "0D57A98A",
+   "key": "modular-kick",
+   "file": "0D57A98A.flac",
+   "name": "Modular Kick",
+   "group": "modular",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 48510,
+   "root": 60,
+   "loop": [
+    0,
+    0
+   ],
+   "drum": 36,
+   "tuned": "kit",
+   "credit": {
+    "site": "Freesound",
+    "author": "modularsamples",
+    "page": "https://freesound.org/people/modularsamples/sounds/328486/",
+    "licence": "CC0 1.0 (public domain)",
+    "licence_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset"
+  },
+  "071E6AF5": {
+   "id": "071E6AF5",
+   "key": "modular-open-hat",
+   "file": "071E6AF5.flac",
+   "name": "Modular Open Hat",
+   "group": "modular",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 21249,
+   "root": 60,
+   "loop": [
+    0,
+    0
+   ],
+   "drum": 46,
+   "tuned": "kit",
+   "credit": {
+    "site": "Freesound",
+    "author": "modularsamples",
+    "page": "https://freesound.org/people/modularsamples/sounds/328586/",
+    "licence": "CC0 1.0 (public domain)",
+    "licence_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset"
+  },
+  "43FA53DD": {
+   "id": "43FA53DD",
+   "key": "modular-snare",
+   "file": "43FA53DD.flac",
+   "name": "Modular Snare",
+   "group": "modular",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 17206,
+   "root": 60,
+   "loop": [
+    0,
+    0
+   ],
+   "drum": 38,
+   "tuned": "kit",
+   "credit": {
+    "site": "Freesound",
+    "author": "modularsamples",
+    "page": "https://freesound.org/people/modularsamples/sounds/328500/",
+    "licence": "CC0 1.0 (public domain)",
+    "licence_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset"
+  },
+  "76F12F07": {
+   "id": "76F12F07",
+   "key": "modular-tom-high",
+   "file": "76F12F07.flac",
+   "name": "Modular Tom High",
+   "group": "modular",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 19404,
+   "root": 60,
+   "loop": [
+    0,
+    0
+   ],
+   "drum": 50,
+   "tuned": "kit",
+   "credit": {
+    "site": "Freesound",
+    "author": "modularsamples",
+    "page": "https://freesound.org/people/modularsamples/sounds/328592/",
+    "licence": "CC0 1.0 (public domain)",
+    "licence_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset"
+  },
+  "B0008AD9": {
+   "id": "B0008AD9",
+   "key": "modular-tom-low",
+   "file": "B0008AD9.flac",
+   "name": "Modular Tom Low",
+   "group": "modular",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 18249,
+   "root": 60,
+   "loop": [
+    0,
+    0
+   ],
+   "drum": 43,
+   "tuned": "kit",
+   "credit": {
+    "site": "Freesound",
+    "author": "modularsamples",
+    "page": "https://freesound.org/people/modularsamples/sounds/328593/",
+    "licence": "CC0 1.0 (public domain)",
+    "licence_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset"
+  },
+  "3E76C300": {
+   "id": "3E76C300",
+   "key": "monopoly-lead",
+   "file": "3E76C300.flac",
+   "name": "Mono/Poly Lead",
+   "group": "monopoly-lead",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 150065,
+   "root": 72.001,
+   "loop": [
+    122974,
+    142442
+   ],
+   "reading": {
+    "midi": 72.001,
+    "gate_s": 3.25
+   },
+   "tuned": "read",
+   "credit": {
+    "site": "Freesound",
+    "author": "modularsamples",
+    "page": "https://freesound.org/people/modularsamples/sounds/295242/",
+    "licence": "CC0 1.0 (public domain)",
+    "licence_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset; held 3.0 s of 10.0 (then its own release)"
+  },
+  "E53F0737": {
+   "id": "E53F0737",
+   "key": "organ-club",
+   "file": "E53F0737.flac",
+   "name": "Organ Club",
+   "group": "organ-club",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 182574,
+   "root": 48,
+   "loop": [
+    103490,
+    175297
+   ],
+   "reading": {
+    "midi": 48,
+    "gate_s": 3.995
+   },
+   "named": "C4",
+   "tuned": "read",
+   "credit": {
+    "site": "YouTone",
+    "author": "Volo's machines (patches/projects/volo-machines.project.json)",
+    "made": "the organ machine, preset organ-club, key C4",
+    "licence": "YouTone's own: rendered by its synth engine from Volo's own presets"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset",
+   "measures": {
+    "psola": {
+     "file": "E53F0737.psola.f32",
+     "release": 1,
+     "markers": {
+      "onset": 0,
+      "gate": 3.9950113378684806,
+      "loop": [
+       0.030975056689342403,
+       3.9950113378684806
+      ],
+      "loop_by_hand": false,
+      "loop_off": false,
+      "gate_by_hand": false
+     },
+     "distance": 0.28
+    },
+    "resynth": {
+     "file": "E53F0737.resynth.f32",
+     "release": 1,
+     "markers": {
+      "onset": 0,
+      "gate": 3.995,
+      "loop": [
+       0.046439909297052155,
+       3.9938321995464854
+      ],
+      "loop_by_hand": false,
+      "loop_off": false,
+      "gate_by_hand": false
+     },
+     "distance": 1.146
+    }
+   }
+  },
+  "72422B37": {
+   "id": "72422B37",
+   "key": "piano-A0-loud",
+   "file": "72422B37.flac",
+   "name": "Grand A0 loud",
+   "group": "grand-piano",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 176400,
+   "root": 21,
+   "loop": [
+    0,
+    0
+   ],
+   "reading": {
+    "midi": 20.891,
+    "gate_s": 4
+   },
+   "named": "A0",
+   "layer": [
+    90,
+    127
+   ],
+   "tuned": "nominal",
+   "credit": {
+    "site": "GitHub",
+    "author": "Alexander Holm",
+    "page": "https://github.com/sfzinstruments/SalamanderGrandPiano",
+    "licence": "CC BY 3.0",
+    "licence_url": "https://creativecommons.org/licenses/by/3.0/",
+    "attribution": "Salamander Grand Piano V3 by Alexander Holm, CC BY 3.0"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset; cut at 4.0 s"
+  },
+  "9F691026": {
+   "id": "9F691026",
+   "key": "piano-A0-soft",
+   "file": "9F691026.flac",
+   "name": "Grand A0 soft",
+   "group": "grand-piano",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 176400,
+   "root": 21,
+   "loop": [
+    0,
+    0
+   ],
+   "reading": {
+    "midi": 20.848,
+    "gate_s": 4
+   },
+   "named": "A0",
+   "layer": [
+    0,
+    89
+   ],
+   "tuned": "nominal",
+   "credit": {
+    "site": "GitHub",
+    "author": "Alexander Holm",
+    "page": "https://github.com/sfzinstruments/SalamanderGrandPiano",
+    "licence": "CC BY 3.0",
+    "licence_url": "https://creativecommons.org/licenses/by/3.0/",
+    "attribution": "Salamander Grand Piano V3 by Alexander Holm, CC BY 3.0"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset; cut at 4.0 s"
+  },
+  "5E9989DE": {
+   "id": "5E9989DE",
+   "key": "piano-A1-loud",
+   "file": "5E9989DE.flac",
+   "name": "Grand A1 loud",
+   "group": "grand-piano",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 176400,
+   "root": 33,
+   "loop": [
+    0,
+    0
+   ],
+   "reading": {
+    "midi": 32.997,
+    "gate_s": 4
+   },
+   "named": "A1",
+   "layer": [
+    90,
+    127
+   ],
+   "tuned": "nominal",
+   "credit": {
+    "site": "GitHub",
+    "author": "Alexander Holm",
+    "page": "https://github.com/sfzinstruments/SalamanderGrandPiano",
+    "licence": "CC BY 3.0",
+    "licence_url": "https://creativecommons.org/licenses/by/3.0/",
+    "attribution": "Salamander Grand Piano V3 by Alexander Holm, CC BY 3.0"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset; cut at 4.0 s"
+  },
+  "E2B84641": {
+   "id": "E2B84641",
+   "key": "piano-A1-soft",
+   "file": "E2B84641.flac",
+   "name": "Grand A1 soft",
+   "group": "grand-piano",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 176400,
+   "root": 33,
+   "loop": [
+    0,
+    0
+   ],
+   "reading": {
+    "midi": 32.973,
+    "gate_s": 4
+   },
+   "named": "A1",
+   "layer": [
+    0,
+    89
+   ],
+   "tuned": "nominal",
+   "credit": {
+    "site": "GitHub",
+    "author": "Alexander Holm",
+    "page": "https://github.com/sfzinstruments/SalamanderGrandPiano",
+    "licence": "CC BY 3.0",
+    "licence_url": "https://creativecommons.org/licenses/by/3.0/",
+    "attribution": "Salamander Grand Piano V3 by Alexander Holm, CC BY 3.0"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset; cut at 4.0 s"
+  },
+  "94D9F193": {
+   "id": "94D9F193",
+   "key": "piano-A2-loud",
+   "file": "94D9F193.flac",
+   "name": "Grand A2 loud",
+   "group": "grand-piano",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 176400,
+   "root": 45,
+   "loop": [
+    0,
+    0
+   ],
+   "reading": {
+    "midi": 45.017,
+    "gate_s": 4
+   },
+   "named": "A2",
+   "layer": [
+    90,
+    127
+   ],
+   "tuned": "nominal",
+   "credit": {
+    "site": "GitHub",
+    "author": "Alexander Holm",
+    "page": "https://github.com/sfzinstruments/SalamanderGrandPiano",
+    "licence": "CC BY 3.0",
+    "licence_url": "https://creativecommons.org/licenses/by/3.0/",
+    "attribution": "Salamander Grand Piano V3 by Alexander Holm, CC BY 3.0"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset; cut at 4.0 s"
+  },
+  "46AA74F2": {
+   "id": "46AA74F2",
+   "key": "piano-A2-soft",
+   "file": "46AA74F2.flac",
+   "name": "Grand A2 soft",
+   "group": "grand-piano",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 176400,
+   "root": 45,
+   "loop": [
+    0,
+    0
+   ],
+   "reading": {
+    "midi": 45.026,
+    "gate_s": 4
+   },
+   "named": "A2",
+   "layer": [
+    0,
+    89
+   ],
+   "tuned": "nominal",
+   "credit": {
+    "site": "GitHub",
+    "author": "Alexander Holm",
+    "page": "https://github.com/sfzinstruments/SalamanderGrandPiano",
+    "licence": "CC BY 3.0",
+    "licence_url": "https://creativecommons.org/licenses/by/3.0/",
+    "attribution": "Salamander Grand Piano V3 by Alexander Holm, CC BY 3.0"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset; cut at 4.0 s"
+  },
+  "3BA6F5B1": {
+   "id": "3BA6F5B1",
+   "key": "piano-A3-loud",
+   "file": "3BA6F5B1.flac",
+   "name": "Grand A3 loud",
+   "group": "grand-piano",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 132300,
+   "root": 57,
+   "loop": [
+    0,
+    0
+   ],
+   "reading": {
+    "midi": 57.036,
+    "gate_s": 3
+   },
+   "named": "A3",
+   "layer": [
+    90,
+    127
+   ],
+   "tuned": "nominal",
+   "credit": {
+    "site": "GitHub",
+    "author": "Alexander Holm",
+    "page": "https://github.com/sfzinstruments/SalamanderGrandPiano",
+    "licence": "CC BY 3.0",
+    "licence_url": "https://creativecommons.org/licenses/by/3.0/",
+    "attribution": "Salamander Grand Piano V3 by Alexander Holm, CC BY 3.0"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset; cut at 3.0 s"
+  },
+  "EAF390EA": {
+   "id": "EAF390EA",
+   "key": "piano-A3-soft",
+   "file": "EAF390EA.flac",
+   "name": "Grand A3 soft",
+   "group": "grand-piano",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 132300,
+   "root": 57,
+   "loop": [
+    0,
+    0
+   ],
+   "reading": {
+    "midi": 57.027,
+    "gate_s": 3
+   },
+   "named": "A3",
+   "layer": [
+    0,
+    89
+   ],
+   "tuned": "nominal",
+   "credit": {
+    "site": "GitHub",
+    "author": "Alexander Holm",
+    "page": "https://github.com/sfzinstruments/SalamanderGrandPiano",
+    "licence": "CC BY 3.0",
+    "licence_url": "https://creativecommons.org/licenses/by/3.0/",
+    "attribution": "Salamander Grand Piano V3 by Alexander Holm, CC BY 3.0"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset; cut at 3.0 s"
+  },
+  "41EB2522": {
+   "id": "41EB2522",
+   "key": "piano-A4-loud",
+   "file": "41EB2522.flac",
+   "name": "Grand A4 loud",
+   "group": "grand-piano",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 132300,
+   "root": 69,
+   "loop": [
+    0,
+    0
+   ],
+   "reading": {
+    "midi": 69.047,
+    "gate_s": 3
+   },
+   "named": "A4",
+   "layer": [
+    90,
+    127
+   ],
+   "tuned": "nominal",
+   "credit": {
+    "site": "GitHub",
+    "author": "Alexander Holm",
+    "page": "https://github.com/sfzinstruments/SalamanderGrandPiano",
+    "licence": "CC BY 3.0",
+    "licence_url": "https://creativecommons.org/licenses/by/3.0/",
+    "attribution": "Salamander Grand Piano V3 by Alexander Holm, CC BY 3.0"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset; cut at 3.0 s"
+  },
+  "D141F621": {
+   "id": "D141F621",
+   "key": "piano-A4-soft",
+   "file": "D141F621.flac",
+   "name": "Grand A4 soft",
+   "group": "grand-piano",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 132300,
+   "root": 69,
+   "loop": [
+    0,
+    0
+   ],
+   "reading": {
+    "midi": 69.048,
+    "gate_s": 3
+   },
+   "named": "A4",
+   "layer": [
+    0,
+    89
+   ],
+   "tuned": "nominal",
+   "credit": {
+    "site": "GitHub",
+    "author": "Alexander Holm",
+    "page": "https://github.com/sfzinstruments/SalamanderGrandPiano",
+    "licence": "CC BY 3.0",
+    "licence_url": "https://creativecommons.org/licenses/by/3.0/",
+    "attribution": "Salamander Grand Piano V3 by Alexander Holm, CC BY 3.0"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset; cut at 3.0 s"
+  },
+  "96F5285A": {
+   "id": "96F5285A",
+   "key": "piano-A5-loud",
+   "file": "96F5285A.flac",
+   "name": "Grand A5 loud",
+   "group": "grand-piano",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 88200,
+   "root": 81,
+   "loop": [
+    0,
+    0
+   ],
+   "reading": {
+    "midi": 81.08,
+    "gate_s": 2
+   },
+   "named": "A5",
+   "layer": [
+    90,
+    127
+   ],
+   "tuned": "nominal",
+   "credit": {
+    "site": "GitHub",
+    "author": "Alexander Holm",
+    "page": "https://github.com/sfzinstruments/SalamanderGrandPiano",
+    "licence": "CC BY 3.0",
+    "licence_url": "https://creativecommons.org/licenses/by/3.0/",
+    "attribution": "Salamander Grand Piano V3 by Alexander Holm, CC BY 3.0"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset; cut at 2.0 s"
+  },
+  "8F65C2A0": {
+   "id": "8F65C2A0",
+   "key": "piano-A5-soft",
+   "file": "8F65C2A0.flac",
+   "name": "Grand A5 soft",
+   "group": "grand-piano",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 88200,
+   "root": 81,
+   "loop": [
+    0,
+    0
+   ],
+   "reading": {
+    "midi": 81.071,
+    "gate_s": 2
+   },
+   "named": "A5",
+   "layer": [
+    0,
+    89
+   ],
+   "tuned": "nominal",
+   "credit": {
+    "site": "GitHub",
+    "author": "Alexander Holm",
+    "page": "https://github.com/sfzinstruments/SalamanderGrandPiano",
+    "licence": "CC BY 3.0",
+    "licence_url": "https://creativecommons.org/licenses/by/3.0/",
+    "attribution": "Salamander Grand Piano V3 by Alexander Holm, CC BY 3.0"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset; cut at 2.0 s"
+  },
+  "D67A6A3D": {
+   "id": "D67A6A3D",
+   "key": "piano-A6-loud",
+   "file": "D67A6A3D.flac",
+   "name": "Grand A6 loud",
+   "group": "grand-piano",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 88200,
+   "root": 93,
+   "loop": [
+    0,
+    0
+   ],
+   "reading": {
+    "midi": 93.147,
+    "gate_s": 2
+   },
+   "named": "A6",
+   "layer": [
+    90,
+    127
+   ],
+   "tuned": "nominal",
+   "credit": {
+    "site": "GitHub",
+    "author": "Alexander Holm",
+    "page": "https://github.com/sfzinstruments/SalamanderGrandPiano",
+    "licence": "CC BY 3.0",
+    "licence_url": "https://creativecommons.org/licenses/by/3.0/",
+    "attribution": "Salamander Grand Piano V3 by Alexander Holm, CC BY 3.0"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset; cut at 2.0 s"
+  },
+  "D015ABC4": {
+   "id": "D015ABC4",
+   "key": "piano-A6-soft",
+   "file": "D015ABC4.flac",
+   "name": "Grand A6 soft",
+   "group": "grand-piano",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 88200,
+   "root": 93,
+   "loop": [
+    0,
+    0
+   ],
+   "reading": {
+    "midi": 93.117,
+    "gate_s": 2
+   },
+   "named": "A6",
+   "layer": [
+    0,
+    89
+   ],
+   "tuned": "nominal",
+   "credit": {
+    "site": "GitHub",
+    "author": "Alexander Holm",
+    "page": "https://github.com/sfzinstruments/SalamanderGrandPiano",
+    "licence": "CC BY 3.0",
+    "licence_url": "https://creativecommons.org/licenses/by/3.0/",
+    "attribution": "Salamander Grand Piano V3 by Alexander Holm, CC BY 3.0"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset; cut at 2.0 s"
+  },
+  "43911B8C": {
+   "id": "43911B8C",
+   "key": "piano-A7-loud",
+   "file": "43911B8C.flac",
+   "name": "Grand A7 loud",
+   "group": "grand-piano",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 87318,
+   "root": 105,
+   "loop": [
+    0,
+    0
+   ],
+   "reading": {
+    "midi": 93.382,
+    "gate_s": 2
+   },
+   "named": "A7",
+   "layer": [
+    90,
+    127
+   ],
+   "tuned": "nominal",
+   "credit": {
+    "site": "GitHub",
+    "author": "Alexander Holm",
+    "page": "https://github.com/sfzinstruments/SalamanderGrandPiano",
+    "licence": "CC BY 3.0",
+    "licence_url": "https://creativecommons.org/licenses/by/3.0/",
+    "attribution": "Salamander Grand Piano V3 by Alexander Holm, CC BY 3.0"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset; cut at 2.0 s"
+  },
+  "7841FA24": {
+   "id": "7841FA24",
+   "key": "piano-A7-soft",
+   "file": "7841FA24.flac",
+   "name": "Grand A7 soft",
+   "group": "grand-piano",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 88200,
+   "root": 105,
+   "loop": [
+    0,
+    0
+   ],
+   "reading": {
+    "midi": 93.301,
+    "gate_s": 2
+   },
+   "named": "A7",
+   "layer": [
+    0,
+    89
+   ],
+   "tuned": "nominal",
+   "credit": {
+    "site": "GitHub",
+    "author": "Alexander Holm",
+    "page": "https://github.com/sfzinstruments/SalamanderGrandPiano",
+    "licence": "CC BY 3.0",
+    "licence_url": "https://creativecommons.org/licenses/by/3.0/",
+    "attribution": "Salamander Grand Piano V3 by Alexander Holm, CC BY 3.0"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset; cut at 2.0 s"
+  },
+  "A883D153": {
+   "id": "A883D153",
+   "key": "piano-C1-loud",
+   "file": "A883D153.flac",
+   "name": "Grand C1 loud",
+   "group": "grand-piano",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 176400,
+   "root": 24,
+   "loop": [
+    0,
+    0
+   ],
+   "reading": {
+    "midi": 23.893,
+    "gate_s": 4
+   },
+   "named": "C1",
+   "layer": [
+    90,
+    127
+   ],
+   "tuned": "nominal",
+   "credit": {
+    "site": "GitHub",
+    "author": "Alexander Holm",
+    "page": "https://github.com/sfzinstruments/SalamanderGrandPiano",
+    "licence": "CC BY 3.0",
+    "licence_url": "https://creativecommons.org/licenses/by/3.0/",
+    "attribution": "Salamander Grand Piano V3 by Alexander Holm, CC BY 3.0"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset; cut at 4.0 s"
+  },
+  "37DEB996": {
+   "id": "37DEB996",
+   "key": "piano-C1-soft",
+   "file": "37DEB996.flac",
+   "name": "Grand C1 soft",
+   "group": "grand-piano",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 176400,
+   "root": 24,
+   "loop": [
+    0,
+    0
+   ],
+   "reading": {
+    "midi": 23.942,
+    "gate_s": 4
+   },
+   "named": "C1",
+   "layer": [
+    0,
+    89
+   ],
+   "tuned": "nominal",
+   "credit": {
+    "site": "GitHub",
+    "author": "Alexander Holm",
+    "page": "https://github.com/sfzinstruments/SalamanderGrandPiano",
+    "licence": "CC BY 3.0",
+    "licence_url": "https://creativecommons.org/licenses/by/3.0/",
+    "attribution": "Salamander Grand Piano V3 by Alexander Holm, CC BY 3.0"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset; cut at 4.0 s"
+  },
+  "22D3284A": {
+   "id": "22D3284A",
+   "key": "piano-C2-loud",
+   "file": "22D3284A.flac",
+   "name": "Grand C2 loud",
+   "group": "grand-piano",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 176400,
+   "root": 36,
+   "loop": [
+    0,
+    0
+   ],
+   "reading": {
+    "midi": 35.985,
+    "gate_s": 4
+   },
+   "named": "C2",
+   "layer": [
+    90,
+    127
+   ],
+   "tuned": "nominal",
+   "credit": {
+    "site": "GitHub",
+    "author": "Alexander Holm",
+    "page": "https://github.com/sfzinstruments/SalamanderGrandPiano",
+    "licence": "CC BY 3.0",
+    "licence_url": "https://creativecommons.org/licenses/by/3.0/",
+    "attribution": "Salamander Grand Piano V3 by Alexander Holm, CC BY 3.0"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset; cut at 4.0 s"
+  },
+  "FCCE2C18": {
+   "id": "FCCE2C18",
+   "key": "piano-C2-soft",
+   "file": "FCCE2C18.flac",
+   "name": "Grand C2 soft",
+   "group": "grand-piano",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 176400,
+   "root": 36,
+   "loop": [
+    0,
+    0
+   ],
+   "reading": {
+    "midi": 35.966,
+    "gate_s": 4
+   },
+   "named": "C2",
+   "layer": [
+    0,
+    89
+   ],
+   "tuned": "nominal",
+   "credit": {
+    "site": "GitHub",
+    "author": "Alexander Holm",
+    "page": "https://github.com/sfzinstruments/SalamanderGrandPiano",
+    "licence": "CC BY 3.0",
+    "licence_url": "https://creativecommons.org/licenses/by/3.0/",
+    "attribution": "Salamander Grand Piano V3 by Alexander Holm, CC BY 3.0"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset; cut at 4.0 s"
+  },
+  "867A5CF3": {
+   "id": "867A5CF3",
+   "key": "piano-C3-loud",
+   "file": "867A5CF3.flac",
+   "name": "Grand C3 loud",
+   "group": "grand-piano",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 132300,
+   "root": 48,
+   "loop": [
+    0,
+    0
+   ],
+   "reading": {
+    "midi": 47.993,
+    "gate_s": 3
+   },
+   "named": "C3",
+   "layer": [
+    90,
+    127
+   ],
+   "tuned": "nominal",
+   "credit": {
+    "site": "GitHub",
+    "author": "Alexander Holm",
+    "page": "https://github.com/sfzinstruments/SalamanderGrandPiano",
+    "licence": "CC BY 3.0",
+    "licence_url": "https://creativecommons.org/licenses/by/3.0/",
+    "attribution": "Salamander Grand Piano V3 by Alexander Holm, CC BY 3.0"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset; cut at 3.0 s"
+  },
+  "089AEDCF": {
+   "id": "089AEDCF",
+   "key": "piano-C3-soft",
+   "file": "089AEDCF.flac",
+   "name": "Grand C3 soft",
+   "group": "grand-piano",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 132300,
+   "root": 48,
+   "loop": [
+    0,
+    0
+   ],
+   "reading": {
+    "midi": 47.999,
+    "gate_s": 3
+   },
+   "named": "C3",
+   "layer": [
+    0,
+    89
+   ],
+   "tuned": "nominal",
+   "credit": {
+    "site": "GitHub",
+    "author": "Alexander Holm",
+    "page": "https://github.com/sfzinstruments/SalamanderGrandPiano",
+    "licence": "CC BY 3.0",
+    "licence_url": "https://creativecommons.org/licenses/by/3.0/",
+    "attribution": "Salamander Grand Piano V3 by Alexander Holm, CC BY 3.0"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset; cut at 3.0 s"
+  },
+  "38CD7B03": {
+   "id": "38CD7B03",
+   "key": "piano-C4-loud",
+   "file": "38CD7B03.flac",
+   "name": "Grand C4 loud",
+   "group": "grand-piano",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 132300,
+   "root": 60,
+   "loop": [
+    0,
+    0
+   ],
+   "reading": {
+    "midi": 60.04,
+    "gate_s": 3
+   },
+   "named": "C4",
+   "layer": [
+    90,
+    127
+   ],
+   "tuned": "nominal",
+   "credit": {
+    "site": "GitHub",
+    "author": "Alexander Holm",
+    "page": "https://github.com/sfzinstruments/SalamanderGrandPiano",
+    "licence": "CC BY 3.0",
+    "licence_url": "https://creativecommons.org/licenses/by/3.0/",
+    "attribution": "Salamander Grand Piano V3 by Alexander Holm, CC BY 3.0"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset; cut at 3.0 s"
+  },
+  "A2BD7A01": {
+   "id": "A2BD7A01",
+   "key": "piano-C4-soft",
+   "file": "A2BD7A01.flac",
+   "name": "Grand C4 soft",
+   "group": "grand-piano",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 132300,
+   "root": 60,
+   "loop": [
+    0,
+    0
+   ],
+   "reading": {
+    "midi": 60.03,
+    "gate_s": 3
+   },
+   "named": "C4",
+   "layer": [
+    0,
+    89
+   ],
+   "tuned": "nominal",
+   "credit": {
+    "site": "GitHub",
+    "author": "Alexander Holm",
+    "page": "https://github.com/sfzinstruments/SalamanderGrandPiano",
+    "licence": "CC BY 3.0",
+    "licence_url": "https://creativecommons.org/licenses/by/3.0/",
+    "attribution": "Salamander Grand Piano V3 by Alexander Holm, CC BY 3.0"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset; cut at 3.0 s"
+  },
+  "661FD4D7": {
+   "id": "661FD4D7",
+   "key": "piano-C5-loud",
+   "file": "661FD4D7.flac",
+   "name": "Grand C5 loud",
+   "group": "grand-piano",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 88200,
+   "root": 72,
+   "loop": [
+    0,
+    0
+   ],
+   "reading": {
+    "midi": 72.084,
+    "gate_s": 2
+   },
+   "named": "C5",
+   "layer": [
+    90,
+    127
+   ],
+   "tuned": "nominal",
+   "credit": {
+    "site": "GitHub",
+    "author": "Alexander Holm",
+    "page": "https://github.com/sfzinstruments/SalamanderGrandPiano",
+    "licence": "CC BY 3.0",
+    "licence_url": "https://creativecommons.org/licenses/by/3.0/",
+    "attribution": "Salamander Grand Piano V3 by Alexander Holm, CC BY 3.0"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset; cut at 2.0 s"
+  },
+  "E52A2278": {
+   "id": "E52A2278",
+   "key": "piano-C5-soft",
+   "file": "E52A2278.flac",
+   "name": "Grand C5 soft",
+   "group": "grand-piano",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 88200,
+   "root": 72,
+   "loop": [
+    0,
+    0
+   ],
+   "reading": {
+    "midi": 72.078,
+    "gate_s": 2
+   },
+   "named": "C5",
+   "layer": [
+    0,
+    89
+   ],
+   "tuned": "nominal",
+   "credit": {
+    "site": "GitHub",
+    "author": "Alexander Holm",
+    "page": "https://github.com/sfzinstruments/SalamanderGrandPiano",
+    "licence": "CC BY 3.0",
+    "licence_url": "https://creativecommons.org/licenses/by/3.0/",
+    "attribution": "Salamander Grand Piano V3 by Alexander Holm, CC BY 3.0"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset; cut at 2.0 s"
+  },
+  "C7FBE258": {
+   "id": "C7FBE258",
+   "key": "piano-C6-loud",
+   "file": "C7FBE258.flac",
+   "name": "Grand C6 loud",
+   "group": "grand-piano",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 88200,
+   "root": 84,
+   "loop": [
+    0,
+    0
+   ],
+   "reading": {
+    "midi": 84.105,
+    "gate_s": 2
+   },
+   "named": "C6",
+   "layer": [
+    90,
+    127
+   ],
+   "tuned": "nominal",
+   "credit": {
+    "site": "GitHub",
+    "author": "Alexander Holm",
+    "page": "https://github.com/sfzinstruments/SalamanderGrandPiano",
+    "licence": "CC BY 3.0",
+    "licence_url": "https://creativecommons.org/licenses/by/3.0/",
+    "attribution": "Salamander Grand Piano V3 by Alexander Holm, CC BY 3.0"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset; cut at 2.0 s"
+  },
+  "7AD05BBC": {
+   "id": "7AD05BBC",
+   "key": "piano-C6-soft",
+   "file": "7AD05BBC.flac",
+   "name": "Grand C6 soft",
+   "group": "grand-piano",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 88200,
+   "root": 84,
+   "loop": [
+    0,
+    0
+   ],
+   "reading": {
+    "midi": 84.124,
+    "gate_s": 2
+   },
+   "named": "C6",
+   "layer": [
+    0,
+    89
+   ],
+   "tuned": "nominal",
+   "credit": {
+    "site": "GitHub",
+    "author": "Alexander Holm",
+    "page": "https://github.com/sfzinstruments/SalamanderGrandPiano",
+    "licence": "CC BY 3.0",
+    "licence_url": "https://creativecommons.org/licenses/by/3.0/",
+    "attribution": "Salamander Grand Piano V3 by Alexander Holm, CC BY 3.0"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset; cut at 2.0 s"
+  },
+  "37E6C254": {
+   "id": "37E6C254",
+   "key": "piano-C7-loud",
+   "file": "37E6C254.flac",
+   "name": "Grand C7 loud",
+   "group": "grand-piano",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 88200,
+   "root": 96,
+   "loop": [
+    0,
+    0
+   ],
+   "reading": {
+    "midi": 96.231,
+    "gate_s": 2
+   },
+   "named": "C7",
+   "layer": [
+    90,
+    127
+   ],
+   "tuned": "nominal",
+   "credit": {
+    "site": "GitHub",
+    "author": "Alexander Holm",
+    "page": "https://github.com/sfzinstruments/SalamanderGrandPiano",
+    "licence": "CC BY 3.0",
+    "licence_url": "https://creativecommons.org/licenses/by/3.0/",
+    "attribution": "Salamander Grand Piano V3 by Alexander Holm, CC BY 3.0"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset; cut at 2.0 s"
+  },
+  "F40D7B25": {
+   "id": "F40D7B25",
+   "key": "piano-C7-soft",
+   "file": "F40D7B25.flac",
+   "name": "Grand C7 soft",
+   "group": "grand-piano",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 88200,
+   "root": 96,
+   "loop": [
+    0,
+    0
+   ],
+   "reading": {
+    "midi": 96.237,
+    "gate_s": 2
+   },
+   "named": "C7",
+   "layer": [
+    0,
+    89
+   ],
+   "tuned": "nominal",
+   "credit": {
+    "site": "GitHub",
+    "author": "Alexander Holm",
+    "page": "https://github.com/sfzinstruments/SalamanderGrandPiano",
+    "licence": "CC BY 3.0",
+    "licence_url": "https://creativecommons.org/licenses/by/3.0/",
+    "attribution": "Salamander Grand Piano V3 by Alexander Holm, CC BY 3.0"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset; cut at 2.0 s"
+  },
+  "167715EF": {
+   "id": "167715EF",
+   "key": "piano-C8-loud",
+   "file": "167715EF.flac",
+   "name": "Grand C8 loud",
+   "group": "grand-piano",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 88200,
+   "root": 108,
+   "loop": [
+    0,
+    0
+   ],
+   "reading": {
+    "midi": 43.334,
+    "gate_s": 2
+   },
+   "named": "C8",
+   "layer": [
+    90,
+    127
+   ],
+   "tuned": "nominal",
+   "credit": {
+    "site": "GitHub",
+    "author": "Alexander Holm",
+    "page": "https://github.com/sfzinstruments/SalamanderGrandPiano",
+    "licence": "CC BY 3.0",
+    "licence_url": "https://creativecommons.org/licenses/by/3.0/",
+    "attribution": "Salamander Grand Piano V3 by Alexander Holm, CC BY 3.0"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset; cut at 2.0 s"
+  },
+  "5871E5F0": {
+   "id": "5871E5F0",
+   "key": "piano-C8-soft",
+   "file": "5871E5F0.flac",
+   "name": "Grand C8 soft",
+   "group": "grand-piano",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 88200,
+   "root": 108,
+   "loop": [
+    0,
+    0
+   ],
+   "reading": {
+    "midi": 41.743,
+    "gate_s": 2
+   },
+   "named": "C8",
+   "layer": [
+    0,
+    89
+   ],
+   "tuned": "nominal",
+   "credit": {
+    "site": "GitHub",
+    "author": "Alexander Holm",
+    "page": "https://github.com/sfzinstruments/SalamanderGrandPiano",
+    "licence": "CC BY 3.0",
+    "licence_url": "https://creativecommons.org/licenses/by/3.0/",
+    "attribution": "Salamander Grand Piano V3 by Alexander Holm, CC BY 3.0"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset; cut at 2.0 s"
+  },
+  "A3C1D4AA": {
+   "id": "A3C1D4AA",
+   "key": "piano-Ds1-loud",
+   "file": "A3C1D4AA.flac",
+   "name": "Grand D#1 loud",
+   "group": "grand-piano",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 176400,
+   "root": 27,
+   "loop": [
+    0,
+    0
+   ],
+   "reading": {
+    "midi": 26.952,
+    "gate_s": 4
+   },
+   "named": "D#1",
+   "layer": [
+    90,
+    127
+   ],
+   "tuned": "nominal",
+   "credit": {
+    "site": "GitHub",
+    "author": "Alexander Holm",
+    "page": "https://github.com/sfzinstruments/SalamanderGrandPiano",
+    "licence": "CC BY 3.0",
+    "licence_url": "https://creativecommons.org/licenses/by/3.0/",
+    "attribution": "Salamander Grand Piano V3 by Alexander Holm, CC BY 3.0"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset; cut at 4.0 s"
+  },
+  "C97C1349": {
+   "id": "C97C1349",
+   "key": "piano-Ds1-soft",
+   "file": "C97C1349.flac",
+   "name": "Grand D#1 soft",
+   "group": "grand-piano",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 176400,
+   "root": 27,
+   "loop": [
+    0,
+    0
+   ],
+   "reading": {
+    "midi": 26.951,
+    "gate_s": 4
+   },
+   "named": "D#1",
+   "layer": [
+    0,
+    89
+   ],
+   "tuned": "nominal",
+   "credit": {
+    "site": "GitHub",
+    "author": "Alexander Holm",
+    "page": "https://github.com/sfzinstruments/SalamanderGrandPiano",
+    "licence": "CC BY 3.0",
+    "licence_url": "https://creativecommons.org/licenses/by/3.0/",
+    "attribution": "Salamander Grand Piano V3 by Alexander Holm, CC BY 3.0"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset; cut at 4.0 s"
+  },
+  "8376EB53": {
+   "id": "8376EB53",
+   "key": "piano-Ds2-loud",
+   "file": "8376EB53.flac",
+   "name": "Grand D#2 loud",
+   "group": "grand-piano",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 176400,
+   "root": 39,
+   "loop": [
+    0,
+    0
+   ],
+   "reading": {
+    "midi": 39.019,
+    "gate_s": 4
+   },
+   "named": "D#2",
+   "layer": [
+    90,
+    127
+   ],
+   "tuned": "nominal",
+   "credit": {
+    "site": "GitHub",
+    "author": "Alexander Holm",
+    "page": "https://github.com/sfzinstruments/SalamanderGrandPiano",
+    "licence": "CC BY 3.0",
+    "licence_url": "https://creativecommons.org/licenses/by/3.0/",
+    "attribution": "Salamander Grand Piano V3 by Alexander Holm, CC BY 3.0"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset; cut at 4.0 s"
+  },
+  "2BC52AB2": {
+   "id": "2BC52AB2",
+   "key": "piano-Ds2-soft",
+   "file": "2BC52AB2.flac",
+   "name": "Grand D#2 soft",
+   "group": "grand-piano",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 176400,
+   "root": 39,
+   "loop": [
+    0,
+    0
+   ],
+   "reading": {
+    "midi": 39.021,
+    "gate_s": 4
+   },
+   "named": "D#2",
+   "layer": [
+    0,
+    89
+   ],
+   "tuned": "nominal",
+   "credit": {
+    "site": "GitHub",
+    "author": "Alexander Holm",
+    "page": "https://github.com/sfzinstruments/SalamanderGrandPiano",
+    "licence": "CC BY 3.0",
+    "licence_url": "https://creativecommons.org/licenses/by/3.0/",
+    "attribution": "Salamander Grand Piano V3 by Alexander Holm, CC BY 3.0"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset; cut at 4.0 s"
+  },
+  "C0118858": {
+   "id": "C0118858",
+   "key": "piano-Ds3-loud",
+   "file": "C0118858.flac",
+   "name": "Grand D#3 loud",
+   "group": "grand-piano",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 132300,
+   "root": 51,
+   "loop": [
+    0,
+    0
+   ],
+   "reading": {
+    "midi": 51.023,
+    "gate_s": 3
+   },
+   "named": "D#3",
+   "layer": [
+    90,
+    127
+   ],
+   "tuned": "nominal",
+   "credit": {
+    "site": "GitHub",
+    "author": "Alexander Holm",
+    "page": "https://github.com/sfzinstruments/SalamanderGrandPiano",
+    "licence": "CC BY 3.0",
+    "licence_url": "https://creativecommons.org/licenses/by/3.0/",
+    "attribution": "Salamander Grand Piano V3 by Alexander Holm, CC BY 3.0"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset; cut at 3.0 s"
+  },
+  "0883D823": {
+   "id": "0883D823",
+   "key": "piano-Ds3-soft",
+   "file": "0883D823.flac",
+   "name": "Grand D#3 soft",
+   "group": "grand-piano",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 132300,
+   "root": 51,
+   "loop": [
+    0,
+    0
+   ],
+   "reading": {
+    "midi": 51.02,
+    "gate_s": 3
+   },
+   "named": "D#3",
+   "layer": [
+    0,
+    89
+   ],
+   "tuned": "nominal",
+   "credit": {
+    "site": "GitHub",
+    "author": "Alexander Holm",
+    "page": "https://github.com/sfzinstruments/SalamanderGrandPiano",
+    "licence": "CC BY 3.0",
+    "licence_url": "https://creativecommons.org/licenses/by/3.0/",
+    "attribution": "Salamander Grand Piano V3 by Alexander Holm, CC BY 3.0"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset; cut at 3.0 s"
+  },
+  "175594CA": {
+   "id": "175594CA",
+   "key": "piano-Ds4-soft",
+   "file": "175594CA.flac",
+   "name": "Grand D#4 soft",
+   "group": "grand-piano",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 132300,
+   "root": 63,
+   "loop": [
+    0,
+    0
+   ],
+   "reading": {
+    "midi": 63.031,
+    "gate_s": 3
+   },
+   "named": "D#4",
+   "layer": [
+    0,
+    89
+   ],
+   "tuned": "nominal",
+   "credit": {
+    "site": "GitHub",
+    "author": "Alexander Holm",
+    "page": "https://github.com/sfzinstruments/SalamanderGrandPiano",
+    "licence": "CC BY 3.0",
+    "licence_url": "https://creativecommons.org/licenses/by/3.0/",
+    "attribution": "Salamander Grand Piano V3 by Alexander Holm, CC BY 3.0"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset; cut at 3.0 s"
+  },
+  "44BA7178": {
+   "id": "44BA7178",
+   "key": "piano-Ds5-loud",
+   "file": "44BA7178.flac",
+   "name": "Grand D#5 loud",
+   "group": "grand-piano",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 88200,
+   "root": 75,
+   "loop": [
+    0,
+    0
+   ],
+   "reading": {
+    "midi": 75.042,
+    "gate_s": 2
+   },
+   "named": "D#5",
+   "layer": [
+    90,
+    127
+   ],
+   "tuned": "nominal",
+   "credit": {
+    "site": "GitHub",
+    "author": "Alexander Holm",
+    "page": "https://github.com/sfzinstruments/SalamanderGrandPiano",
+    "licence": "CC BY 3.0",
+    "licence_url": "https://creativecommons.org/licenses/by/3.0/",
+    "attribution": "Salamander Grand Piano V3 by Alexander Holm, CC BY 3.0"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset; cut at 2.0 s"
+  },
+  "A9046A4D": {
+   "id": "A9046A4D",
+   "key": "piano-Ds5-soft",
+   "file": "A9046A4D.flac",
+   "name": "Grand D#5 soft",
+   "group": "grand-piano",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 88200,
+   "root": 75,
+   "loop": [
+    0,
+    0
+   ],
+   "reading": {
+    "midi": 75.042,
+    "gate_s": 2
+   },
+   "named": "D#5",
+   "layer": [
+    0,
+    89
+   ],
+   "tuned": "nominal",
+   "credit": {
+    "site": "GitHub",
+    "author": "Alexander Holm",
+    "page": "https://github.com/sfzinstruments/SalamanderGrandPiano",
+    "licence": "CC BY 3.0",
+    "licence_url": "https://creativecommons.org/licenses/by/3.0/",
+    "attribution": "Salamander Grand Piano V3 by Alexander Holm, CC BY 3.0"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset; cut at 2.0 s"
+  },
+  "EF063B6C": {
+   "id": "EF063B6C",
+   "key": "piano-Ds6-loud",
+   "file": "EF063B6C.flac",
+   "name": "Grand D#6 loud",
+   "group": "grand-piano",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 88200,
+   "root": 87,
+   "loop": [
+    0,
+    0
+   ],
+   "reading": {
+    "midi": 87.068,
+    "gate_s": 2
+   },
+   "named": "D#6",
+   "layer": [
+    90,
+    127
+   ],
+   "tuned": "nominal",
+   "credit": {
+    "site": "GitHub",
+    "author": "Alexander Holm",
+    "page": "https://github.com/sfzinstruments/SalamanderGrandPiano",
+    "licence": "CC BY 3.0",
+    "licence_url": "https://creativecommons.org/licenses/by/3.0/",
+    "attribution": "Salamander Grand Piano V3 by Alexander Holm, CC BY 3.0"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset; cut at 2.0 s"
+  },
+  "1548BEAC": {
+   "id": "1548BEAC",
+   "key": "piano-Ds6-soft",
+   "file": "1548BEAC.flac",
+   "name": "Grand D#6 soft",
+   "group": "grand-piano",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 88200,
+   "root": 87,
+   "loop": [
+    0,
+    0
+   ],
+   "reading": {
+    "midi": 87.075,
+    "gate_s": 2
+   },
+   "named": "D#6",
+   "layer": [
+    0,
+    89
+   ],
+   "tuned": "nominal",
+   "credit": {
+    "site": "GitHub",
+    "author": "Alexander Holm",
+    "page": "https://github.com/sfzinstruments/SalamanderGrandPiano",
+    "licence": "CC BY 3.0",
+    "licence_url": "https://creativecommons.org/licenses/by/3.0/",
+    "attribution": "Salamander Grand Piano V3 by Alexander Holm, CC BY 3.0"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset; cut at 2.0 s"
+  },
+  "0ECB587F": {
+   "id": "0ECB587F",
+   "key": "piano-Ds7-loud",
+   "file": "0ECB587F.flac",
+   "name": "Grand D#7 loud",
+   "group": "grand-piano",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 88200,
+   "root": 99,
+   "loop": [
+    0,
+    0
+   ],
+   "reading": {
+    "midi": 87.185,
+    "gate_s": 2
+   },
+   "named": "D#7",
+   "layer": [
+    90,
+    127
+   ],
+   "tuned": "nominal",
+   "credit": {
+    "site": "GitHub",
+    "author": "Alexander Holm",
+    "page": "https://github.com/sfzinstruments/SalamanderGrandPiano",
+    "licence": "CC BY 3.0",
+    "licence_url": "https://creativecommons.org/licenses/by/3.0/",
+    "attribution": "Salamander Grand Piano V3 by Alexander Holm, CC BY 3.0"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset; cut at 2.0 s"
+  },
+  "A64884AE": {
+   "id": "A64884AE",
+   "key": "piano-Ds7-soft",
+   "file": "A64884AE.flac",
+   "name": "Grand D#7 soft",
+   "group": "grand-piano",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 88200,
+   "root": 99,
+   "loop": [
+    0,
+    0
+   ],
+   "reading": {
+    "midi": 87.187,
+    "gate_s": 2
+   },
+   "named": "D#7",
+   "layer": [
+    0,
+    89
+   ],
+   "tuned": "nominal",
+   "credit": {
+    "site": "GitHub",
+    "author": "Alexander Holm",
+    "page": "https://github.com/sfzinstruments/SalamanderGrandPiano",
+    "licence": "CC BY 3.0",
+    "licence_url": "https://creativecommons.org/licenses/by/3.0/",
+    "attribution": "Salamander Grand Piano V3 by Alexander Holm, CC BY 3.0"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset; cut at 2.0 s"
+  },
+  "E8FDF787": {
+   "id": "E8FDF787",
+   "key": "piano-Fs1-loud",
+   "file": "E8FDF787.flac",
+   "name": "Grand F#1 loud",
+   "group": "grand-piano",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 176400,
+   "root": 30,
+   "loop": [
+    0,
+    0
+   ],
+   "reading": {
+    "midi": 29.958,
+    "gate_s": 4
+   },
+   "named": "F#1",
+   "layer": [
+    90,
+    127
+   ],
+   "tuned": "nominal",
+   "credit": {
+    "site": "GitHub",
+    "author": "Alexander Holm",
+    "page": "https://github.com/sfzinstruments/SalamanderGrandPiano",
+    "licence": "CC BY 3.0",
+    "licence_url": "https://creativecommons.org/licenses/by/3.0/",
+    "attribution": "Salamander Grand Piano V3 by Alexander Holm, CC BY 3.0"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset; cut at 4.0 s"
+  },
+  "E98FCA11": {
+   "id": "E98FCA11",
+   "key": "piano-Fs1-soft",
+   "file": "E98FCA11.flac",
+   "name": "Grand F#1 soft",
+   "group": "grand-piano",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 176400,
+   "root": 30,
+   "loop": [
+    0,
+    0
+   ],
+   "reading": {
+    "midi": 29.982,
+    "gate_s": 4
+   },
+   "named": "F#1",
+   "layer": [
+    0,
+    89
+   ],
+   "tuned": "nominal",
+   "credit": {
+    "site": "GitHub",
+    "author": "Alexander Holm",
+    "page": "https://github.com/sfzinstruments/SalamanderGrandPiano",
+    "licence": "CC BY 3.0",
+    "licence_url": "https://creativecommons.org/licenses/by/3.0/",
+    "attribution": "Salamander Grand Piano V3 by Alexander Holm, CC BY 3.0"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset; cut at 4.0 s"
+  },
+  "8219CF40": {
+   "id": "8219CF40",
+   "key": "piano-Fs2-loud",
+   "file": "8219CF40.flac",
+   "name": "Grand F#2 loud",
+   "group": "grand-piano",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 176400,
+   "root": 42,
+   "loop": [
+    0,
+    0
+   ],
+   "reading": {
+    "midi": 41.994,
+    "gate_s": 4
+   },
+   "named": "F#2",
+   "layer": [
+    90,
+    127
+   ],
+   "tuned": "nominal",
+   "credit": {
+    "site": "GitHub",
+    "author": "Alexander Holm",
+    "page": "https://github.com/sfzinstruments/SalamanderGrandPiano",
+    "licence": "CC BY 3.0",
+    "licence_url": "https://creativecommons.org/licenses/by/3.0/",
+    "attribution": "Salamander Grand Piano V3 by Alexander Holm, CC BY 3.0"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset; cut at 4.0 s"
+  },
+  "6B2E628C": {
+   "id": "6B2E628C",
+   "key": "piano-Fs2-soft",
+   "file": "6B2E628C.flac",
+   "name": "Grand F#2 soft",
+   "group": "grand-piano",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 176400,
+   "root": 42,
+   "loop": [
+    0,
+    0
+   ],
+   "reading": {
+    "midi": 41.99,
+    "gate_s": 4
+   },
+   "named": "F#2",
+   "layer": [
+    0,
+    89
+   ],
+   "tuned": "nominal",
+   "credit": {
+    "site": "GitHub",
+    "author": "Alexander Holm",
+    "page": "https://github.com/sfzinstruments/SalamanderGrandPiano",
+    "licence": "CC BY 3.0",
+    "licence_url": "https://creativecommons.org/licenses/by/3.0/",
+    "attribution": "Salamander Grand Piano V3 by Alexander Holm, CC BY 3.0"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset; cut at 4.0 s"
+  },
+  "A0286F9C": {
+   "id": "A0286F9C",
+   "key": "piano-Fs3-loud",
+   "file": "A0286F9C.flac",
+   "name": "Grand F#3 loud",
+   "group": "grand-piano",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 132300,
+   "root": 54,
+   "loop": [
+    0,
+    0
+   ],
+   "reading": {
+    "midi": 54.005,
+    "gate_s": 3
+   },
+   "named": "F#3",
+   "layer": [
+    90,
+    127
+   ],
+   "tuned": "nominal",
+   "credit": {
+    "site": "GitHub",
+    "author": "Alexander Holm",
+    "page": "https://github.com/sfzinstruments/SalamanderGrandPiano",
+    "licence": "CC BY 3.0",
+    "licence_url": "https://creativecommons.org/licenses/by/3.0/",
+    "attribution": "Salamander Grand Piano V3 by Alexander Holm, CC BY 3.0"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset; cut at 3.0 s"
+  },
+  "B5DD9801": {
+   "id": "B5DD9801",
+   "key": "piano-Fs3-soft",
+   "file": "B5DD9801.flac",
+   "name": "Grand F#3 soft",
+   "group": "grand-piano",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 132300,
+   "root": 54,
+   "loop": [
+    0,
+    0
+   ],
+   "reading": {
+    "midi": 53.997,
+    "gate_s": 3
+   },
+   "named": "F#3",
+   "layer": [
+    0,
+    89
+   ],
+   "tuned": "nominal",
+   "credit": {
+    "site": "GitHub",
+    "author": "Alexander Holm",
+    "page": "https://github.com/sfzinstruments/SalamanderGrandPiano",
+    "licence": "CC BY 3.0",
+    "licence_url": "https://creativecommons.org/licenses/by/3.0/",
+    "attribution": "Salamander Grand Piano V3 by Alexander Holm, CC BY 3.0"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset; cut at 3.0 s"
+  },
+  "2EDE909A": {
+   "id": "2EDE909A",
+   "key": "piano-Fs4-loud",
+   "file": "2EDE909A.flac",
+   "name": "Grand F#4 loud",
+   "group": "grand-piano",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 132300,
+   "root": 66,
+   "loop": [
+    0,
+    0
+   ],
+   "reading": {
+    "midi": 65.989,
+    "gate_s": 3
+   },
+   "named": "F#4",
+   "layer": [
+    90,
+    127
+   ],
+   "tuned": "nominal",
+   "credit": {
+    "site": "GitHub",
+    "author": "Alexander Holm",
+    "page": "https://github.com/sfzinstruments/SalamanderGrandPiano",
+    "licence": "CC BY 3.0",
+    "licence_url": "https://creativecommons.org/licenses/by/3.0/",
+    "attribution": "Salamander Grand Piano V3 by Alexander Holm, CC BY 3.0"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset; cut at 3.0 s"
+  },
+  "C5F1B6D1": {
+   "id": "C5F1B6D1",
+   "key": "piano-Fs4-soft",
+   "file": "C5F1B6D1.flac",
+   "name": "Grand F#4 soft",
+   "group": "grand-piano",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 132300,
+   "root": 66,
+   "loop": [
+    0,
+    0
+   ],
+   "reading": {
+    "midi": 65.998,
+    "gate_s": 3
+   },
+   "named": "F#4",
+   "layer": [
+    0,
+    89
+   ],
+   "tuned": "nominal",
+   "credit": {
+    "site": "GitHub",
+    "author": "Alexander Holm",
+    "page": "https://github.com/sfzinstruments/SalamanderGrandPiano",
+    "licence": "CC BY 3.0",
+    "licence_url": "https://creativecommons.org/licenses/by/3.0/",
+    "attribution": "Salamander Grand Piano V3 by Alexander Holm, CC BY 3.0"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset; cut at 3.0 s"
+  },
+  "9FED97BF": {
+   "id": "9FED97BF",
+   "key": "piano-Fs5-loud",
+   "file": "9FED97BF.flac",
+   "name": "Grand F#5 loud",
+   "group": "grand-piano",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 88200,
+   "root": 78,
+   "loop": [
+    0,
+    0
+   ],
+   "reading": {
+    "midi": 78.061,
+    "gate_s": 2
+   },
+   "named": "F#5",
+   "layer": [
+    90,
+    127
+   ],
+   "tuned": "nominal",
+   "credit": {
+    "site": "GitHub",
+    "author": "Alexander Holm",
+    "page": "https://github.com/sfzinstruments/SalamanderGrandPiano",
+    "licence": "CC BY 3.0",
+    "licence_url": "https://creativecommons.org/licenses/by/3.0/",
+    "attribution": "Salamander Grand Piano V3 by Alexander Holm, CC BY 3.0"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset; cut at 2.0 s"
+  },
+  "3FD1ECE3": {
+   "id": "3FD1ECE3",
+   "key": "piano-Fs5-soft",
+   "file": "3FD1ECE3.flac",
+   "name": "Grand F#5 soft",
+   "group": "grand-piano",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 88200,
+   "root": 78,
+   "loop": [
+    0,
+    0
+   ],
+   "reading": {
+    "midi": 78.051,
+    "gate_s": 2
+   },
+   "named": "F#5",
+   "layer": [
+    0,
+    89
+   ],
+   "tuned": "nominal",
+   "credit": {
+    "site": "GitHub",
+    "author": "Alexander Holm",
+    "page": "https://github.com/sfzinstruments/SalamanderGrandPiano",
+    "licence": "CC BY 3.0",
+    "licence_url": "https://creativecommons.org/licenses/by/3.0/",
+    "attribution": "Salamander Grand Piano V3 by Alexander Holm, CC BY 3.0"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset; cut at 2.0 s"
+  },
+  "57F9CD02": {
+   "id": "57F9CD02",
+   "key": "piano-Fs6-loud",
+   "file": "57F9CD02.flac",
+   "name": "Grand F#6 loud",
+   "group": "grand-piano",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 88200,
+   "root": 90,
+   "loop": [
+    0,
+    0
+   ],
+   "reading": {
+    "midi": 90.122,
+    "gate_s": 2
+   },
+   "named": "F#6",
+   "layer": [
+    90,
+    127
+   ],
+   "tuned": "nominal",
+   "credit": {
+    "site": "GitHub",
+    "author": "Alexander Holm",
+    "page": "https://github.com/sfzinstruments/SalamanderGrandPiano",
+    "licence": "CC BY 3.0",
+    "licence_url": "https://creativecommons.org/licenses/by/3.0/",
+    "attribution": "Salamander Grand Piano V3 by Alexander Holm, CC BY 3.0"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset; cut at 2.0 s"
+  },
+  "91C4CE52": {
+   "id": "91C4CE52",
+   "key": "piano-Fs6-soft",
+   "file": "91C4CE52.flac",
+   "name": "Grand F#6 soft",
+   "group": "grand-piano",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 88200,
+   "root": 90,
+   "loop": [
+    0,
+    0
+   ],
+   "reading": {
+    "midi": 90.141,
+    "gate_s": 2
+   },
+   "named": "F#6",
+   "layer": [
+    0,
+    89
+   ],
+   "tuned": "nominal",
+   "credit": {
+    "site": "GitHub",
+    "author": "Alexander Holm",
+    "page": "https://github.com/sfzinstruments/SalamanderGrandPiano",
+    "licence": "CC BY 3.0",
+    "licence_url": "https://creativecommons.org/licenses/by/3.0/",
+    "attribution": "Salamander Grand Piano V3 by Alexander Holm, CC BY 3.0"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset; cut at 2.0 s"
+  },
+  "7CB47DB8": {
+   "id": "7CB47DB8",
+   "key": "piano-Fs7-loud",
+   "file": "7CB47DB8.flac",
+   "name": "Grand F#7 loud",
+   "group": "grand-piano",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 88200,
+   "root": 102,
+   "loop": [
+    0,
+    0
+   ],
+   "reading": {
+    "midi": 90.245,
+    "gate_s": 2
+   },
+   "named": "F#7",
+   "layer": [
+    90,
+    127
+   ],
+   "tuned": "nominal",
+   "credit": {
+    "site": "GitHub",
+    "author": "Alexander Holm",
+    "page": "https://github.com/sfzinstruments/SalamanderGrandPiano",
+    "licence": "CC BY 3.0",
+    "licence_url": "https://creativecommons.org/licenses/by/3.0/",
+    "attribution": "Salamander Grand Piano V3 by Alexander Holm, CC BY 3.0"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset; cut at 2.0 s"
+  },
+  "F32E0FA1": {
+   "id": "F32E0FA1",
+   "key": "piano-Fs7-soft",
+   "file": "F32E0FA1.flac",
+   "name": "Grand F#7 soft",
+   "group": "grand-piano",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 88200,
+   "root": 102,
+   "loop": [
+    0,
+    0
+   ],
+   "reading": {
+    "midi": 90.269,
+    "gate_s": 2
+   },
+   "named": "F#7",
+   "layer": [
+    0,
+    89
+   ],
+   "tuned": "nominal",
+   "credit": {
+    "site": "GitHub",
+    "author": "Alexander Holm",
+    "page": "https://github.com/sfzinstruments/SalamanderGrandPiano",
+    "licence": "CC BY 3.0",
+    "licence_url": "https://creativecommons.org/licenses/by/3.0/",
+    "attribution": "Salamander Grand Piano V3 by Alexander Holm, CC BY 3.0"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset; cut at 2.0 s"
+  },
+  "EF211808": {
+   "id": "EF211808",
+   "key": "sh2-pluck",
+   "file": "EF211808.flac",
+   "name": "SH-2 Pluck",
+   "group": "sh2-pluck",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 40572,
+   "root": 48.038,
+   "loop": [
+    0,
+    0
+   ],
+   "reading": {
+    "midi": 48.038,
+    "gate_s": 0.485
+   },
+   "tuned": "read",
+   "credit": {
+    "site": "Freesound",
+    "author": "modularsamples",
+    "page": "https://freesound.org/people/modularsamples/sounds/311012/",
+    "licence": "CC0 1.0 (public domain)",
+    "licence_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset",
+   "measures": {
+    "psola": {
+     "file": "EF211808.psola.f32",
+     "release": 1,
+     "markers": {
+      "onset": 0.0021768707482993197,
+      "gate": 0.48498866213151925,
+      "loop": [
+       0.046054421768707485,
+       0.48498866213151925
+      ],
+      "loop_by_hand": false,
+      "loop_off": false,
+      "gate_by_hand": false
+     },
+     "distance": 0.52
+    },
+    "resynth": {
+     "file": "EF211808.resynth.f32",
+     "release": 1,
+     "markers": {
+      "onset": 0.0021768707482993197,
+      "gate": 0.485,
+      "loop": [
+       0.03700680272108844,
+       0.4897959183673469
+      ],
+      "loop_by_hand": false,
+      "loop_off": false,
+      "gate_by_hand": false
+     },
+     "distance": 1.797
+    }
+   }
+  },
+  "2AD140E7": {
+   "id": "2AD140E7",
+   "key": "tb303",
+   "file": "2AD140E7.flac",
+   "name": "TB-303 Saw",
+   "group": "tb303",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 77696,
+   "root": 48.058,
+   "loop": [
+    0,
+    0
+   ],
+   "reading": {
+    "midi": 48.058,
+    "gate_s": 1.73
+   },
+   "tuned": "read",
+   "credit": {
+    "site": "Freesound",
+    "author": "DJMini",
+    "page": "https://freesound.org/people/DJMini/sounds/89075/",
+    "licence": "CC0 1.0 (public domain)",
+    "licence_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset"
+  },
+  "FA9E3CBF": {
+   "id": "FA9E3CBF",
+   "key": "tr08-clap",
+   "file": "FA9E3CBF.flac",
+   "name": "TR-808 Clap",
+   "group": "tr08",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 58212,
+   "root": 60,
+   "loop": [
+    0,
+    0
+   ],
+   "drum": 38,
+   "tuned": "kit",
+   "credit": {
+    "site": "Freesound",
+    "author": "Karman_Lyne",
+    "page": "https://freesound.org/people/Karman_Lyne/sounds/519305/",
+    "licence": "CC0 1.0 (public domain)",
+    "licence_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset"
+  },
+  "90D0C890": {
+   "id": "90D0C890",
+   "key": "tr08-closed-hat",
+   "file": "90D0C890.flac",
+   "name": "TR-808 Closed Hat",
+   "group": "tr08",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 6680,
+   "root": 60,
+   "loop": [
+    0,
+    0
+   ],
+   "drum": 42,
+   "tuned": "kit",
+   "credit": {
+    "site": "Freesound",
+    "author": "Karman_Lyne",
+    "page": "https://freesound.org/people/Karman_Lyne/sounds/519308/",
+    "licence": "CC0 1.0 (public domain)",
+    "licence_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset"
+  },
+  "05318AFB": {
+   "id": "05318AFB",
+   "key": "tr08-conga-high",
+   "file": "05318AFB.flac",
+   "name": "TR-808 Conga High",
+   "group": "tr08",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 13230,
+   "root": 60,
+   "loop": [
+    0,
+    0
+   ],
+   "drum": 50,
+   "tuned": "kit",
+   "credit": {
+    "site": "Freesound",
+    "author": "Karman_Lyne",
+    "page": "https://freesound.org/people/Karman_Lyne/sounds/519309/",
+    "licence": "CC0 1.0 (public domain)",
+    "licence_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset"
+  },
+  "60BF3B5C": {
+   "id": "60BF3B5C",
+   "key": "tr08-conga-low",
+   "file": "60BF3B5C.flac",
+   "name": "TR-808 Conga Low",
+   "group": "tr08",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 23814,
+   "root": 60,
+   "loop": [
+    0,
+    0
+   ],
+   "drum": 43,
+   "tuned": "kit",
+   "credit": {
+    "site": "Freesound",
+    "author": "Karman_Lyne",
+    "page": "https://freesound.org/people/Karman_Lyne/sounds/519310/",
+    "licence": "CC0 1.0 (public domain)",
+    "licence_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset"
+  },
+  "D7CFAB12": {
+   "id": "D7CFAB12",
+   "key": "tr08-conga-mid",
+   "file": "D7CFAB12.flac",
+   "name": "TR-808 Conga Mid",
+   "group": "tr08",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 14112,
+   "root": 60,
+   "loop": [
+    0,
+    0
+   ],
+   "drum": 47,
+   "tuned": "kit",
+   "credit": {
+    "site": "Freesound",
+    "author": "Karman_Lyne",
+    "page": "https://freesound.org/people/Karman_Lyne/sounds/520167/",
+    "licence": "CC0 1.0 (public domain)",
+    "licence_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset"
+  },
+  "A28C9EF9": {
+   "id": "A28C9EF9",
+   "key": "tr08-cowbell",
+   "file": "A28C9EF9.flac",
+   "name": "TR-808 Cowbell",
+   "group": "tr08",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 61740,
+   "root": 60,
+   "loop": [
+    0,
+    0
+   ],
+   "drum": 51,
+   "tuned": "kit",
+   "credit": {
+    "site": "Freesound",
+    "author": "Karman_Lyne",
+    "page": "https://freesound.org/people/Karman_Lyne/sounds/519303/",
+    "licence": "CC0 1.0 (public domain)",
+    "licence_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset"
+  },
+  "46313BB8": {
+   "id": "46313BB8",
+   "key": "tr08-cymbal",
+   "file": "46313BB8.flac",
+   "name": "TR-808 Cymbal",
+   "group": "tr08",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 156996,
+   "root": 60,
+   "loop": [
+    0,
+    0
+   ],
+   "drum": 51,
+   "tuned": "kit",
+   "credit": {
+    "site": "Freesound",
+    "author": "Karman_Lyne",
+    "page": "https://freesound.org/people/Karman_Lyne/sounds/519302/",
+    "licence": "CC0 1.0 (public domain)",
+    "licence_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset"
+  },
+  "B20045A7": {
+   "id": "B20045A7",
+   "key": "tr08-kick",
+   "file": "B20045A7.flac",
+   "name": "TR-808 Kick",
+   "group": "tr08",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 54684,
+   "root": 60,
+   "loop": [
+    0,
+    0
+   ],
+   "drum": 36,
+   "tuned": "kit",
+   "credit": {
+    "site": "Freesound",
+    "author": "Karman_Lyne",
+    "page": "https://freesound.org/people/Karman_Lyne/sounds/519306/",
+    "licence": "CC0 1.0 (public domain)",
+    "licence_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset"
+  },
+  "911AC666": {
+   "id": "911AC666",
+   "key": "tr08-maracas",
+   "file": "911AC666.flac",
+   "name": "TR-808 Maracas",
+   "group": "tr08",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 3528,
+   "root": 60,
+   "loop": [
+    0,
+    0
+   ],
+   "drum": 42,
+   "tuned": "kit",
+   "credit": {
+    "site": "Freesound",
+    "author": "Karman_Lyne",
+    "page": "https://freesound.org/people/Karman_Lyne/sounds/520173/",
+    "licence": "CC0 1.0 (public domain)",
+    "licence_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset"
+  },
+  "A83B6C22": {
+   "id": "A83B6C22",
+   "key": "tr08-open-hat",
+   "file": "A83B6C22.flac",
+   "name": "TR-808 Open Hat",
+   "group": "tr08",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 30104,
+   "root": 60,
+   "loop": [
+    0,
+    0
+   ],
+   "drum": 46,
+   "tuned": "kit",
+   "credit": {
+    "site": "Freesound",
+    "author": "Karman_Lyne",
+    "page": "https://freesound.org/people/Karman_Lyne/sounds/519307/",
+    "licence": "CC0 1.0 (public domain)",
+    "licence_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset"
+  },
+  "954F79D6": {
+   "id": "954F79D6",
+   "key": "tr08-rim",
+   "file": "954F79D6.flac",
+   "name": "TR-808 Rim",
+   "group": "tr08",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 5979,
+   "root": 60,
+   "loop": [
+    0,
+    0
+   ],
+   "drum": 46,
+   "tuned": "kit",
+   "credit": {
+    "site": "Freesound",
+    "author": "Karman_Lyne",
+    "page": "https://freesound.org/people/Karman_Lyne/sounds/520172/",
+    "licence": "CC0 1.0 (public domain)",
+    "licence_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset"
+  },
+  "0B34111E": {
+   "id": "0B34111E",
+   "key": "tr08-snare",
+   "file": "0B34111E.flac",
+   "name": "TR-808 Snare",
+   "group": "tr08",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 9702,
+   "root": 60,
+   "loop": [
+    0,
+    0
+   ],
+   "drum": 38,
+   "tuned": "kit",
+   "credit": {
+    "site": "Freesound",
+    "author": "Karman_Lyne",
+    "page": "https://freesound.org/people/Karman_Lyne/sounds/520171/",
+    "licence": "CC0 1.0 (public domain)",
+    "licence_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset"
+  },
+  "E2C4F254": {
+   "id": "E2C4F254",
+   "key": "tr08-tom-high",
+   "file": "E2C4F254.flac",
+   "name": "TR-808 Tom High",
+   "group": "tr08",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 19404,
+   "root": 60,
+   "loop": [
+    0,
+    0
+   ],
+   "drum": 50,
+   "tuned": "kit",
+   "credit": {
+    "site": "Freesound",
+    "author": "Karman_Lyne",
+    "page": "https://freesound.org/people/Karman_Lyne/sounds/520170/",
+    "licence": "CC0 1.0 (public domain)",
+    "licence_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset"
+  },
+  "081D08E2": {
+   "id": "081D08E2",
+   "key": "tr08-tom-low",
+   "file": "081D08E2.flac",
+   "name": "TR-808 Tom Low",
+   "group": "tr08",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 28224,
+   "root": 60,
+   "loop": [
+    0,
+    0
+   ],
+   "drum": 43,
+   "tuned": "kit",
+   "credit": {
+    "site": "Freesound",
+    "author": "Karman_Lyne",
+    "page": "https://freesound.org/people/Karman_Lyne/sounds/520168/",
+    "licence": "CC0 1.0 (public domain)",
+    "licence_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset"
+  },
+  "79E6E43E": {
+   "id": "79E6E43E",
+   "key": "tr08-tom-mid",
+   "file": "79E6E43E.flac",
+   "name": "TR-808 Tom Mid",
+   "group": "tr08",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 26460,
+   "root": 60,
+   "loop": [
+    0,
+    0
+   ],
+   "drum": 47,
+   "tuned": "kit",
+   "credit": {
+    "site": "Freesound",
+    "author": "Karman_Lyne",
+    "page": "https://freesound.org/people/Karman_Lyne/sounds/520174/",
+    "licence": "CC0 1.0 (public domain)",
+    "licence_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset"
+  },
+  "5C5B7655": {
+   "id": "5C5B7655",
+   "key": "tubular-bell-b4",
+   "file": "5C5B7655.flac",
+   "name": "Tubular Bell B4",
+   "group": "tubular-bells",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 264600,
+   "root": 71,
+   "loop": [
+    0,
+    0
+   ],
+   "reading": {
+    "midi": 64.046,
+    "gate_s": 6
+   },
+   "named": "B4",
+   "tuned": "nominal",
+   "credit": {
+    "site": "GitHub",
+    "author": "Versilian Studios (VCSL)",
+    "page": "https://github.com/sgossner/VCSL",
+    "licence": "CC0 1.0 (public domain)",
+    "licence_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset; cut at 6.0 s"
+  },
+  "2B384E73": {
+   "id": "2B384E73",
+   "key": "tubular-bell-c4",
+   "file": "2B384E73.flac",
+   "name": "Tubular Bell C4",
+   "group": "tubular-bells",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 264600,
+   "root": 60,
+   "loop": [
+    0,
+    0
+   ],
+   "reading": {
+    "midi": 25.799,
+    "gate_s": 6
+   },
+   "named": "C4",
+   "tuned": "nominal",
+   "credit": {
+    "site": "GitHub",
+    "author": "Versilian Studios (VCSL)",
+    "page": "https://github.com/sgossner/VCSL",
+    "licence": "CC0 1.0 (public domain)",
+    "licence_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset; cut at 6.0 s"
+  },
+  "123667F5": {
+   "id": "123667F5",
+   "key": "tubular-bell-d5",
+   "file": "123667F5.flac",
+   "name": "Tubular Bell D5",
+   "group": "tubular-bells",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 264600,
+   "root": 74,
+   "loop": [
+    0,
+    0
+   ],
+   "reading": {
+    "midi": 86.079,
+    "gate_s": 6
+   },
+   "named": "D5",
+   "tuned": "nominal",
+   "credit": {
+    "site": "GitHub",
+    "author": "Versilian Studios (VCSL)",
+    "page": "https://github.com/sgossner/VCSL",
+    "licence": "CC0 1.0 (public domain)",
+    "licence_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset; cut at 6.0 s"
+  },
+  "125EEF0A": {
+   "id": "125EEF0A",
+   "key": "tubular-bell-e4",
+   "file": "125EEF0A.flac",
+   "name": "Tubular Bell E4",
+   "group": "tubular-bells",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 264600,
+   "root": 64,
+   "loop": [
+    0,
+    0
+   ],
+   "reading": {
+    "midi": 88.292,
+    "gate_s": 6
+   },
+   "named": "E4",
+   "tuned": "nominal",
+   "credit": {
+    "site": "GitHub",
+    "author": "Versilian Studios (VCSL)",
+    "page": "https://github.com/sgossner/VCSL",
+    "licence": "CC0 1.0 (public domain)",
+    "licence_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset; cut at 6.0 s"
+  },
+  "21DE33C8": {
+   "id": "21DE33C8",
+   "key": "tubular-bell-f5",
+   "file": "21DE33C8.flac",
+   "name": "Tubular Bell F5",
+   "group": "tubular-bells",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 264600,
+   "root": 77,
+   "loop": [
+    0,
+    0
+   ],
+   "reading": {
+    "midi": 61.705,
+    "gate_s": 6
+   },
+   "named": "F5",
+   "tuned": "nominal",
+   "credit": {
+    "site": "GitHub",
+    "author": "Versilian Studios (VCSL)",
+    "page": "https://github.com/sgossner/VCSL",
+    "licence": "CC0 1.0 (public domain)",
+    "licence_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset; cut at 6.0 s"
+  },
+  "3926EED6": {
+   "id": "3926EED6",
+   "key": "tubular-bell-g4",
+   "file": "3926EED6.flac",
+   "name": "Tubular Bell G4",
+   "group": "tubular-bells",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 264600,
+   "root": 67,
+   "loop": [
+    0,
+    0
+   ],
+   "reading": {
+    "midi": 91.17,
+    "gate_s": 6
+   },
+   "named": "G4",
+   "tuned": "nominal",
+   "credit": {
+    "site": "GitHub",
+    "author": "Versilian Studios (VCSL)",
+    "page": "https://github.com/sgossner/VCSL",
+    "licence": "CC0 1.0 (public domain)",
+    "licence_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset; cut at 6.0 s"
+  },
+  "963309D7": {
+   "id": "963309D7",
+   "key": "wine-glass",
+   "file": "963309D7.flac",
+   "name": "Wine Glass F#5",
+   "group": "wine-glass",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 176400,
+   "root": 77.866,
+   "loop": [
+    92473,
+    172651
+   ],
+   "reading": {
+    "midi": 77.866,
+    "gate_s": 4
+   },
+   "named": "F#5",
+   "tuned": "read",
+   "credit": {
+    "site": "GitHub",
+    "author": "Versilian Studios (VCSL)",
+    "page": "https://github.com/sgossner/VCSL",
+    "licence": "CC0 1.0 (public domain)",
+    "licence_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset; cut at 4.0 s",
+   "measures": {
+    "resynth": {
+     "file": "963309D7.resynth.f32",
+     "release": 1,
+     "markers": {
+      "onset": 0,
+      "gate": 4,
+      "loop": [
+       0.1741496598639456,
+       3.9706122448979593
+      ],
+      "loop_by_hand": false,
+      "loop_off": false,
+      "gate_by_hand": false
+     },
+     "distance": 4.101
+    }
+   }
+  },
+  "BD4A415F": {
+   "id": "BD4A415F",
+   "key": "wurli-A1",
+   "file": "BD4A415F.flac",
+   "name": "Wurlitzer A1",
+   "group": "wurlitzer",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 110250,
+   "root": 33.044,
+   "loop": [
+    0,
+    0
+   ],
+   "reading": {
+    "midi": 33.044,
+    "gate_s": 2.5
+   },
+   "named": "A1",
+   "tuned": "read",
+   "credit": {
+    "site": "GitHub",
+    "author": "Greg Sullivan",
+    "page": "https://github.com/sfzinstruments/GregSullivan.E-Pianos",
+    "licence": "CC BY 3.0",
+    "licence_url": "https://creativecommons.org/licenses/by/3.0/",
+    "attribution": "Yamaha CP80 and Wurlitzer EP200 samples by Greg Sullivan, CC BY 3.0"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset; cut at 2.5 s"
+  },
+  "CEC1DB8C": {
+   "id": "CEC1DB8C",
+   "key": "wurli-B2",
+   "file": "CEC1DB8C.flac",
+   "name": "Wurlitzer B2",
+   "group": "wurlitzer",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 110250,
+   "root": 47.077,
+   "loop": [
+    0,
+    0
+   ],
+   "reading": {
+    "midi": 47.077,
+    "gate_s": 2.5
+   },
+   "named": "B2",
+   "tuned": "read",
+   "credit": {
+    "site": "GitHub",
+    "author": "Greg Sullivan",
+    "page": "https://github.com/sfzinstruments/GregSullivan.E-Pianos",
+    "licence": "CC BY 3.0",
+    "licence_url": "https://creativecommons.org/licenses/by/3.0/",
+    "attribution": "Yamaha CP80 and Wurlitzer EP200 samples by Greg Sullivan, CC BY 3.0"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset; cut at 2.5 s"
+  },
+  "26156C40": {
+   "id": "26156C40",
+   "key": "wurli-C2",
+   "file": "26156C40.flac",
+   "name": "Wurlitzer C2",
+   "group": "wurlitzer",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 110250,
+   "root": 36.076,
+   "loop": [
+    0,
+    0
+   ],
+   "reading": {
+    "midi": 36.076,
+    "gate_s": 2.5
+   },
+   "named": "C2",
+   "tuned": "read",
+   "credit": {
+    "site": "GitHub",
+    "author": "Greg Sullivan",
+    "page": "https://github.com/sfzinstruments/GregSullivan.E-Pianos",
+    "licence": "CC BY 3.0",
+    "licence_url": "https://creativecommons.org/licenses/by/3.0/",
+    "attribution": "Yamaha CP80 and Wurlitzer EP200 samples by Greg Sullivan, CC BY 3.0"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset; cut at 2.5 s"
+  },
+  "E9F104B7": {
+   "id": "E9F104B7",
+   "key": "wurli-Cs4",
+   "file": "E9F104B7.flac",
+   "name": "Wurlitzer C#4",
+   "group": "wurlitzer",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 97053,
+   "root": 61.007,
+   "loop": [
+    0,
+    0
+   ],
+   "reading": {
+    "midi": 61.007,
+    "gate_s": 2.168
+   },
+   "named": "C#4",
+   "tuned": "read",
+   "credit": {
+    "site": "GitHub",
+    "author": "Greg Sullivan",
+    "page": "https://github.com/sfzinstruments/GregSullivan.E-Pianos",
+    "licence": "CC BY 3.0",
+    "licence_url": "https://creativecommons.org/licenses/by/3.0/",
+    "attribution": "Yamaha CP80 and Wurlitzer EP200 samples by Greg Sullivan, CC BY 3.0"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset"
+  },
+  "55FE0A06": {
+   "id": "55FE0A06",
+   "key": "wurli-Cs5",
+   "file": "55FE0A06.flac",
+   "name": "Wurlitzer C#5",
+   "group": "wurlitzer",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 79375,
+   "root": 72.981,
+   "loop": [
+    0,
+    0
+   ],
+   "reading": {
+    "midi": 72.981,
+    "gate_s": 1.768
+   },
+   "named": "C#5",
+   "tuned": "read",
+   "credit": {
+    "site": "GitHub",
+    "author": "Greg Sullivan",
+    "page": "https://github.com/sfzinstruments/GregSullivan.E-Pianos",
+    "licence": "CC BY 3.0",
+    "licence_url": "https://creativecommons.org/licenses/by/3.0/",
+    "attribution": "Yamaha CP80 and Wurlitzer EP200 samples by Greg Sullivan, CC BY 3.0"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset"
+  },
+  "51CC9BF7": {
+   "id": "51CC9BF7",
+   "key": "wurli-Cs6",
+   "file": "51CC9BF7.flac",
+   "name": "Wurlitzer C#6",
+   "group": "wurlitzer",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 47971,
+   "root": 84.992,
+   "loop": [
+    0,
+    0
+   ],
+   "reading": {
+    "midi": 84.992,
+    "gate_s": 1.055
+   },
+   "named": "C#6",
+   "tuned": "read",
+   "credit": {
+    "site": "GitHub",
+    "author": "Greg Sullivan",
+    "page": "https://github.com/sfzinstruments/GregSullivan.E-Pianos",
+    "licence": "CC BY 3.0",
+    "licence_url": "https://creativecommons.org/licenses/by/3.0/",
+    "attribution": "Yamaha CP80 and Wurlitzer EP200 samples by Greg Sullivan, CC BY 3.0"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset"
+  },
+  "93BE68CA": {
+   "id": "93BE68CA",
+   "key": "wurli-E3",
+   "file": "93BE68CA.flac",
+   "name": "Wurlitzer E3",
+   "group": "wurlitzer",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 104286,
+   "root": 52.04,
+   "loop": [
+    0,
+    0
+   ],
+   "reading": {
+    "midi": 52.04,
+    "gate_s": 2.332
+   },
+   "named": "E3",
+   "tuned": "read",
+   "credit": {
+    "site": "GitHub",
+    "author": "Greg Sullivan",
+    "page": "https://github.com/sfzinstruments/GregSullivan.E-Pianos",
+    "licence": "CC BY 3.0",
+    "licence_url": "https://creativecommons.org/licenses/by/3.0/",
+    "attribution": "Yamaha CP80 and Wurlitzer EP200 samples by Greg Sullivan, CC BY 3.0"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset"
+  },
+  "94515D00": {
+   "id": "94515D00",
+   "key": "wurli-F2",
+   "file": "94515D00.flac",
+   "name": "Wurlitzer F2",
+   "group": "wurlitzer",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 110250,
+   "root": 41.061,
+   "loop": [
+    0,
+    0
+   ],
+   "reading": {
+    "midi": 41.061,
+    "gate_s": 2.5
+   },
+   "named": "F2",
+   "tuned": "read",
+   "credit": {
+    "site": "GitHub",
+    "author": "Greg Sullivan",
+    "page": "https://github.com/sfzinstruments/GregSullivan.E-Pianos",
+    "licence": "CC BY 3.0",
+    "licence_url": "https://creativecommons.org/licenses/by/3.0/",
+    "attribution": "Yamaha CP80 and Wurlitzer EP200 samples by Greg Sullivan, CC BY 3.0"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset; cut at 2.5 s"
+  },
+  "B091CEC7": {
+   "id": "B091CEC7",
+   "key": "wurli-G5",
+   "file": "B091CEC7.flac",
+   "name": "Wurlitzer G5",
+   "group": "wurlitzer",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 41733,
+   "root": 79.063,
+   "loop": [
+    0,
+    0
+   ],
+   "reading": {
+    "midi": 79.063,
+    "gate_s": 0.914
+   },
+   "named": "G5",
+   "tuned": "read",
+   "credit": {
+    "site": "GitHub",
+    "author": "Greg Sullivan",
+    "page": "https://github.com/sfzinstruments/GregSullivan.E-Pianos",
+    "licence": "CC BY 3.0",
+    "licence_url": "https://creativecommons.org/licenses/by/3.0/",
+    "attribution": "Yamaha CP80 and Wurlitzer EP200 samples by Greg Sullivan, CC BY 3.0"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset"
+  },
+  "D9890402": {
+   "id": "D9890402",
+   "key": "wurli-Gs3",
+   "file": "D9890402.flac",
+   "name": "Wurlitzer G#3",
+   "group": "wurlitzer",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 109523,
+   "root": 56.109,
+   "loop": [
+    0,
+    0
+   ],
+   "reading": {
+    "midi": 56.109,
+    "gate_s": 2.451
+   },
+   "named": "G#3",
+   "tuned": "read",
+   "credit": {
+    "site": "GitHub",
+    "author": "Greg Sullivan",
+    "page": "https://github.com/sfzinstruments/GregSullivan.E-Pianos",
+    "licence": "CC BY 3.0",
+    "licence_url": "https://creativecommons.org/licenses/by/3.0/",
+    "attribution": "Yamaha CP80 and Wurlitzer EP200 samples by Greg Sullivan, CC BY 3.0"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset"
+  },
+  "68E417CA": {
+   "id": "68E417CA",
+   "key": "wurli-Gs4",
+   "file": "68E417CA.flac",
+   "name": "Wurlitzer G#4",
+   "group": "wurlitzer",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 110250,
+   "root": 67.994,
+   "loop": [
+    0,
+    0
+   ],
+   "reading": {
+    "midi": 67.994,
+    "gate_s": 2.5
+   },
+   "named": "G#4",
+   "tuned": "read",
+   "credit": {
+    "site": "GitHub",
+    "author": "Greg Sullivan",
+    "page": "https://github.com/sfzinstruments/GregSullivan.E-Pianos",
+    "licence": "CC BY 3.0",
+    "licence_url": "https://creativecommons.org/licenses/by/3.0/",
+    "attribution": "Yamaha CP80 and Wurlitzer EP200 samples by Greg Sullivan, CC BY 3.0"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset; cut at 2.5 s"
+  },
+  "35DAD7F5": {
+   "id": "35DAD7F5",
+   "key": "wurli-Gs6",
+   "file": "35DAD7F5.flac",
+   "name": "Wurlitzer G#6",
+   "group": "wurlitzer",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 46409,
+   "root": 92.034,
+   "loop": [
+    0,
+    0
+   ],
+   "reading": {
+    "midi": 92.034,
+    "gate_s": 1.02
+   },
+   "named": "G#6",
+   "tuned": "read",
+   "credit": {
+    "site": "GitHub",
+    "author": "Greg Sullivan",
+    "page": "https://github.com/sfzinstruments/GregSullivan.E-Pianos",
+    "licence": "CC BY 3.0",
+    "licence_url": "https://creativecommons.org/licenses/by/3.0/",
+    "attribution": "Yamaha CP80 and Wurlitzer EP200 samples by Greg Sullivan, CC BY 3.0"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset"
+  },
+  "896193D0": {
+   "id": "896193D0",
+   "key": "xpander-stack",
+   "file": "896193D0.flac",
+   "name": "Xpander Stack",
+   "group": "xpander-stack",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 147294,
+   "root": 47.96,
+   "loop": [
+    140077,
+    142442
+   ],
+   "reading": {
+    "midi": 47.96,
+    "gate_s": 3.25
+   },
+   "tuned": "read",
+   "credit": {
+    "site": "Freesound",
+    "author": "modularsamples",
+    "page": "https://freesound.org/people/modularsamples/sounds/300008/",
+    "licence": "CC0 1.0 (public domain)",
+    "licence_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset; held 3.0 s of 10.0 (then its own release)"
+  },
+  "4C78A5DB": {
+   "id": "4C78A5DB",
+   "key": "z1-strings",
+   "file": "4C78A5DB.flac",
+   "name": "Z1 Strings",
+   "group": "z1-strings",
+   "rate": 44100,
+   "channels": 1,
+   "frames": 209475,
+   "root": 48.184,
+   "loop": [
+    70797,
+    186542
+   ],
+   "reading": {
+    "midi": 48.184,
+    "gate_s": 4.25
+   },
+   "tuned": "read",
+   "credit": {
+    "site": "Freesound",
+    "author": "modularsamples",
+    "page": "https://freesound.org/people/modularsamples/sounds/297075/",
+    "licence": "CC0 1.0 (public domain)",
+    "licence_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+   },
+   "prepared": "mono, 44.1 kHz, from the onset; held 4.0 s of 10.0 (then its own release)"
+  }
+ }
+}

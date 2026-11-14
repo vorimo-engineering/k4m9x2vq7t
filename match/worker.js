@@ -136,6 +136,12 @@ function readRegistry(w) {
     }));
   });
   reg.byType = new Map(reg.types.map(t => [t.type, t]));
+  /* THE SAMPLE TABLE'S SLOTS, the engine's own count (PCKS_SAMPLE_SLOTS, 256 since round 4): the top of a
+   * sample player's SAMPLE SLOT knob, plus one */
+  {
+    const sp = reg.byType.get('smp.single'), i = sp?.paramByKey.get('sample');
+    reg.sample_slots = i !== undefined && Number.isFinite(sp.params[i].max) ? Math.round(sp.params[i].max) + 1 : 64;
+  }
   reg.groups = new Map();
   for (const t of reg.types) {
     if (!reg.groups.has(t.group)) reg.groups.set(t.group, []);
@@ -332,6 +338,75 @@ function matrixLabel(s, max = 24) {
 }
 
 /* --------------------------------------------------------------------- graph */
+/* ------------------------------------------------------------ recordings
+ * A WASM INSTANCE'S COPY OF THE RECORDINGS its graphs play: one buffer per recording, by id, counted
+ * by the tables that name it and freed when none does. The pool itself (samples.js) is plain JS;
+ * this is only where the engine can read it. */
+class WasmSamples {
+  constructor(wasm) { this.w = wasm; this.bufs = new Map(); }
+  /** A recording (Int16Array) or a measurement (Float32Array) copied into wasm memory once under `id`. */
+  acquire(id, arr) {
+    let b = this.bufs.get(id);
+    if (!b) {
+      const ptr = this.w.malloc(Math.max(4, arr.byteLength));
+      if (!ptr) return 0;
+      if (arr instanceof Float32Array) new Float32Array(this.w.memory.buffer, ptr, arr.length).set(arr);
+      else new Int16Array(this.w.memory.buffer, ptr, arr.length).set(arr);
+      b = { ptr, refs: 0 };
+      this.bufs.set(id, b);
+    }
+    b.refs++;
+    return b.ptr;
+  }
+  /** A measurement's Resynth noise colours at `sr` (pcks_resynth_noise_build), once per measurement and rate. */
+  noise(key, mptr, n, sr) {
+    const id = `${key}@${Math.round(sr)}`, x = this.w.x;
+    let b = this.bufs.get(id);
+    if (!b) {
+      if (!x.pcks_resynth_noise_bytes) return 0;
+      const ptr = this.w.malloc(x.pcks_resynth_noise_bytes());
+      if (!ptr) return 0;
+      if (x.pcks_resynth_noise_build(ptr, mptr, n, sr) < 0) { this.w.free(ptr); return 0; }
+      b = { ptr, refs: 0 };
+      this.bufs.set(id, b);
+    }
+    b.refs++;
+    return b.ptr;
+  }
+  /* A BUFFER NO TABLE NAMES lives on a while: a voice that started on it keeps reading it until it ends
+   * (pcks_sample.h THREADING). Freed 20 s later — longer than any release a preset sets (12 s) — or at once
+   * when nothing can be sounding (destroy). */
+  release(id, now = false) {
+    const b = this.bufs.get(id);
+    if (!b || --b.refs > 0) return;
+    this.bufs.delete(id);
+    if (now) { this.w.free(b.ptr); return; }
+    const t = setTimeout(() => this.w.free(b.ptr), 20000);
+    if (t && typeof t.unref === 'function') t.unref();   /* never keeps a node test alive */
+  }
+}
+
+/** What the engine hears in a recording (pcks_sample_pitch / pcks_sample_loop): its pitch as a MIDI
+ *  note (0 = none) — MATCH's reader since round 4, in the 2 MiB of scratch it borrows for the call — and a
+ *  loop of whole periods for a pitched one ([0, 0] = none). */
+function analyseSample(wasm, pcm, channels, rate) {
+  const x = wasm.x;
+  if (!x.pcks_sample_pitch || !x.pcks_sample_scratch_floats) return { root: 0, loop: [0, 0] };
+  const p = wasm.malloc(Math.max(2, pcm.byteLength)), out = wasm.malloc(8);
+  const sc = wasm.malloc(4 * x.pcks_sample_scratch_floats());
+  if (!p || !out || !sc) { for (const q of [p, out, sc]) if (q) wasm.free(q); return { root: 0, loop: [0, 0] }; }
+  new Int16Array(wasm.memory.buffer, p, pcm.length).set(pcm);
+  const frames = Math.floor(pcm.length / channels);
+  const root = x.pcks_sample_pitch(p, frames, channels, rate, sc);
+  let loop = [0, 0];
+  if (root > 0 && x.pcks_sample_loop(p, frames, channels, rate, root, out, out + 4)) {
+    const I = wasm.I32;
+    loop = [I[out >> 2], I[(out >> 2) + 1]];
+  }
+  wasm.free(p); wasm.free(out); wasm.free(sc);
+  return { root, loop };
+}
+
 class Graph {
   constructor(wasm, reg, sr = 48000, maxVoices = 16) {
     this.w = wasm;
@@ -388,6 +463,7 @@ class Graph {
    * fresh allocation, so a second destroy() — or a resurrected object — would
    * be worse than the leak it replaced. */
   destroy() {
+    this._dropSamples();
     if (this.g) this.w.x.pcks_graph_destroy(this.g);
     if (this._out) this.w.free(this._out);
     if (this._scratchF) this.w.free(this._scratchF);
@@ -409,6 +485,7 @@ class Graph {
   }
   clear() {
     this._base.clear();
+    this._lanes?.clear();
     this._mx = { sources: [], cells: new Map() };
     this.w.x.pcks_graph_clear(this.g);
   }
@@ -569,6 +646,24 @@ class Graph {
   /* -- control -- */
   noteOn(midi, vel = 1)   { this.w.x.pcks_graph_note_on(this.g, midi, vel); }
   noteOff(midi)           { this.w.x.pcks_graph_note_off(this.g, midi); }
+  /* LANES — one instrument, several sets of knob values (pcks_graph.h "LANES"): a KIT's drums, each a
+   * preset in its own lane. setLanes before compile; a lane's knobs, notes and chokes by its number. */
+  setLanes(n)             { return this.w.x.pcks_graph_set_lanes(this.g, n | 0); }
+  lanes()                 { return this.w.x.pcks_graph_lanes(this.g); }
+  setParamLane(id, p, norm, lane) {
+    norm = Math.min(1, Math.max(0, norm));
+    this.w.x.pcks_graph_set_param_lane(this.g, this.w.id(id), p, norm, lane | 0);
+    /* THE LANE'S VALUE, mirrored: what a kit's pad shows on the face while you edit it (kit.js) */
+    (this._lanes || (this._lanes = new Map())).set(`${lane | 0}\u0000${id}\u0000${p}`, norm);
+  }
+  /** A knob's value in one lane: the last written there, else the knob as every lane has it. */
+  getParamLane(id, p, lane) {
+    const k = `${lane | 0}\u0000${id}\u0000${p}`;
+    return this._lanes?.has(k) ? this._lanes.get(k) : this.getParam(id, p);
+  }
+  noteOnLane(midi, vel, lane) { this.w.x.pcks_graph_note_on_lane(this.g, midi, vel, lane | 0); }
+  noteOffLane(midi, lane)     { this.w.x.pcks_graph_note_off_lane(this.g, midi, lane | 0); }
+  chokeLane(lane)             { this.w.x.pcks_graph_choke_lane(this.g, lane | 0); }
   allNotesOff()           { this.w.x.pcks_graph_all_notes_off(this.g); }
   pitchBend(b)            { this.w.x.pcks_graph_pitch_bend(this.g, b); }
   setSeed(s)              { this.w.x.pcks_graph_set_seed(this.g, s >>> 0); }
@@ -588,6 +683,8 @@ class Graph {
     let m = this._base.get(id);
     if (!m) this._base.set(id, m = new Map());
     m.set(p, norm);
+    /* the lane-unaware setter writes every lane (pcks_graph_set_param): no lane keeps another value */
+    if (this._lanes?.size) for (const k of [...this._lanes.keys()]) if (k.endsWith(`\u0000${id}\u0000${p}`)) this._lanes.delete(k);
   }
 
   getParam(id, p) {
@@ -617,6 +714,72 @@ class Graph {
     return true;
   }
   setInput(l, r, stride, frames) { this.w.x.pcks_graph_set_input(this.g, l, r, stride | 0, frames | 0); }
+
+  /** THE SAMPLE TABLE this graph's smp.* blocks play (pcks_graph_set_samples, pcks_sample.h):
+   *  `entries[slot]` as samples.js resolveTable makes them — { id, pcm, channels, frames, rate, root,
+   *  loop, xfade, lovel, hivel, grain, grainData, resyn, resynData } or null for an empty slot. The PCM and
+   *  the measurements are copied into this wasm instance once each (WasmSamples) and every table here
+   *  borrows them; the Resynth's noise colours are built here at this graph's rate. The table itself is this
+   *  graph's, since a slot means a different recording in a different synth. Not structural: no compile.
+   *  A graph marked `noAudio` (the page's mirror while the audio thread plays) files no audio at all. */
+  setSamples(entries) {
+    const x = this.w.x;
+    if (!x.pcks_sample_table_size) return false;
+    if (this.noAudio) return true;
+    const ws = this.w.samples || (this.w.samples = new WasmSamples(this.w));
+    if (!this._tab) {
+      this._tab = this.w.malloc(x.pcks_sample_table_size());
+      if (!this._tab) return false;
+      x.pcks_sample_table_clear(this._tab);
+      x.pcks_graph_set_samples(this.g, this._tab);
+      this._tabIds = [];
+    }
+    const slots = this.reg?.sample_slots || 64;
+    const list = Array.isArray(entries) ? entries : [];
+    const old = this._tabIds, ids = [];
+    let ok = true;
+    for (let i = 0; i < Math.min(slots, Math.max(old.length, list.length)); i++) {
+      const e = list[i];
+      const p = e && e.pcm ? ws.acquire(e.id, e.pcm) : 0;
+      const held = [];
+      if (p) {
+        held.push(e.id);
+        x.pcks_sample_table_set(this._tab, i, p, e.frames | 0, e.channels | 0, e.rate, e.root || 60,
+                                e.loop?.[0] | 0, e.loop?.[1] | 0, e.xfade | 0, e.gain || 0);
+        if (x.pcks_sample_table_set_vel) x.pcks_sample_table_set_vel(this._tab, i, e.lovel | 0, e.hivel | 0);
+        if (x.pcks_sample_table_set_measure) {
+          if (e.grain && e.grainData?.length) {
+            const mp = ws.acquire(e.grain, e.grainData);
+            if (mp) { held.push(e.grain); x.pcks_sample_table_set_measure(this._tab, i, 0, mp, e.grainData.length, 0); }
+          }
+          if (e.resyn && e.resynData?.length) {
+            const mp = ws.acquire(e.resyn, e.resynData);
+            if (mp) {
+              held.push(e.resyn);
+              const np = ws.noise(e.resyn, mp, e.resynData.length, this.sr);
+              if (np) held.push(`${e.resyn}@${Math.round(this.sr)}`);
+              x.pcks_sample_table_set_measure(this._tab, i, 1, mp, e.resynData.length, np);
+            }
+          }
+        }
+      } else {
+        if (e && e.pcm) ok = false;                     /* no room in wasm memory: the block's own sound */
+        x.pcks_sample_table_set(this._tab, i, 0, 0, 1, 48000, 0, 0, 0, 0, 0);
+      }
+      ids[i] = held;
+    }
+    /* after: a buffer kept in a slot never drops to 0 */
+    for (const h of old) for (const id of h || []) ws.release(id);
+    this._tabIds = ids;
+    return ok;
+  }
+  _dropSamples() {
+    if (!this._tab) return;
+    if (this.g) this.w.x.pcks_graph_set_samples(this.g, 0);
+    for (const h of this._tabIds || []) for (const id of h || []) this.w.samples?.release(id, true);   /* the graph is going: nothing sounds */
+    this.w.free(this._tab);
+    this._tab = 0; this._tabIds = [];
+  }
 
   /* -- render --
    * Returns a VIEW into wasm memory, valid until the next render.  The caller
@@ -798,6 +961,8 @@ __x["enumLabels"] = enumLabels;
 __x["modLabel"] = modLabel;
 __x["formatValue"] = formatValue;
 __x["matrixLabel"] = matrixLabel;
+__x["WasmSamples"] = WasmSamples;
+__x["analyseSample"] = analyseSample;
 __x["Graph"] = Graph;
 __x["Chain"] = Chain;
 __x["curveEval"] = curveEval;
